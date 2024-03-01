@@ -20,5 +20,3 @@ To run the tests, execute the following command:
 ```
 ./gradlew clean build
 ```
-
-This README file provides a brief description of the project, lists the environments where the tests are executed, and provides instructions on how to run the tests.
