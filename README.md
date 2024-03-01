@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project is used for building a compatibility matrix. It runs the simplest Java agent in various environments, with the primary goal of determining compatibility between different server configurations. This could help developers ensure that their Java agents work correctly across a range of runtime environments.
+This project builds a compatibility matrix for Java agents across various environments, ensuring proper functioning in diverse server configurations.
 
 Environments in which the tests are run:
 
