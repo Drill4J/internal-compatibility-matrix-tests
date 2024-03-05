@@ -12,7 +12,7 @@ plugins {
     id("com.github.johnrengelman.shadow")
 }
 group = "com.epam.drill.compatibility"
-version = "1.0.0"
+version = rootProject.version
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = JavaVersion.current().toString()
 }

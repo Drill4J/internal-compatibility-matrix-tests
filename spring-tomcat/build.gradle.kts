@@ -16,8 +16,7 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = JavaVersion.current().toString()
 }
 
-version = "1.0.0"
-
+version = rootProject.version
 repositories {
     mavenCentral()
 }
