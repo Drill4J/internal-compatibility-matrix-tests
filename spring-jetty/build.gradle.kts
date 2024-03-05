@@ -11,7 +11,7 @@ plugins {
     id("io.spring.dependency-management")
 }
 
-group = "com.epam.drill.compatibility.matrix"
+group = "com.epam.drill.compatibility"
 version = "1.0.0"
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = JavaVersion.current().toString()

@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-group = "com.epam.drill.compatibility.matrix"
+group = "com.epam.drill.compatibility"
 version = "1.0.0"
 
 plugins {

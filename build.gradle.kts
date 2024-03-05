@@ -6,7 +6,7 @@ plugins {
     id("org.springframework.boot").apply(false)
 }
 
-group = "com.epam.drill"
+group = "com.epam.drill.compatibility"
 val kotlinVersion: String by extra
 val kotlinxCollectionsVersion: String by extra
 val kotlinxCoroutinesVersion: String by extra
