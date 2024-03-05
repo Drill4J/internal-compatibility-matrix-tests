@@ -17,12 +17,9 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = JavaVersion.current().toString()
 }
 
-
-
 repositories {
     mavenLocal()
     mavenCentral()
-    gradlePluginPortal()
 }
 
 val nativeAgentLibName: String by parent!!.extra
