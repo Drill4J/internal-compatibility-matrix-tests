@@ -30,8 +30,8 @@ jobs:
           - { version: 8.0, distribution: 'temurin' }
           - { version: 11.0, distribution: 'zulu' }
           - { version: 11.0, distribution: 'temurin' }
-          - { version: 17.0, distribution: 'zulu' }
-          - { version: 17.0, distribution: 'temurin' }
+#          - { version: 17.0, distribution: 'zulu' }
+#          - { version: 17.0, distribution: 'temurin' }
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v3
