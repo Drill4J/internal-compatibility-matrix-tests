@@ -1,9 +1,5 @@
 plugins {
-    `kotlin-dsl-base`.apply(false)
-    `kotlin-dsl`.apply(false)
     kotlin("jvm").apply(false)
-    kotlin("multiplatform").apply(false)
-    id("org.springframework.boot").apply(false)
 }
 
 group = "com.epam.drill.compatibility"
