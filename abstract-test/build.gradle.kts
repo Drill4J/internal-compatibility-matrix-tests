@@ -17,6 +17,7 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springframework.boot:spring-boot-starter-webflux:2.7.18")
     implementation(kotlin("test-junit"))
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
     implementation(project(":common"))
