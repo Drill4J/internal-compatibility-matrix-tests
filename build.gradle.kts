@@ -12,6 +12,10 @@ val kotlinxCollectionsVersion: String by extra
 val kotlinxCoroutinesVersion: String by extra
 val kotlinxSerializationVersion: String by extra
 
+val javaVersion = JavaVersion.current()
+val jvmFlag = if (javaVersion.isJava9Compatible) "-XX:MaxMetaspaceSize=1024m" else "-XX:MaxPermSize=1024m"
+extra["org.gradle.jvmargs"] = "-Xmx4096m $jvmFlag"
+
 subprojects {
     val constraints = setOf(
         dependencies.constraints.create("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"),

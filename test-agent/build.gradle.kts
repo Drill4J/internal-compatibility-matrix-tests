@@ -14,13 +14,10 @@ plugins {
 group = "com.epam.drill.compatibility.matrix"
 version = "1.0.0"
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = JavaVersion.current().toString()
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
+
 
 repositories {
     mavenLocal()
