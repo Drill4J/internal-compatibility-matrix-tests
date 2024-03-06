@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 group = "com.epam.drill.compatibility"
 version = "1.0.0"
@@ -30,18 +31,7 @@ tasks {
     test {
         useJUnitPlatform()
     }
-    val testJar by registering(Jar::class) {
-        from(sourceSets.test.get().output)
-        archiveClassifier.set("test")
+    named<BootJar>("bootJar") {
+        enabled = false
     }
-    configurations {
-        create("testArtifacts") {
-            extendsFrom(configurations["testImplementation"])
-            outgoing.artifact(testJar.get())
-        }
-    }
-}
-
-artifacts {
-    add("testArtifacts", tasks["testJar"])
 }

@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.konan.target.presetName
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     kotlin("jvm")
@@ -22,6 +23,8 @@ repositories {
     mavenCentral()
 }
 
+val microutilsLoggingVersion: String by parent!!.extra
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux") {
         exclude(group = "org.springframework.boot", module = "spring-boot-starter-reactor-netty")
@@ -29,9 +32,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-tomcat")
     implementation("org.apache.tomcat.embed:tomcat-embed-core")
     implementation("org.apache.tomcat.embed:tomcat-embed-websocket")
-
+    implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
     testImplementation("io.projectreactor:reactor-test")
-    testImplementation(project(path = ":abstract-test", configuration = "testArtifacts"))
+    testImplementation(project(":abstract-test"))
     evaluationDependsOn(":test-agent")
 }
 
@@ -49,5 +52,8 @@ tasks {
         )
         dependsOn(kotlinTargets.linkTask)
         dependsOn(project(":test-agent").tasks["runtimeJar"])
+    }
+    named<BootJar>("bootJar") {
+        enabled = false
     }
 }

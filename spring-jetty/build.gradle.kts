@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.konan.target.presetName
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     kotlin("jvm")
@@ -23,6 +24,7 @@ repositories {
 }
 
 val nativeAgentLibName: String by parent!!.extra
+val microutilsLoggingVersion: String by parent!!.extra
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web") {
@@ -30,7 +32,8 @@ dependencies {
     }
     implementation("org.springframework.boot:spring-boot-starter-jetty")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation(project(path = ":abstract-test", configuration = "testArtifacts"))
+    implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
+    testImplementation(project(":abstract-test"))
     evaluationDependsOn(":test-agent")
 }
 
@@ -46,5 +49,8 @@ tasks {
         )
         dependsOn(kotlinTargets.linkTask)
         dependsOn(project(":test-agent").tasks["runtimeJar"])
+    }
+    named<BootJar>("bootJar") {
+        enabled = false
     }
 }
