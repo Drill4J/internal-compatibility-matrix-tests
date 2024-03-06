@@ -1,4 +1,4 @@
-rootProject.name = "compatibility-matrix-tests"
+rootProject.name = "internal-compatibility-matrix-tests"
 
 pluginManagement {
     val kotlinVersion: String by extra
