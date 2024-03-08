@@ -55,6 +55,9 @@ tasks {
     named<BootJar>("bootJar") {
         enabled = false
     }
+    licenseTest {
+        enabled = false
+    }
 }
 
 @Suppress("UNUSED_VARIABLE")

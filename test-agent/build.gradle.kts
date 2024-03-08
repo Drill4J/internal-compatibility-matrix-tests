@@ -117,13 +117,13 @@ license {
     val licenseFormatSources by tasks.registering(LicenseFormat::class) {
         source = fileTree("$projectDir/src").also {
             include("**/*.kt", "**/*.java", "**/*.groovy")
-            exclude("**/commonGenerated")
+            exclude("**/kni")
         }
     }
     val licenseCheckSources by tasks.registering(LicenseCheck::class) {
         source = fileTree("$projectDir/src").also {
             include("**/*.kt", "**/*.java", "**/*.groovy")
-            exclude("**/commonGenerated")
+            exclude("**/kni")
         }
     }
 }
