@@ -1,10 +1,14 @@
+import com.hierynomus.gradle.license.tasks.LicenseCheck
+import com.hierynomus.gradle.license.tasks.LicenseFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.net.URI
 
 group = "com.epam.drill.compatibility"
 version = "1.0.0"
 
 plugins {
     kotlin("jvm")
+    id("com.github.hierynomus.license")
 }
 
 val microutilsLoggingVersion: String by parent!!.extra
@@ -27,5 +31,22 @@ tasks {
     }
     test {
         useJUnitPlatform()
+    }
+}
+
+@Suppress("UNUSED_VARIABLE")
+license {
+    headerURI = URI("https://raw.githubusercontent.com/Drill4J/drill4j/develop/COPYRIGHT")
+    val licenseFormatSources by tasks.registering(LicenseFormat::class) {
+        source = fileTree("$projectDir/src").also {
+            include("**/*.kt", "**/*.java", "**/*.groovy")
+            exclude("**/commonGenerated")
+        }
+    }
+    val licenseCheckSources by tasks.registering(LicenseCheck::class) {
+        source = fileTree("$projectDir/src").also {
+            include("**/*.kt", "**/*.java", "**/*.groovy")
+            exclude("**/commonGenerated")
+        }
     }
 }
