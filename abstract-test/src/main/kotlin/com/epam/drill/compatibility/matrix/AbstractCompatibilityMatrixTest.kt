@@ -8,7 +8,9 @@ import java.util.Objects
 import mu.KLogger
 import com.epam.drill.agent.instrument.TestRequestHolder
 
+@Suppress("FunctionName")
 abstract class AbstractCompatibilityMatrixTest {
+
     protected abstract val logger: KLogger
 
     @Test
@@ -46,6 +48,7 @@ abstract class AbstractCompatibilityMatrixTest {
     private fun callHttpEndpoint(
         endpoint: String,
         headers: Map<String, String> = emptyMap(),
+        contentType: String = "plain/text",
         body: String = "test-request"
     ): Pair<Map<String, String>, String> {
         lateinit var connection: HttpURLConnection
@@ -53,6 +56,7 @@ abstract class AbstractCompatibilityMatrixTest {
             logger.trace { "callHttpEndpoint: Requesting $endpoint: headers=$headers, body=$body" }
             connection = URL(endpoint).openConnection() as HttpURLConnection
             connection.requestMethod = "POST"
+            connection.setRequestProperty("Content-Type", contentType)
             headers.entries.forEach {
                 connection.setRequestProperty(it.key, it.value)
             }

@@ -22,9 +22,9 @@ import org.springframework.beans.factory.ObjectProvider
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory
 import org.springframework.boot.web.embedded.netty.NettyRouteProvider
-import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.client.reactive.ReactorResourceFactory
@@ -47,10 +47,12 @@ import kotlin.test.Test
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     classes = [ReactorTransformerObjectTest.SimpleController::class]
 )
-class ReactorTransformerObjectTest: AbstractCompatibilityMatrixTest() {
+class ReactorTransformerObjectTest : AbstractCompatibilityMatrixTest() {
     override val logger = KotlinLogging.logger {}
+
     @Autowired
     lateinit var webTestClient: WebTestClient
+
     @LocalServerPort
     var serverPort: Int = 0
 
@@ -93,7 +95,6 @@ class ReactorTransformerObjectTest: AbstractCompatibilityMatrixTest() {
             .expectBody<String>()
             .isEqualTo("task-session-1")
     }
-
 
 
     @RestController
