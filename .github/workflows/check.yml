@@ -45,14 +45,14 @@ jobs:
           distribution: ${{ matrix.javaVersion.distribution }}
       - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
         run: |
-          if echo "${{ matrix.javaVersion.version }}" | grep -q "^17.0"; then
+          if echo "${{ matrix.javaVersion.version }}" | grep -q "^17"; then
             echo "Using java17.gradle.properties"
             cp java17.gradle.properties gradle.properties
           fi
       - if: matrix.config.preset == 'mingwX64'
         shell: pwsh
         run: |
-          if ("${{ matrix.javaVersion.version }}" -eq "17.0") {
+          if ("${{ matrix.javaVersion.version }}" -eq "17") {
             Write-Output "Using java17.gradle.properties"
             Copy-Item -Path java17.gradle.properties -Destination gradle.properties
           }
