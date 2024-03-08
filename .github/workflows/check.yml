@@ -32,9 +32,10 @@ jobs:
           - { version: 11.0, distribution: 'zulu' }
           - { version: 11.0, distribution: 'temurin' }
           - { version: 11.0, distribution: 'corretto' }
-#          - { version: 17.0, distribution: 'zulu' }
-#          - { version: 17.0, distribution: 'temurin' }
-#          - { version: 17.0, distribution: 'oracle' }
+          - { version: 17.0, distribution: 'zulu' }
+          - { version: 17.0, distribution: 'temurin' }
+          - { version: 17.0, distribution: 'corretto' }
+          - { version: 17.0, distribution: 'oracle' }
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v3
@@ -42,6 +43,12 @@ jobs:
         with:
           java-version: ${{ matrix.javaVersion.version }}
           distribution: ${{ matrix.javaVersion.distribution }}
+      - name: Switch properties file
+        run: |
+          if echo "${{ matrix.javaVersion.version }}" | grep -q "^17.0"; then
+            echo "Using java17.gradle.properties"
+            echo "PROPERTIES_FILE=java17.gradle.properties" >> $GITHUB_ENV
+          fi
       - uses: gradle/wrapper-validation-action@v1
       - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
         run: chmod +x ${{ github.workspace }}/gradlew
