@@ -28,8 +28,12 @@ jobs:
         javaVersion:
           - { version: 8.0, distribution: 'zulu' }
           - { version: 8.0, distribution: 'temurin' }
+          - { version: 8.0, distribution: 'corretto' }
+          - { version: 8.0, distribution: 'oracle' }
           - { version: 11.0, distribution: 'zulu' }
           - { version: 11.0, distribution: 'temurin' }
+          - { version: 11.0, distribution: 'corretto' }
+          - { version: 11.0, distribution: 'oracle' }
 #          - { version: 17.0, distribution: 'zulu' }
 #          - { version: 17.0, distribution: 'temurin' }
     runs-on: ${{ matrix.config.os }}
