@@ -40,6 +40,11 @@ dependencies {
     testImplementation("io.projectreactor:reactor-test")
     testImplementation(project(":abstract-test"))
     evaluationDependsOn(":test-agent")
+    configurations {
+        all {
+            exclude(group = "ch.qos.logback", module = "logback-classic")
+        }
+    }
 }
 
 val nativeAgentLibName: String by parent!!.extra

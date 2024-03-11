@@ -38,6 +38,11 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
     testImplementation(project(":abstract-test"))
     evaluationDependsOn(":test-agent")
+    configurations {
+        all {
+            exclude(group = "ch.qos.logback", module = "logback-classic")
+        }
+    }
 }
 
 
