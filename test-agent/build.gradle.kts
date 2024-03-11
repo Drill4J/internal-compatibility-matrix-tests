@@ -120,6 +120,7 @@ license {
         }
     }
     val licenseCheckSources by tasks.registering(LicenseCheck::class) {
+        dependsOn(":test-agent:copyNativeClassesLinuxX64Main", ":test-agent:copyNativeClassesMacosX64Main")
         source = fileTree("$projectDir/src").also {
             include("**/*.kt", "**/*.java", "**/*.groovy")
             exclude("**/kni")
