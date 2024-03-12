@@ -1,11 +1,7 @@
 import com.hierynomus.gradle.license.tasks.LicenseCheck
 import com.hierynomus.gradle.license.tasks.LicenseFormat
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.konan.target.HostManager
-import org.jetbrains.kotlin.konan.target.presetName
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 import java.net.URI
 
@@ -39,7 +35,6 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation(project(":abstract-test"))
-    evaluationDependsOn(":test-agent")
     configurations {
         all {
             exclude(group = "ch.qos.logback", module = "logback-classic")
@@ -50,17 +45,11 @@ dependencies {
 val nativeAgentLibName: String by parent!!.extra
 
 tasks {
-    val kotlinTargets = (project(":test-agent").extensions.getByName("kotlin") as KotlinMultiplatformExtension)
-        .targets.withType<KotlinNativeTarget>().getByName(HostManager.host.presetName)
-        .binaries.getSharedLib(nativeAgentLibName, NativeBuildType.DEBUG)
     test {
+        val extension = if (HostManager.hostIsMingw) ".dll" else ".so"
         jvmArgs = listOf(
-            "-agentpath:${kotlinTargets.outputFile.path}=${
-                project(":test-agent").tasks.named("runtimeJar").get().outputs.files.singleFile
-            }"
+            "-agentpath:${rootProject.projectDir.path}/drill-agent/drill_agent$extension=${rootProject.projectDir.path}/drill-agent/drill-runtime.jar"
         )
-        dependsOn(kotlinTargets.linkTask)
-        dependsOn(project(":test-agent").tasks["runtimeJar"])
     }
     named<BootJar>("bootJar") {
         enabled = false

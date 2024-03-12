@@ -105,4 +105,4 @@ jobs:
         run: ${{ github.workspace }}/setup-shared-libs.bat
       - uses: gradle/gradle-build-action@v2
         with:
-          arguments: :${{matrix.envVersions.testModule}}:check
+          arguments: :test-agent:buildAgentJar :${{matrix.envVersions.testModule}}:check

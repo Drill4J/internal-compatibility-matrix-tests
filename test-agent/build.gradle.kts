@@ -4,6 +4,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.konan.target.HostManager
@@ -105,6 +106,22 @@ kotlin {
             dependencies {
                 exclude("/META-INF/services/javax.servlet.ServletContainerInitializer")
                 exclude("/ch/qos/logback/classic/servlet/*")
+            }
+        }
+        register("buildAgentJar") {
+            val kotlinTargets = targets.withType<KotlinNativeTarget>().getByName(HostManager.host.presetName)
+                .binaries.getSharedLib(nativeAgentLibName, NativeBuildType.DEBUG)
+            dependsOn(runtimeJar)
+            dependsOn(kotlinTargets.linkTask)
+            doLast {
+                copy {
+                    from(runtimeJar.get().outputs.files.singleFile.path)
+                    into("${project.rootDir}/drill-agent")
+                }
+                copy {
+                    from(kotlinTargets.outputFile.path)
+                    into("${project.rootDir}/drill-agent")
+                }
             }
         }
     }
