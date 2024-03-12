@@ -115,11 +115,15 @@ kotlin {
             dependsOn(kotlinTargets.linkTask)
             doLast {
                 copy {
-                    from(runtimeJar.get().outputs.files.singleFile.path)
+                    val path = runtimeJar.get().outputs.files.singleFile.path
+                    println("Was generated: $path")
+                    from(path)
                     into("${project.rootDir}/drill-agent")
                 }
                 copy {
-                    from(kotlinTargets.outputFile.path)
+                    val path = kotlinTargets.outputFile.path
+                    println("Was generated: $path")
+                    from(path)
                     into("${project.rootDir}/drill-agent")
                 }
             }
