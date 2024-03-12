@@ -43,7 +43,7 @@ dependencies {
 
 tasks {
     test {
-        val extension = if (HostManager.hostIsMingw) ".dll" else ".so"
+        val extension = if (HostManager.hostIsMingw) ".dll" else ".dylib"
         jvmArgs = listOf(
             "-agentpath:${rootProject.projectDir.path}/drill-agent/drill_agent$extension=${rootProject.projectDir.path}/drill-agent/drill-runtime.jar"
         )

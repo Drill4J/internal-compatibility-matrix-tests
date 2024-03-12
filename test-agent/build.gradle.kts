@@ -108,7 +108,7 @@ kotlin {
                 exclude("/ch/qos/logback/classic/servlet/*")
             }
         }
-        register("buildAgentJar") {
+        register("buildAgent") {
             val kotlinTargets = targets.withType<KotlinNativeTarget>().getByName(HostManager.host.presetName)
                 .binaries.getSharedLib(nativeAgentLibName, NativeBuildType.DEBUG)
             dependsOn(runtimeJar)
