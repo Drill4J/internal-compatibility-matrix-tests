@@ -45,9 +45,13 @@ val nativeAgentLibName: String by parent!!.extra
 
 tasks {
     test {
-        val extension = if (HostManager.hostIsMingw) ".dll" else ".dylib"
+        val fileName = when {
+            HostManager.hostIsMingw -> "drill_agent.dll"
+            HostManager.hostIsMac -> "libdrill_agent.dylib"
+            else -> "libdrill_agent.so"
+        }
         jvmArgs = listOf(
-            "-agentpath:${rootProject.projectDir.path}/drill-agent/drill_agent$extension=${rootProject.projectDir.path}/drill-agent/drill-runtime.jar"
+            "-agentpath:${rootProject.projectDir.path}/drill-agent/$fileName=${rootProject.projectDir.path}/drill-agent/drill-runtime.jar"
         )
     }
     named<BootJar>("bootJar") {
