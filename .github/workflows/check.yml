@@ -58,7 +58,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: agent-jar-${{matrix.config.preset}}
-          path: test-agent/build/lib/*.jar
+          path: test-agent/build/libs/*.jar
   check:
     needs: build-agent
     strategy:
@@ -161,4 +161,4 @@ jobs:
           }
       - uses: gradle/gradle-build-action@v2
         with:
-          arguments: :${{matrix.envVersions.testModule}}:check -Dtest-agent.binaries=agent
+          arguments: :${{matrix.envVersions.testModule}}:check -Dtest-agent.binaries=agent/${{matrix.config.preset}}

@@ -58,7 +58,7 @@ tasks {
                 HostManager.hostIsMac -> "libdrill_agent.dylib"
                 else -> "libdrill_agent.so"
             }
-            pathToBinary = "$binaries/$fileName"
+            pathToBinary = "$binaries/drill-agentDebugShared/$fileName"
             pathToRuntimeJar = "$binaries/drill-runtime.jar"
         } else {
             val kotlinTargets = (project(":test-agent").extensions.getByName("kotlin") as KotlinMultiplatformExtension)
