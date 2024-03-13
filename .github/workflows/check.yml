@@ -86,6 +86,10 @@ jobs:
         run: chmod +x ${{ github.workspace }}/setup-shared-libs.sh
       - if: matrix.config.preset == 'linuxX64'
         run: sudo apt-get install -y libtinfo5
+      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
+        run: ${{ github.workspace }}/setup-shared-libs.sh
+      - if: matrix.config.preset == 'mingwX64'
+        run: ${{ github.workspace }}/setup-shared-libs.bat
       - uses: gradle/gradle-build-action@v2
         with:
           arguments: :test-agent:buildAgent
@@ -106,10 +110,6 @@ jobs:
             Write-Output "Using java17.gradle.properties"
             Copy-Item -Path java17.gradle.properties -Destination gradle.properties
           }
-      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
-        run: ${{ github.workspace }}/setup-shared-libs.sh
-      - if: matrix.config.preset == 'mingwX64'
-        run: ${{ github.workspace }}/setup-shared-libs.bat
       - uses: gradle/gradle-build-action@v2
         with:
           arguments: :${{matrix.envVersions.testModule}}:check
