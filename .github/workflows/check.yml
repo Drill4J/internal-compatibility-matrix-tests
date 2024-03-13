@@ -141,9 +141,6 @@ jobs:
         run: ${{ github.workspace }}/setup-shared-libs.sh
       - if: matrix.config.preset == 'mingwX64'
         run: ${{ github.workspace }}/setup-shared-libs.bat
-      - uses: gradle/gradle-build-action@v2
-        with:
-          arguments: :test-agent:buildAgent
       - uses: actions/setup-java@v3
         with:
           java-version: ${{ matrix.envVersions.javaVersion }}
