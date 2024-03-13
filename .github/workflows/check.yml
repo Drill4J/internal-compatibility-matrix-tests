@@ -79,6 +79,13 @@ jobs:
         with:
           java-version: 8.0
           distribution: 'corretto'
+      - uses: gradle/wrapper-validation-action@v1
+      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
+        run: chmod +x ${{ github.workspace }}/gradlew
+      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
+        run: chmod +x ${{ github.workspace }}/setup-shared-libs.sh
+      - if: matrix.config.preset == 'linuxX64'
+        run: sudo apt-get install -y libtinfo5
       - uses: gradle/gradle-build-action@v2
         with:
           arguments: :test-agent:buildAgent
@@ -99,13 +106,6 @@ jobs:
             Write-Output "Using java17.gradle.properties"
             Copy-Item -Path java17.gradle.properties -Destination gradle.properties
           }
-      - uses: gradle/wrapper-validation-action@v1
-      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
-        run: chmod +x ${{ github.workspace }}/gradlew
-      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
-        run: chmod +x ${{ github.workspace }}/setup-shared-libs.sh
-      - if: matrix.config.preset == 'linuxX64'
-        run: sudo apt-get install -y libtinfo5
       - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
         run: ${{ github.workspace }}/setup-shared-libs.sh
       - if: matrix.config.preset == 'mingwX64'
