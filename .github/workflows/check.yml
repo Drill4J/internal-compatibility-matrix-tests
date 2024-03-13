@@ -79,7 +79,9 @@ jobs:
         with:
           java-version: 8.0
           distribution: 'corretto'
-      - run: ./gradlew :test-agent:buildAgent
+      - uses: gradle/gradle-build-action@v2
+        with:
+          arguments: :test-agent:buildAgent
       - uses: actions/setup-java@v3
         with:
           java-version: ${{ matrix.envVersions.javaVersion }}
