@@ -161,4 +161,4 @@ jobs:
           }
       - uses: gradle/gradle-build-action@v2
         with:
-          arguments: :${{matrix.envVersions.testModule}}:check -Dtest-agent.binaries=/agent/${{matrix.config.preset}}
+          arguments: :${{matrix.envVersions.testModule}}:check -Dtest-agent.binaries=${{github.workspace}}/agent
