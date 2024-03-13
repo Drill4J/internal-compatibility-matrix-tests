@@ -45,7 +45,7 @@ jobs:
         run: ${{ github.workspace }}/setup-shared-libs.bat
       - uses: gradle/gradle-build-action@v2
         with:
-          arguments: :test-agent:runtimeJar
+          arguments: :test-agent:runtimeJar :test-agent:build
       - name: Upload agent binary
         uses: actions/upload-artifact@master
         with:
@@ -58,7 +58,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: agent-jar-${{matrix.config.preset}}
-          path: test-agent/build/libs/*.jar
+          path: test-agent/build/libs/drill-runtime.jar
   check:
     needs: build-agent
     strategy:
