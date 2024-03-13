@@ -45,7 +45,7 @@ jobs:
         run: ${{ github.workspace }}/setup-shared-libs.bat
       - uses: gradle/gradle-build-action@v2
         with:
-          arguments: :test-agent:assemble
+          arguments: :test-agent:runtimeJar
       - name: Upload agent binary
         uses: actions/upload-artifact@master
         with:
