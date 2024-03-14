@@ -3,9 +3,6 @@ rootProject.name = "internal-compatibility-matrix-tests"
 pluginManagement {
     val kotlinVersion: String by extra
     val kotlinMultiplatformVersion: String by extra
-    val springDependencyManagement: String by extra
-    val springBootVersion: String by extra
-
     val shadowPluginVersion: String by extra
     val licenseVersion: String by extra
 
@@ -13,8 +10,6 @@ pluginManagement {
         kotlin("jvm") version kotlinVersion
         kotlin("multiplatform") version kotlinMultiplatformVersion
         kotlin("plugin.serialization") version kotlinVersion
-        id("io.spring.dependency-management") version springDependencyManagement
-        id("org.springframework.boot") version springBootVersion
 
         id("com.github.johnrengelman.shadow") version shadowPluginVersion
         id("com.github.hierynomus.license") version licenseVersion
