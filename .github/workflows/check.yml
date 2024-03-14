@@ -97,6 +97,7 @@ jobs:
           - { javaVersion: 11.0, distribution: 'zulu', testModule: 'spring-webflux-netty' }
           - { javaVersion: 8.0, distribution: 'temurin', testModule: 'spring-webflux-netty' }
           - { javaVersion: 8.0, distribution: 'zulu', testModule: 'spring-webflux-netty' }
+          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'spring-jetty' }
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v3
