@@ -10,17 +10,11 @@ import java.net.URI
 
 plugins {
     kotlin("jvm")
-    id("org.springframework.boot")
-    id("io.spring.dependency-management")
     id("com.github.hierynomus.license")
 }
 
-group = "com.epam.drill.compatibility"
 version = rootProject.version
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = JavaVersion.current().toString()
-}
-
+group = rootProject.group
 
 repositories {
     mavenCentral()
@@ -28,14 +22,15 @@ repositories {
 
 val nativeAgentLibName: String by parent!!.extra
 val microutilsLoggingVersion: String by parent!!.extra
+val springBootVersion: String by parent!!.extra
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web") {
+    implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
+    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
         exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
     }
-    implementation("org.springframework.boot:spring-boot-starter-jetty")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
+    implementation("org.springframework.boot:spring-boot-starter-jetty:$springBootVersion")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation(project(":abstract-test"))
     configurations {
         all {
@@ -46,6 +41,9 @@ dependencies {
 }
 
 tasks {
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = JavaVersion.current().toString()
+    }
     test {
         val pathToBinary: String
         val pathToRuntimeJar: String
@@ -74,7 +72,6 @@ tasks {
             "-agentpath:$pathToBinary=$pathToRuntimeJar"
         )
     }
-    this["bootJar"].enabled = false
     licenseTest.get().enabled = false
 }
 

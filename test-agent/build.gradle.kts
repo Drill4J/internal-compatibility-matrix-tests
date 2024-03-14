@@ -15,8 +15,10 @@ plugins {
     id("com.github.johnrengelman.shadow")
     id("com.github.hierynomus.license")
 }
-group = "com.epam.drill.compatibility"
+
+group = rootProject.group
 version = rootProject.version
+
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = JavaVersion.current().toString()
 }
