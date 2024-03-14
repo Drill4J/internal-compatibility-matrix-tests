@@ -29,7 +29,7 @@ dependencies {
     }
     implementation("org.springframework.boot:spring-boot-starter-jetty:$springBootVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
-    testImplementation(project(":abstract-test"))
+    testImplementation(project(":common-test"))
     configurations {
         all {
             exclude(group = "ch.qos.logback", module = "logback-classic")

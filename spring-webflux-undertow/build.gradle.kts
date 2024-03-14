@@ -29,7 +29,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-undertow:$springBootVersion")
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
     testImplementation("io.projectreactor:reactor-test:3.4.10")
-    testImplementation(project(":abstract-test"))
+    testImplementation(project(":common-test"))
     configurations {
         all {
             exclude(group = "ch.qos.logback", module = "logback-classic")

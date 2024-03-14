@@ -26,7 +26,7 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
     implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
     testImplementation("io.projectreactor:reactor-test:3.4.10")
-    testImplementation(project(":abstract-test"))
+    testImplementation(project(":common-test"))
     configurations {
         all {
             exclude(group = "ch.qos.logback", module = "logback-classic")

@@ -31,7 +31,7 @@ dependencies {
     implementation("org.apache.tomcat.embed:tomcat-embed-core:9.0.53")
     implementation("org.apache.tomcat.embed:tomcat-embed-websocket:9.0.53")
     testImplementation("io.projectreactor:reactor-test:3.4.10")
-    testImplementation(project(":abstract-test"))
+    testImplementation(project(":common-test"))
     configurations {
         all {
             exclude(group = "ch.qos.logback", module = "logback-classic")
