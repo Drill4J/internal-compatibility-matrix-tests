@@ -17,10 +17,11 @@ repositories {
 
 dependencies {
     compileOnly("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
-    implementation("org.springframework.boot:spring-boot-starter-webflux:2.7.18")
-    implementation("org.springframework.boot:spring-boot-starter-test:2.7.18")
-    implementation(kotlin("test-junit"))
-    implementation(project(":common"))
+    //TODO change with separate jar
+    compileOnly("org.springframework.boot:spring-boot-starter-webflux:2.7.18")
+    compileOnly("org.springframework.boot:spring-boot-starter-test:2.7.18")
+    compileOnly(kotlin("test-junit"))
+    compileOnly(project(":common"))
 }
 
 tasks {

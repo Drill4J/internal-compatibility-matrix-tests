@@ -29,6 +29,7 @@ dependencies {
     }
     implementation("org.springframework.boot:spring-boot-starter-undertow:$springBootVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+    testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
     configurations {
         all {

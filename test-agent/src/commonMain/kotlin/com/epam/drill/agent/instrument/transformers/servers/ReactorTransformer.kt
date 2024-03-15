@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.epam.drill.compatibility.matrix
+package com.epam.drill.agent.instrument.transformers.servers
 
-class CompatibilityMatrixTest : SpringWebfluxMatrixTest()
+import com.epam.drill.agent.instrument.TransformerObject
 
+expect object ReactorTransformer : TransformerObject

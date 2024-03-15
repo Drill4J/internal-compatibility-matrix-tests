@@ -25,6 +25,8 @@ val springBootVersion = "2.7.18"
 dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
     implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+    testImplementation(kotlin("test-junit"))
     testImplementation("io.projectreactor:reactor-test:3.4.10")
     testImplementation(project(":common-test"))
     configurations {

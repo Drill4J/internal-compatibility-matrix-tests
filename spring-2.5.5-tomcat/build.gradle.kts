@@ -26,6 +26,7 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
     implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+    testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
     configurations {
         all {

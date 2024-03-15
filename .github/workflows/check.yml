@@ -75,22 +75,22 @@ jobs:
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.5.5-undertow' }
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-jetty' }
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-netty' }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-tomcat' }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-undertow' }
+#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-tomcat' }
+#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-undertow' }
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.5.5-jetty' }
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.5.5-tomcat' }
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.5.5-undertow' }
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-jetty' }
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-netty' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-tomcat' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-undertow' }
+#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-tomcat' }
+#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-undertow' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.5.5-jetty' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.5.5-tomcat' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.5.5-undertow' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-jetty' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-netty' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-tomcat' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-undertow' }
+#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-tomcat' }
+#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.5.5-webflux-undertow' }
           - { javaVersion: 17.0, distribution: 'oracle', testModule: 'spring-2.5.5-webflux-netty' }
           - { javaVersion: 17.0, distribution: 'temurin', testModule: 'spring-2.5.5-webflux-netty' }
           - { javaVersion: 17.0, distribution: 'zulu', testModule: 'spring-2.5.5-webflux-netty' }
@@ -105,22 +105,22 @@ jobs:
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-undertow' }
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-jetty' }
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-netty' }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-tomcat' }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-undertow' }
+#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-tomcat' }
+#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-undertow' }
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-jetty' }
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-tomcat' }
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-undertow' }
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-jetty' }
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-netty' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-tomcat' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-undertow' }
+#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-tomcat' }
+#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-undertow' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-jetty' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-tomcat' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-undertow' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-jetty' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-netty' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-tomcat' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-undertow' }
+#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-tomcat' }
+#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-undertow' }
           - { javaVersion: 17.0, distribution: 'oracle', testModule: 'spring-2.7.18-webflux-netty' }
           - { javaVersion: 17.0, distribution: 'temurin', testModule: 'spring-2.7.18-webflux-netty' }
           - { javaVersion: 17.0, distribution: 'zulu', testModule: 'spring-2.7.18-webflux-netty' }

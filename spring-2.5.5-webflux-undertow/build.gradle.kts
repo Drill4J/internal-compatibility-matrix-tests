@@ -28,6 +28,8 @@ dependencies {
     }
     implementation("org.springframework.boot:spring-boot-starter-undertow:$springBootVersion")
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+    testImplementation(kotlin("test-junit"))
     testImplementation("io.projectreactor:reactor-test:3.4.10")
     testImplementation(project(":common-test"))
     configurations {

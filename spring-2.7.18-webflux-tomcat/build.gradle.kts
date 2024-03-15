@@ -30,6 +30,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-tomcat:$springBootVersion")
     implementation("org.apache.tomcat.embed:tomcat-embed-core:9.0.53")
     implementation("org.apache.tomcat.embed:tomcat-embed-websocket:9.0.53")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation("io.projectreactor:reactor-test:3.4.10")
     testImplementation(project(":common-test"))
     configurations {
