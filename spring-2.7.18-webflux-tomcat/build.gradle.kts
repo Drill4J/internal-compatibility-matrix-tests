@@ -25,13 +25,15 @@ val springBootVersion = "2.7.18"
 dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
     implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion") {
-        exclude(group = "org.springframework.boot", module = "spring-boot-starter-reactor-netty")
+        // We should have spring-boot-starter-reactor-netty module due to WebClient bean
+        //  exclude(group = "org.springframework.boot", module = "spring-boot-starter-reactor-netty")
     }
     implementation("org.springframework.boot:spring-boot-starter-tomcat:$springBootVersion")
     implementation("org.apache.tomcat.embed:tomcat-embed-core:9.0.53")
     implementation("org.apache.tomcat.embed:tomcat-embed-websocket:9.0.53")
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation("io.projectreactor:reactor-test:3.4.10")
+    testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
     configurations {
         all {

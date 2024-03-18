@@ -24,7 +24,8 @@ val springBootVersion = "2.5.5"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion") {
-        exclude(group = "org.springframework.boot", module = "spring-boot-starter-reactor-netty")
+        // We should have spring-boot-starter-reactor-netty module due to WebClient bean
+        //      exclude(group = "org.springframework.boot", module = "spring-boot-starter-reactor-netty")
     }
     implementation("org.springframework.boot:spring-boot-starter-undertow:$springBootVersion")
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
