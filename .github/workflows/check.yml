@@ -125,6 +125,24 @@ jobs:
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-netty' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-tomcat' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-undertow' }
+          # Servers:
+          # Jetty
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'clean-jetty-10.0.20' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-jetty-10.0.20' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-jetty-10.0.20' }
+          # Netty:
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107' }
+          # Tomcat:
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'clean-tomcat-11.0.0-M18' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-tomcat-11.0.0-M18' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-tomcat-11.0.0-M18' }
+          # Undertow:
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12' }
+
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v3
