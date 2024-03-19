@@ -99,10 +99,17 @@ kotlin {
             .onEach(cleanNativeClassesTask)
 
         val jvmMainCompilation = targets.withType<KotlinJvmTarget>()["jvm"].compilations["main"]
+        val relocatePackages = setOf(
+            "ch.qos.logback",
+            "org.slf4j",
+        )
         val runtimeJar by registering(ShadowJar::class) {
             mergeServiceFiles()
             isZip64 = true
             archiveFileName.set("drill-runtime.jar")
+            relocatePackages.forEach {
+                relocate(it, "${project.group}.shadow.$it")
+            }
             from(jvmMainCompilation.runtimeDependencyFiles, jvmMainCompilation.output)
             dependencies {
                 exclude("/META-INF/services/javax.servlet.ServletContainerInitializer")
