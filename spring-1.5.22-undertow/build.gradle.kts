@@ -31,11 +31,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
-    configurations {
-        all {
-            exclude(group = "ch.qos.logback", module = "logback-classic")
-        }
-    }
     evaluationDependsOn(":test-agent")
 }
 

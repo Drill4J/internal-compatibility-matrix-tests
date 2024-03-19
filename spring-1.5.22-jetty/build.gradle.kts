@@ -31,11 +31,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
-    configurations {
-        all {
-            exclude(group = "ch.qos.logback", module = "logback-classic")
-        }
-    }
     evaluationDependsOn(":test-agent")
 }
 
@@ -67,16 +62,9 @@ tasks {
             dependsOn(project(":test-agent").tasks["runtimeJar"])
             dependsOn(kotlinTargets.linkTask)
         }
-        println("pathToBinary")
-        println(pathToBinary)
-        println(file(pathToBinary).exists())
-        println("pathToRuntimeJar")
-        println(pathToRuntimeJar)
         jvmArgs = listOf(
             "-agentpath:$pathToBinary=$pathToRuntimeJar"
         )
-        println("jvmArgs")
-        println(jvmArgs)
     }
 }
 

@@ -36,11 +36,6 @@ dependencies {
     testImplementation("io.projectreactor:reactor-test:3.4.10")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
-    configurations {
-        all {
-            exclude(group = "ch.qos.logback", module = "logback-classic")
-        }
-    }
     evaluationDependsOn(":test-agent")
 }
 
