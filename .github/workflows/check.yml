@@ -117,6 +117,14 @@ jobs:
           - { javaVersion: 17.0, distribution: 'oracle', testModule: 'spring-2.7.18-webflux-netty' }
           - { javaVersion: 17.0, distribution: 'temurin', testModule: 'spring-2.7.18-webflux-netty' }
           - { javaVersion: 17.0, distribution: 'zulu', testModule: 'spring-2.7.18-webflux-netty' }
+          # Spring 3.1.9
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-jetty' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-tomcat' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-undertow' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-jetty' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-netty' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-tomcat' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-undertow' }
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v3
