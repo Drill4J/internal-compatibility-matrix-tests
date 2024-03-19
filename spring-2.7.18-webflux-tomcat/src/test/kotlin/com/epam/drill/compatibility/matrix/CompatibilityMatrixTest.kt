@@ -15,4 +15,15 @@
  */
 package com.epam.drill.compatibility.matrix
 
-class CompatibilityMatrixTest : SpringWebfluxMatrixTest()
+import org.springframework.test.web.reactive.server.expectBody
+
+class CompatibilityMatrixTest : SpringWebfluxMatrixTest() {
+    override fun `given Mono class, MonoTransformerObject must propagate drill context`() {
+        webTestClient.get().uri("/mono")
+            .header("drill-session-id", "session-1")
+            .exchange()
+            .expectStatus().isOk
+            .expectBody<String>()
+            .isEqualTo("mono-session-1")
+    }
+}

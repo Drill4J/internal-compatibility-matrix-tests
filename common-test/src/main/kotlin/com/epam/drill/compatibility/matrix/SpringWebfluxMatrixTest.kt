@@ -35,20 +35,13 @@ import kotlin.test.Test
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     classes = [SpringWebfluxMatrixTest.SimpleController::class]
 )
-open class SpringWebfluxMatrixTest {
+open abstract class SpringWebfluxMatrixTest {
 
     @Autowired
     lateinit var webTestClient: WebTestClient
 
     @Test
-    fun `given Mono class, MonoTransformerObject must propagate drill context`() {
-        webTestClient.get().uri("/mono")
-            .header("drill-session-id", "session-1")
-            .exchange()
-            .expectStatus().isOk
-            .expectBody<String>()
-            .isEqualTo("mono-session-1")
-    }
+    abstract fun `given Mono class, MonoTransformerObject must propagate drill context`()
 
     @RestController
     @EnableAutoConfiguration

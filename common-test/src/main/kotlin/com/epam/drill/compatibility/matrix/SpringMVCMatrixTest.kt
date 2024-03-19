@@ -47,7 +47,7 @@ open class SpringMVCMatrixTest {
         val entity: HttpEntity<String> = HttpEntity(headers)
         val response: ResponseEntity<String> =
             restTemplate.exchange("/", HttpMethod.GET, entity, String::class.java)
-        assertEquals(response.statusCode, HttpStatus.OK)
+        assertEquals(response.statusCodeValue, HttpStatus.OK.value())
         assertEquals(response.body, "get-controller-session-1")
     }
 
