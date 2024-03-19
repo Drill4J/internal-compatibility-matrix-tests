@@ -25,6 +25,7 @@ val springBootVersion = "2.7.18"
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion") {
         // We should have spring-boot-starter-reactor-netty module due to WebClient bean
+        // https://docs.spring.io/spring-boot/docs/2.1.17.RELEASE/reference/html/howto-embedded-web-servers.html
         //      exclude(group = "org.springframework.boot", module = "spring-boot-starter-reactor-netty")
     }
     implementation("org.springframework.boot:spring-boot-starter-undertow:$springBootVersion")

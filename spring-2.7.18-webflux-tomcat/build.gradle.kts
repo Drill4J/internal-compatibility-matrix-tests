@@ -26,7 +26,8 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
     implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion") {
         // We should have spring-boot-starter-reactor-netty module due to WebClient bean
-        //  exclude(group = "org.springframework.boot", module = "spring-boot-starter-reactor-netty")
+        // https://docs.spring.io/spring-boot/docs/2.1.17.RELEASE/reference/html/howto-embedded-web-servers.html
+        //      exclude(group = "org.springframework.boot", module = "spring-boot-starter-reactor-netty")
     }
     implementation("org.springframework.boot:spring-boot-starter-tomcat:$springBootVersion")
     implementation("org.apache.tomcat.embed:tomcat-embed-core:9.0.53")
