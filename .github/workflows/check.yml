@@ -127,7 +127,6 @@ jobs:
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-undertow' }
           # Servers:
           # Jetty
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'clean-jetty-10.0.20' }
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-jetty-10.0.20' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-jetty-10.0.20' }
           # Netty:
@@ -135,11 +134,9 @@ jobs:
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107' }
           # Tomcat:
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'clean-tomcat-11.0.0-M18' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-tomcat-11.0.0-M18' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-tomcat-10.1.19' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-tomcat-11.0.0-M18' }
           # Undertow:
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12' }
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12' }
 
