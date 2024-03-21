@@ -17,9 +17,14 @@ repositories {
 
 dependencies {
     compileOnly("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
-    //TODO change with separate jar
-    compileOnly("org.springframework.boot:spring-boot-starter-webflux:2.7.18")
+    compileOnly("org.springframework:spring-test:5.3.31")
+    compileOnly("org.springframework:spring-beans:5.3.31")
+    compileOnly("org.springframework:spring-web:5.3.31")
+    compileOnly("org.springframework:spring-context:5.3.31")
     compileOnly("org.springframework.boot:spring-boot-starter-test:2.7.18")
+    compileOnly("org.springframework.boot:spring-boot-autoconfigure:2.7.18")
+    compileOnly("io.projectreactor:reactor-core:3.4.34")
+
     compileOnly(kotlin("test-junit"))
     compileOnly(project(":common"))
 }
