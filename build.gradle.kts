@@ -28,7 +28,9 @@ subprojects {
         dependencies.constraints.create("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:$kotlinxSerializationVersion"),
         dependencies.constraints.create("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:$kotlinxSerializationVersion"),
     )
-//    configurations.all {
-//        dependencyConstraints += constraints
-//    }
+    configurations.all {
+        dependencyConstraints.addAll(
+            constraints
+        )
+    }
 }
