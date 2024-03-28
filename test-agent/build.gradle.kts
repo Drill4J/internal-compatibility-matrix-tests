@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.konan.target.presetName
 import java.net.URI
 
 plugins {
-    kotlin("multiplatform") version "1.5.31"
+    kotlin("multiplatform")
     id("com.github.johnrengelman.shadow")
     id("com.github.hierynomus.license")
 }
