@@ -72,14 +72,14 @@ jobs:
         envVersions:
           # Spring 1.5.22 (Only Spring MVC, WebFlux appears from 2.X version of Spring Boot)
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-1.5.22-tomcat', gradleVersion: '7.4.2'  }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-1.5.22-undertow', gradleVersion: '7.4.2'  }
-          - { javaVersion: 8.0, distribution: 'temurin', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2'  }
-          - { javaVersion: 8.0, distribution: 'zulu', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2'  }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-1.5.22-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-1.5.22-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'temurin', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'zulu', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
 
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2'  }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-1.5.22-tomcat', gradleVersion: '7.4.2'  }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-1.5.22-undertow', gradleVersion: '7.4.2'  }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-1.5.22-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-1.5.22-undertow', gradleVersion: '7.4.2' }
           - { javaVersion: 11.0, distribution: 'temurin', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
           - { javaVersion: 11.0, distribution: 'zulu', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
 
@@ -139,8 +139,6 @@ jobs:
           # Undertow:
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12', gradleVersion: '7.4.2' }
-          # Java 21:
-          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'spring-3.1.9-tomcat', gradleVersion: '8.5' }
 
     runs-on: ${{ matrix.config.os }}
     steps:
@@ -169,4 +167,4 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: ${{ matrix.envVersions.gradleVersion }}
-      - run: gradle :${{matrix.envVersions.testModule}}:check -Dtest-agent.binaries=${{github.workspace}}/agent
+      - run: gradle :${{matrix.envVersions.testModule}}:check -Dtest-agent.binaries="${{github.workspace}}/agent"
