@@ -162,7 +162,7 @@ jobs:
         run: ${{ github.workspace }}/setup-shared-libs.bat
       - name: Set-up kotlin version for java 21
         if: matrix.envVersions.javaVersion == '21.0'
-        run: echo "kotlinVersion= ${{ matrix.kotlinVersion }}" >> $GITHUB_ENV
+        run: echo "kotlinVersion= ${{ matrix.envVersions.kotlinVersion }}" >> $GITHUB_ENV
         shell: bash
       - uses: actions/setup-java@v3
         with:
