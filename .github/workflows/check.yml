@@ -167,4 +167,4 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: ${{ matrix.envVersions.gradleVersion }}
-      - run: gradle :${{matrix.envVersions.testModule}}:check -Dtest-agent.binaries="${{github.workspace}}/agent"
+      - run: gradle check -Dtest-agent.binaries="${{github.workspace}}/agent" --project-dir :${{matrix.envVersions.testModule}}
