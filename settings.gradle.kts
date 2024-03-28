@@ -2,7 +2,7 @@ rootProject.name = "internal-compatibility-matrix-tests"
 
 pluginManagement {
     val kotlinVersion = System.getenv("kotlinVersion") ?: "1.6.0"
-    val kotlinMultiplatformVersion = System.getenv("kotlinVersion") ?: "1.5.31"
+    val kotlinMultiplatformVersion: String by extra
     val shadowPluginVersion: String by extra
     val licenseVersion: String by extra
 
