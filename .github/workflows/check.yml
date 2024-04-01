@@ -140,7 +140,7 @@ jobs:
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12', gradleVersion: '7.4.2' }
           # Java 21:
-          - { javaVersion: 21.0, kotlinVersion: '1.9.20',  distribution: 'corretto', testModule: 'clean-undertow-2.3.12', gradleVersion: '8.5' }
+          - { javaVersion: 21.0, kotlinVersion: '1.9.20',  distribution: 'corretto', testModule: 'spring-3.1.9-tomcat', gradleVersion: '8.5' }
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v3

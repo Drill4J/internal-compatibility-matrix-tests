@@ -62,6 +62,12 @@ tasks {
         jvmArgs = listOf(
             "-agentpath:$pathToBinary=$pathToRuntimeJar"
         )
+        dependsOn("printJavaVersion")
+    }
+    register("printJavaVersion") {
+        doLast {
+            println("Java version: ${System.getProperty("java.version")}")
+        }
     }
 }
 
