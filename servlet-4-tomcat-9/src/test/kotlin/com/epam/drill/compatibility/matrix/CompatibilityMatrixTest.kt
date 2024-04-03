@@ -40,6 +40,7 @@ class CompatibilityMatrixTest: CleanServerMatrixTest() {
         fun setup() {
             tomcat = Tomcat().apply {
                 setPort(0)
+                setBaseDir("./build")
                 val ctx = addWebapp("/", File("src/main/webapp/").absolutePath)
                 val additionWebInfClasses = File("build/classes")
                 val resources: WebResourceRoot = StandardRoot(ctx)
