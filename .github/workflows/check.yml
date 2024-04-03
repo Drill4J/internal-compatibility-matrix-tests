@@ -70,77 +70,80 @@ jobs:
           - { os: windows-latest, preset: mingwX64 }
           - { os: macos-latest, preset: macosX64 }
         envVersions:
-#          # Spring 1.5.22 (Only Spring MVC, WebFlux appears from 2.X version of Spring Boot)
-#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-1.5.22-tomcat', gradleVersion: '7.4.2' }
-#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-1.5.22-undertow', gradleVersion: '7.4.2' }
-#          - { javaVersion: 8.0, distribution: 'temurin', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 8.0, distribution: 'zulu', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
-#
-#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-1.5.22-tomcat', gradleVersion: '7.4.2' }
-#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-1.5.22-undertow', gradleVersion: '7.4.2' }
-#          - { javaVersion: 11.0, distribution: 'temurin', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 11.0, distribution: 'zulu', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
-#
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-1.5.22-tomcat', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-1.5.22-undertow', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'temurin', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'zulu', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'oracle', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
-#
-#          # Spring 2.7.18
-#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-tomcat', gradleVersion: '7.4.2' }
-#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-undertow', gradleVersion: '7.4.2' }
-#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-netty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-tomcat', gradleVersion: '7.4.2' }
-#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-undertow', gradleVersion: '7.4.2' }
-#
-#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-tomcat', gradleVersion: '7.4.2' }
-#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-undertow', gradleVersion: '7.4.2' }
-#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-netty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-tomcat', gradleVersion: '7.4.2' }
-#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-undertow', gradleVersion: '7.4.2' }
-#
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-tomcat', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-undertow', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-netty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-tomcat', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-undertow', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'oracle', testModule: 'spring-2.7.18-webflux-netty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'temurin', testModule: 'spring-2.7.18-webflux-netty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'zulu', testModule: 'spring-2.7.18-webflux-netty', gradleVersion: '7.4.2' }
-#          # Spring 3.1.9
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-tomcat', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-undertow', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-jetty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-netty', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-tomcat', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-undertow', gradleVersion: '7.4.2' }
-#          # Servers:
-#          # Jetty
-#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-jetty-10.0.20', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-jetty-10.0.20', gradleVersion: '7.4.2' }
-#          # Netty:
-#          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107', gradleVersion: '7.4.2' }
-#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107', gradleVersion: '7.4.2' }
-#          # Tomcat:
-#          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-tomcat-10.1.19', gradleVersion: '7.4.2' }
-#          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-tomcat-11.0.0-M18', gradleVersion: '7.4.2' }
+          # Spring 1.5.22 (Only Spring MVC, WebFlux appears from 2.X version of Spring Boot)
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-1.5.22-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-1.5.22-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'temurin', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'zulu', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
+
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-1.5.22-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-1.5.22-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'temurin', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'zulu', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
+
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-1.5.22-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-1.5.22-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'temurin', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'zulu', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'oracle', testModule: 'spring-1.5.22-jetty', gradleVersion: '7.4.2' }
+
+          # Spring 2.7.18
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-netty', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-undertow', gradleVersion: '7.4.2' }
+
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-netty', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-undertow', gradleVersion: '7.4.2' }
+
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-netty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-2.7.18-webflux-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'oracle', testModule: 'spring-2.7.18-webflux-netty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'temurin', testModule: 'spring-2.7.18-webflux-netty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'zulu', testModule: 'spring-2.7.18-webflux-netty', gradleVersion: '7.4.2' }
+          # Spring 3.1.9
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-netty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 21.0, kotlinVersion: '1.9.20',  distribution: 'corretto', testModule: 'spring-3.1.9-webflux-jetty', gradleVersion: '8.5' }
+          # Servers:
+          # Jetty
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-jetty-10.0.20', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-jetty-10.0.20', gradleVersion: '7.4.2' }
+          - { javaVersion: 21.0, kotlinVersion: '1.9.20',  distribution: 'corretto', testModule: 'clean-jetty-10.0.20', gradleVersion: '8.5' }
+          # Netty:
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107', gradleVersion: '7.4.2' }
+          - { javaVersion: 21.0, kotlinVersion: '1.9.20',  distribution: 'corretto', testModule: 'clean-netty-4.1.107', gradleVersion: '8.5' }
+          # Tomcat:
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-tomcat-10.1.19', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-tomcat-11.0.0-M18', gradleVersion: '7.4.2' }
+          - { javaVersion: 21.0, kotlinVersion: '1.9.20',  distribution: 'corretto', testModule: 'clean-tomcat-11.0.0-M18', gradleVersion: '8.5' }
           # Undertow:
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12', gradleVersion: '7.4.2' }
-          # Java 21:
-          - { javaVersion: 21.0, kotlinVersion: '1.9.20',  distribution: 'corretto', testModule: 'spring-3.1.9-tomcat', gradleVersion: '8.5' }
+          - { javaVersion: 21.0, kotlinVersion: '1.9.20',  distribution: 'corretto', testModule: 'clean-undertow-2.3.12', gradleVersion: '8.5' }
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v3
