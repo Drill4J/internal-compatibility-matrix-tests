@@ -41,7 +41,8 @@ class CompatibilityMatrixTest: CleanServerMatrixTest() {
             tomcat = Tomcat().apply {
                 setPort(0)
                 setBaseDir("./build")
-                val ctx = addWebapp("/", File("src/main/webapp/").absolutePath)
+                setAddDefaultWebXmlToWebapp(false)
+                val ctx = addWebapp("/", File("./build").absolutePath)
                 val additionWebInfClasses = File("build/classes")
                 val resources: WebResourceRoot = StandardRoot(ctx)
                 resources.addPreResources(
