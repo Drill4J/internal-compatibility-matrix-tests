@@ -125,21 +125,25 @@ jobs:
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-netty', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-tomcat', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'spring-3.1.9-webflux-jetty', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
           # Servers:
           # Jetty
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-jetty-10.0.20', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-jetty-10.0.20', gradleVersion: '7.4.2' }
+          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'clean-jetty-10.0.20', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
           # Netty:
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107', gradleVersion: '7.4.2' }
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107', gradleVersion: '7.4.2' }
+          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'clean-netty-4.1.107', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
           # Tomcat:
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-tomcat-10.1.19', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-tomcat-11.0.0-M18', gradleVersion: '7.4.2' }
+          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'clean-tomcat-11.0.0-M18', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
           # Undertow:
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12', gradleVersion: '7.4.2' }
-
+          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'clean-undertow-2.3.12', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v3
@@ -159,6 +163,10 @@ jobs:
         run: ${{ github.workspace }}/setup-shared-libs.sh
       - if: matrix.config.preset == 'mingwX64'
         run: ${{ github.workspace }}/setup-shared-libs.bat
+      - name: Set-up kotlin version for java 21
+        if: matrix.envVersions.javaVersion == '21.0'
+        run: echo "kotlinVersion=${{matrix.envVersions.kotlinVersion}}" >> $GITHUB_ENV
+        shell: bash
       - uses: actions/setup-java@v3
         with:
           java-version: ${{ matrix.envVersions.javaVersion }}
