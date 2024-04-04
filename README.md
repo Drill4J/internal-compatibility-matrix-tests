@@ -57,40 +57,29 @@ Run the test module with the test-agent:
 |-------------------|----------|-----|-------|-------|
 | ExecutorService   |          |     |       |       |
 | Reactor           |          |     |       |       |
-| JavaRX            |          |     |       |       |
 | Spring Scheduler  |          |     |       |       |
-| Quartz            |          |     |       |       |
 
 ### HTTP Clients
 
-| Name                   | Versions | JDK | Tests | Notes |
-|------------------------|----------|-----|-------|-------|
-| URLConnection          |          |     |       |       |
-| OkHTTP Client          |          |     |       |       |
-| Apache HttpClient      |          |     |       |       |
-| Apache AsyncHttpClient |          |     |       |       |
-| Spring RestTemplate    |          |     |       |       |
-| Spring WebClient       |          |     |       |       |
-| Feign Client           |          |     |       |       |
+| Name                | Versions | JDK | Tests | Notes |
+|---------------------|----------|-----|-------|-------|
+| URLConnection       |          |     |       |       |
+| OkHTTP Client       |          |     |       |       |
+| Apache HttpClient   |          |     |       |       |
+| Spring RestTemplate |          |     |       |       |
+| Spring WebClient    |          |     |       |       |
+| Apache Feign Client |          |     |       |       |
 
 ### WebSocket
 
 | Name             | Versions | JDK | Tests | Notes |
 |------------------|----------|-----|-------|-------|
 | Spring WebSocket |          |     |       |       |
-| Spring Webflux   |          |     |       |       |
-
-### gRPC
-
-| Name             | Versions | JDK | Tests | Notes |
-|------------------|----------|-----|-------|-------|
-| Spring gRPC      |          |     |       |       |
+| Spring WebFlux   |          |     |       |       |
 
 ### Messaging
 
 | Name             | Versions | JDK | Tests | Notes |
 |------------------|----------|-----|-------|-------|
 | Kafka Client     |          |     |       |       |
-| RabbitMQ Client  |          |     |       |       |
-| ActiveMQ Client  |          |     |       |       |
 | Spring Messaging |          |     |       |       |
