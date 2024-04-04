@@ -18,6 +18,7 @@ repositories {
 val nativeAgentLibName: String by parent!!.extra
 val microutilsLoggingVersion: String by parent!!.extra
 val springBootVersion = "3.1.9"
+ext["jakarta-servlet.version"] = "5.0.0"
 
 dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
@@ -26,6 +27,7 @@ dependencies {
     }
     implementation("org.springframework.boot:spring-boot-starter-jetty:$springBootVersion")
     implementation("org.eclipse.jetty:jetty-reactive-httpclient:1.1.5")
+    implementation("org.eclipse.jetty:jetty-server:11.0.15")
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation(kotlin("test-junit"))
     testImplementation("io.projectreactor:reactor-test:3.4.10")
