@@ -79,6 +79,8 @@ jobs:
           - { testModule: 'servlet-5-tomcat-10', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'servlet-5-jetty-11', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'servlet-5-jetty-11', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'servlet-5-undertow-2', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'servlet-5-undertow-2', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'servlet-6-tomcat-11', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           # Spring 1.5.22 (Only Spring MVC, WebFlux appears from 2.X version of Spring Boot)
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
