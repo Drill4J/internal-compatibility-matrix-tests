@@ -67,6 +67,9 @@ include("spring-webflux-3.1-jetty")
 include("spring-webflux-3.1-netty")
 include("spring-webflux-3.1-tomcat")
 include("spring-webflux-3.1-undertow")
+//Http Clients
+include("tests:http-clients:apache-http-client-4.5")
+include("tests:http-clients:apache-http-client-5.3")
 
 include("common-test")
 include("test-agent")

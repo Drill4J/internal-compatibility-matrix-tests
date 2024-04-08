@@ -24,6 +24,7 @@ dependencies {
     compileOnly("org.springframework.boot:spring-boot-starter-test:2.7.18")
     compileOnly("org.springframework.boot:spring-boot-autoconfigure:2.7.18")
     compileOnly("io.projectreactor:reactor-core:3.4.34")
+    compileOnly("org.simpleframework:simple-http:6.0.1")
 
     compileOnly(kotlin("test-junit"))
     compileOnly(project(":common"))
