@@ -22,6 +22,7 @@ dependencies {
         exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
     }
     implementation("org.springframework.boot:spring-boot-starter-jetty:$springBootVersion")
+    implementation("org.eclipse.jetty:jetty-server:11.0.15")
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))

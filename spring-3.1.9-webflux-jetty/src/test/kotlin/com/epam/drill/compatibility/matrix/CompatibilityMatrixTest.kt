@@ -17,7 +17,6 @@ package com.epam.drill.compatibility.matrix
 
 import org.springframework.test.web.reactive.server.expectBody
 
-//TODO fix instrumentation
 class CompatibilityMatrixTest : SpringWebfluxMatrixTest() {
     override fun `given Mono class, MonoTransformerObject must propagate drill context`() {
         webTestClient.get().uri("/mono")
