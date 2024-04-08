@@ -61,14 +61,15 @@ Run the test module with the test-agent:
 
 ### HTTP Clients
 
-| Name                | Versions | JDK | Tests | Notes |
-|---------------------|----------|-----|-------|-------|
-| URLConnection       |          |     |       |       |
-| OkHTTP Client       |          |     |       |       |
-| Apache HttpClient   |          |     |       |       |
-| Spring RestTemplate |          |     |       |       |
-| Spring WebClient    |          |     |       |       |
-| Apache Feign Client |          |     |       |       |
+| Name                | Versions | JDK  | Tests                                                                 | Notes |
+|---------------------|----------|------|-----------------------------------------------------------------------|-------|
+| URLConnection       |          |      |                                                                       |       |
+| OkHTTP Client       |          |      |                                                                       |       |
+| Apache HttpClient   | 4.5      | 8-17 | [apache-http-client-4.5](./tests/http-clients/apache-http-client-4.5) |       |
+| Apache HttpClient   | 5.3      | 8-17 | [apache-http-client-5.3](./tests/http-clients/apache-http-client-5.3) |       |
+| Spring RestTemplate |          |      |                                                                       |       |
+| Spring WebClient    |          |      |                                                                       |       |
+| Apache Feign Client |          |      |                                                                       |       |
 
 ### WebSocket
 
