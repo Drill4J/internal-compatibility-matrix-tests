@@ -47,6 +47,7 @@ include("servlet-5-tomcat-10")
 include("servlet-5-jetty-11")
 include("servlet-5-undertow-2")
 include("servlet-5-glassfish-7")
+include("servlet-6-tomcat-11")
 //Spring MVC
 include("spring-mvc-1.5-jetty")
 include("spring-mvc-1.5-tomcat")
