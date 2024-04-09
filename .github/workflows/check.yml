@@ -83,61 +83,61 @@ jobs:
           - { testModule: 'tests:web-frameworks:servlet-5-undertow-2', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-6-tomcat-11', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           # Spring 1.5.22 (Only Spring MVC, WebFlux appears from 2.X version of Spring Boot)
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-mvc-1.5-tomcat', gradleVersion: '7.4.2' }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-mvc-1.5-undertow', gradleVersion: '7.4.2' }
-          - { javaVersion: 8.0, distribution: 'temurin', testModule: 'spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 8.0, distribution: 'zulu', testModule: 'spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-1.5-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-1.5-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'temurin', testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'zulu', testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
 
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-mvc-1.5-tomcat', gradleVersion: '7.4.2' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-mvc-1.5-undertow', gradleVersion: '7.4.2' }
-          - { javaVersion: 11.0, distribution: 'temurin', testModule: 'spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 11.0, distribution: 'zulu', testModule: 'spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-1.5-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-1.5-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'temurin', testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'zulu', testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
 
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-mvc-1.5-tomcat', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-mvc-1.5-undertow', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'temurin', testModule: 'spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'zulu', testModule: 'spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'oracle', testModule: 'spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-1.5-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-1.5-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'temurin', testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'zulu', testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'oracle', testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
 
           # Spring 2.7.18
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-mvc-2.7-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-mvc-2.7-tomcat', gradleVersion: '7.4.2' }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-mvc-2.7-undertow', gradleVersion: '7.4.2' }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-webflux-2.7-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-webflux-2.7-netty', gradleVersion: '7.4.2' }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-webflux-2.7-tomcat', gradleVersion: '7.4.2' }
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'spring-webflux-2.7-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-2.7-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-2.7-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-2.7-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-2.7-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-2.7-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-2.7-undertow', gradleVersion: '7.4.2' }
 
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-mvc-2.7-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-mvc-2.7-tomcat', gradleVersion: '7.4.2' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-mvc-2.7-undertow', gradleVersion: '7.4.2' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-webflux-2.7-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-webflux-2.7-netty', gradleVersion: '7.4.2' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-webflux-2.7-tomcat', gradleVersion: '7.4.2' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'spring-webflux-2.7-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-2.7-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-2.7-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-2.7-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-2.7-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-2.7-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-2.7-undertow', gradleVersion: '7.4.2' }
 
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-mvc-2.7-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-mvc-2.7-tomcat', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-mvc-2.7-undertow', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-webflux-2.7-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-webflux-2.7-netty', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-webflux-2.7-tomcat', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-webflux-2.7-undertow', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'oracle', testModule: 'spring-webflux-2.7-netty', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'temurin', testModule: 'spring-webflux-2.7-netty', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'zulu', testModule: 'spring-webflux-2.7-netty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-2.7-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-2.7-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-2.7-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-2.7-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-2.7-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-2.7-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'oracle', testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'temurin', testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'zulu', testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', gradleVersion: '7.4.2' }
           # Spring 3.1.9
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-mvc-3.1-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-mvc-3.1-tomcat', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-mvc-3.1-undertow', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-webflux-3.1-jetty', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-webflux-3.1-netty', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-webflux-3.1-tomcat', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-webflux-3.1-undertow', gradleVersion: '7.4.2' }
-          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'spring-webflux-3.1-jetty', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-3.1-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-3.1-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-3.1-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-3.1-jetty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-3.1-netty', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-3.1-tomcat', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-3.1-undertow', gradleVersion: '7.4.2' }
+          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-3.1-jetty', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
 
           ## Web Servers:
           # Jetty
