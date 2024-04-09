@@ -73,6 +73,8 @@ include("tests:http-clients:apache-http-client-5.3")
 include("tests:http-clients:okhttp-client-3.12")
 include("tests:http-clients:okhttp-client-3.14")
 include("tests:http-clients:okhttp-client-4.12")
+include("tests:http-clients:spring-resttemplate-4.3")
+include("tests:http-clients:spring-resttemplate-5.3")
 
 include("common-test")
 include("test-agent")

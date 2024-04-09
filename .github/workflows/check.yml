@@ -167,6 +167,10 @@ jobs:
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-3.14', gradleVersion: '7.4.2' }
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-4.12', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-4.12', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:spring-resttemplate-4.3', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:spring-resttemplate-4.3', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:spring-resttemplate-5.3', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:spring-resttemplate-5.3', gradleVersion: '7.4.2' }
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v3

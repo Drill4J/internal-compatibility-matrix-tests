@@ -18,11 +18,8 @@ val springBootVersion = "2.7.18"
 
 dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
-    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
-        exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
-    }
-    implementation("org.springframework.boot:spring-boot-starter-undertow:$springBootVersion")
-    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+    implementation("org.springframework:spring-web:4.3.30.RELEASE")
+    testImplementation("org.simpleframework:simple-http:6.0.1")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
     evaluationDependsOn(":test-agent")
