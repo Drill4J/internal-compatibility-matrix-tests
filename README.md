@@ -71,7 +71,8 @@ Run the test module with the test-agent:
 | OkHttp Client       | 4.12     | 8-17 | [okhttp-client-4.12](./tests/http-clients/okhttp-client-4.12)           |       |
 | Spring RestTemplate | 4.3      | 8-17 | [spring-resttemplate-4.3](./tests/http-clients/spring-resttemplate-4.3) |       |
 | Spring RestTemplate | 5.3      | 8-17 | [spring-resttemplate-5.3](./tests/http-clients/spring-resttemplate-5.3) |       |
-| Spring WebClient    |          |      |                                                                         |       |
+| Spring WebClient    | 5.3      | 8-17 | [spring-webclient-5.3](./tests/http-clients/spring-webclient-5.3)       |       |
+| Spring WebClient    | 6.1      | 17   | [spring-webclient-6.1](./tests/http-clients/spring-webclient-6.1)       |       |
 | Apache Feign Client |          |      |                                                                         |       |
 
 ### WebSocket

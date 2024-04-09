@@ -83,6 +83,9 @@ include("tests:http-clients:okhttp-client-4.12")
 //Spring RestTemplate
 include("tests:http-clients:spring-resttemplate-4.3")
 include("tests:http-clients:spring-resttemplate-5.3")
+//Spring WebClient
+include("tests:http-clients:spring-webclient-5.3")
+include("tests:http-clients:spring-webclient-6.1")
 
 include("common-test")
 include("test-agent")
