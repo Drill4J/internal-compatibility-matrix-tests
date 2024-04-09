@@ -25,15 +25,15 @@ Run the test module with the test-agent:
 
 ### Web Servers
 
-| Name      | Versions   | JDK   | Tests                                   | Notes |
-|-----------|------------|-------|-----------------------------------------|-------|
-| Tomcat    | 10.1.19    | 11    | [tomcat-10.1](./tomcat-10.1)     |       |
-| Tomcat    | 11.0.0-M18 | 17    | [tomcat-11.0](./tomcat-11.0) |       |
-| Jetty     | 10.0.20    | 11-17 | [jetty-10.0](./jetty-10.0) |       |
-| Netty     | 4.1.107    | 8-17  | [netty-4.1](./netty-4.1) |       |
-| Undertow  | 2.3.12     | 11-17 | [undertow-2.3](./undertow-2.3) |       |
-| Glassfish | 7.0        | 11-17 | [servlet-5-glassfish-7](./servlet-5-glassfish-7)                                        |       |
-| Wildfly   |            |       |                                         |       |
+| Name      | Versions   | JDK   | Tests                                            | Notes |
+|-----------|------------|-------|--------------------------------------------------|-------|
+| Tomcat    | 10.1.19    | 11    | [tomcat-10.1](./tests/web-servers/tomcat-10.1)   |       |
+| Tomcat    | 11.0.0-M18 | 17    | [tomcat-11.0](./tests/web-servers/tomcat-11.0)                     |       |
+| Jetty     | 10.0.20    | 11-17 | [jetty-10.0](./tests/web-servers/jetty-10.0)                       |       |
+| Netty     | 4.1.107    | 8-17  | [netty-4.1](./tests/web-servers/netty-4.1)                         |       |
+| Undertow  | 2.3.12     | 11-17 | [undertow-2.3](./tests/web-servers/undertow-2.3)                   |       |
+| Glassfish | 7.0        | 11-17 | [servlet-5-glassfish-7](./tests/web-servers/servlet-5-glassfish-7) |       |
+| Wildfly   |            |       |                                                  |       |
 
 ### Web Frameworks
 

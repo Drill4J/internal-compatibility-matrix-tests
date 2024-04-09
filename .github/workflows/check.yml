@@ -138,35 +138,40 @@ jobs:
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-webflux-3.1-tomcat', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'spring-webflux-3.1-undertow', gradleVersion: '7.4.2' }
           - { javaVersion: 21.0, distribution: 'corretto', testModule: 'spring-webflux-3.1-jetty', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-          # Servers:
+
+          ## Web Servers:
           # Jetty
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'jetty-10.0', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'jetty-10.0', gradleVersion: '7.4.2' }
-          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'jetty-10.0', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-servers:jetty-10.0', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-servers:jetty-10.0', gradleVersion: '7.4.2' }
+          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'tests:web-servers:jetty-10.0', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
           # Netty:
-          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'netty-4.1', gradleVersion: '7.4.2' }
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'netty-4.1', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'netty-4.1', gradleVersion: '7.4.2' }
-          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'netty-4.1', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:web-servers:netty-4.1', gradleVersion: '7.4.2' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-servers:netty-4.1', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-servers:netty-4.1', gradleVersion: '7.4.2' }
+          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'tests:web-servers:netty-4.1', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
           # Tomcat:
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tomcat-10.1', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tomcat-11.0', gradleVersion: '7.4.2' }
-          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'tomcat-11.0', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-servers:tomcat-10.1', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-servers:tomcat-11.0', gradleVersion: '7.4.2' }
+          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'tests:web-servers:tomcat-11.0', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
           # Undertow:
-          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'undertow-2.3', gradleVersion: '7.4.2' }
-          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'undertow-2.3', gradleVersion: '7.4.2' }
-          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'undertow-2.3', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-servers:undertow-2.3', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-servers:undertow-2.3', gradleVersion: '7.4.2' }
+          - { javaVersion: 21.0, distribution: 'corretto', testModule: 'tests:web-servers:undertow-2.3', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+
           ## Http Clients:
+          # Apache HttpClient
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:apache-http-client-4.5', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:apache-http-client-4.5', gradleVersion: '7.4.2' }
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:apache-http-client-5.3', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:apache-http-client-5.3', gradleVersion: '7.4.2' }
+          # OkHttp Client
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-3.12', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-3.12', gradleVersion: '7.4.2' }
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-3.14', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-3.14', gradleVersion: '7.4.2' }
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-4.12', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-4.12', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
+          # Spring RestTemplate
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:spring-resttemplate-4.3', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:spring-resttemplate-4.3', gradleVersion: '7.4.2' }
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:spring-resttemplate-5.3', gradleVersion: '7.4.2' }
