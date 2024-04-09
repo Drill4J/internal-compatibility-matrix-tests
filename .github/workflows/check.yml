@@ -156,9 +156,17 @@ jobs:
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'undertow-2.3', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'undertow-2.3', gradleVersion: '7.4.2' }
           - { javaVersion: 21.0, distribution: 'corretto', testModule: 'undertow-2.3', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-          # Undertow:
+          ## Http Clients:
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:apache-http-client-4.5', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:apache-http-client-4.5', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:apache-http-client-5.3', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:apache-http-client-5.3', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-3.12', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-3.12', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-3.14', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-3.14', gradleVersion: '7.4.2' }
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-4.12', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:okhttp-client-4.12', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v3

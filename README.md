@@ -67,6 +67,9 @@ Run the test module with the test-agent:
 | OkHTTP Client       |          |      |                                                                       |       |
 | Apache HttpClient   | 4.5      | 8-17 | [apache-http-client-4.5](./tests/http-clients/apache-http-client-4.5) |       |
 | Apache HttpClient   | 5.3      | 8-17 | [apache-http-client-5.3](./tests/http-clients/apache-http-client-5.3) |       |
+| OkHttp Client       | 3.12     | 8-17 | [okhttp-client-3.12](./tests/http-clients/okhttp-client-3.12)         |       |
+| OkHttp Client       | 3.14     | 8-17 | [okhttp-client-3.14](./tests/http-clients/okhttp-client-3.14)         |       |
+| OkHttp Client       | 4.12     | 8-17 | [okhttp-client-4.12](./tests/http-clients/okhttp-client-4.12)         |       |
 | Spring RestTemplate |          |      |                                                                       |       |
 | Spring WebClient    |          |      |                                                                       |       |
 | Apache Feign Client |          |      |                                                                       |       |

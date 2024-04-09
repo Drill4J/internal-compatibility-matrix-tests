@@ -70,6 +70,9 @@ include("spring-webflux-3.1-undertow")
 //Http Clients
 include("tests:http-clients:apache-http-client-4.5")
 include("tests:http-clients:apache-http-client-5.3")
+include("tests:http-clients:okhttp-client-3.12")
+include("tests:http-clients:okhttp-client-3.14")
+include("tests:http-clients:okhttp-client-4.12")
 
 include("common-test")
 include("test-agent")
