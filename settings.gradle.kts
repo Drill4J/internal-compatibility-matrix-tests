@@ -73,6 +73,8 @@ include("tests:web-frameworks:spring-webflux-3.1-tomcat")
 include("tests:web-frameworks:spring-webflux-3.1-undertow")
 
 //Http Clients
+//URLConnection
+include("tests:http-clients:urlconnection")
 //Apache HttpClient
 include("tests:http-clients:apache-http-client-4.5")
 include("tests:http-clients:apache-http-client-5.3")

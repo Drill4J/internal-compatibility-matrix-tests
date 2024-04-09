@@ -63,7 +63,7 @@ Run the test module with the test-agent:
 
 | Name                | Versions | JDK  | Tests                                                                   | Notes |
 |---------------------|----------|------|-------------------------------------------------------------------------|-------|
-| URLConnection       |          |      |                                                                         |       |
+| URLConnection       | jdk      | 8-17 | [urlconnection](./tests/http-clients/urlconnection)                     |       |
 | Apache HttpClient   | 4.5      | 8-17 | [apache-http-client-4.5](./tests/http-clients/apache-http-client-4.5)   |       |
 | Apache HttpClient   | 5.3      | 8-17 | [apache-http-client-5.3](./tests/http-clients/apache-http-client-5.3)   |       |
 | OkHttp Client       | 3.12     | 8-17 | [okhttp-client-3.12](./tests/http-clients/okhttp-client-3.12)           |       |

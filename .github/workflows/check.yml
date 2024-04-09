@@ -159,6 +159,9 @@ jobs:
           - { javaVersion: 21.0, distribution: 'corretto', testModule: 'tests:web-servers:undertow-2.3', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
 
           ## Http Clients:
+          # URLConnection
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:urlconnection', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:urlconnection', gradleVersion: '7.4.2' }
           # Apache HttpClient
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:apache-http-client-4.5', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:apache-http-client-4.5', gradleVersion: '7.4.2' }
