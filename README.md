@@ -73,7 +73,7 @@ Run the test module with the test-agent:
 | Spring RestTemplate | 5.3      | 8-17 | [spring-resttemplate-5.3](./tests/http-clients/spring-resttemplate-5.3) |       |
 | Spring WebClient    | 5.3      | 8-17 | [spring-webclient-5.3](./tests/http-clients/spring-webclient-5.3)       |       |
 | Spring WebClient    | 6.1      | 17   | [spring-webclient-6.1](./tests/http-clients/spring-webclient-6.1)       |       |
-| Apache Feign Client |          |      |                                                                         |       |
+| Feign Client        | 13       | 8-17 | [feign-client-13](./tests/http-clients/feign-client-13)                 |       |
 
 ### WebSocket
 

@@ -183,6 +183,9 @@ jobs:
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:spring-webclient-5.3', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:spring-webclient-5.3', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:spring-webclient-6.1', gradleVersion: '7.4.2' }
+          # Feign Client
+          - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:feign-client-13', gradleVersion: '7.4.2' }
+          - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:feign-client-13', gradleVersion: '7.4.2' }
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v3

@@ -88,6 +88,8 @@ include("tests:http-clients:spring-resttemplate-5.3")
 //Spring WebClient
 include("tests:http-clients:spring-webclient-5.3")
 include("tests:http-clients:spring-webclient-6.1")
+//Feign Client
+include("tests:http-clients:feign-client-13")
 
 include("common-test")
 include("test-agent")
