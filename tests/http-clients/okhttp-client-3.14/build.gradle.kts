@@ -21,7 +21,6 @@ dependencies {
     testImplementation("org.simpleframework:simple-http:6.0.1")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
-    evaluationDependsOn(":test-agent")
 }
 
 license {

@@ -21,7 +21,6 @@ dependencies {
     implementation("org.eclipse.jetty:jetty-server:$serverVersion")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
-    evaluationDependsOn(":test-agent")
 }
 
 license {

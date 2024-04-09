@@ -25,7 +25,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
-    evaluationDependsOn(":test-agent")
 }
 
 license {

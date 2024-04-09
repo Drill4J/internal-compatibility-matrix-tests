@@ -21,7 +21,6 @@ dependencies {
     implementation("io.undertow:undertow-core:$serverVersion")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
-    evaluationDependsOn(":test-agent")
 }
 
 license {

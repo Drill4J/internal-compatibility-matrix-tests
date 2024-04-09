@@ -22,7 +22,6 @@ dependencies {
     implementation("io.undertow:undertow-servlet:2.3.12.Final")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
-    evaluationDependsOn(":test-agent")
 }
 
 license {

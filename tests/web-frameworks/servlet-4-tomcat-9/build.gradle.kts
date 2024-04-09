@@ -21,7 +21,6 @@ dependencies {
     implementation("org.apache.tomcat.embed:tomcat-embed-core:9.0.87")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
-    evaluationDependsOn(":test-agent")
 }
 
 license {

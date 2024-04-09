@@ -21,7 +21,6 @@ dependencies {
     implementation("io.netty:netty-codec-http:$serverVersion")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
-    evaluationDependsOn(":test-agent")
 }
 
 license {

@@ -28,7 +28,6 @@ dependencies {
     testImplementation(kotlin("test-junit"))
     testImplementation("io.projectreactor:reactor-test:3.4.10")
     testImplementation(project(":common-test"))
-    evaluationDependsOn(":test-agent")
 }
 
 license {
