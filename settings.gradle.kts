@@ -34,20 +34,24 @@ includeSharedLib("jvmapi")
 includeSharedLib("common")
 includeSharedLib("logging")
 includeSharedLib("agent-instrumentation")
+
+//Tests
 //Web Servers
 include("tests:web-servers:jetty-10.0")
 include("tests:web-servers:netty-4.1")
 include("tests:web-servers:tomcat-11.0")
 include("tests:web-servers:tomcat-10.1")
 include("tests:web-servers:undertow-2.3")
+
+//Web Frameworks
 //Http Servlets
-include("servlet-4-tomcat-9")
-include("servlet-4-jetty-9")
-include("servlet-5-tomcat-10")
-include("servlet-5-jetty-11")
-include("servlet-5-undertow-2")
-include("servlet-5-glassfish-7")
-include("servlet-6-tomcat-11")
+include("tests:web-frameworks:servlet-4-tomcat-9")
+include("tests:web-frameworks:servlet-4-jetty-9")
+include("tests:web-frameworks:servlet-5-tomcat-10")
+include("tests:web-frameworks:servlet-5-jetty-11")
+include("tests:web-frameworks:servlet-5-undertow-2")
+include("tests:web-frameworks:servlet-5-glassfish-7")
+include("tests:web-frameworks:servlet-6-tomcat-11")
 //Spring MVC
 include("spring-mvc-1.5-jetty")
 include("spring-mvc-1.5-tomcat")
@@ -67,12 +71,16 @@ include("spring-webflux-3.1-jetty")
 include("spring-webflux-3.1-netty")
 include("spring-webflux-3.1-tomcat")
 include("spring-webflux-3.1-undertow")
+
 //Http Clients
+//Apache HttpClient
 include("tests:http-clients:apache-http-client-4.5")
 include("tests:http-clients:apache-http-client-5.3")
+//OkHttp Client
 include("tests:http-clients:okhttp-client-3.12")
 include("tests:http-clients:okhttp-client-3.14")
 include("tests:http-clients:okhttp-client-4.12")
+//Spring RestTemplate
 include("tests:http-clients:spring-resttemplate-4.3")
 include("tests:http-clients:spring-resttemplate-5.3")
 
