@@ -141,7 +141,7 @@ jobs:
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-3.1-undertow', gradleVersion: '7.4.2' }
           - { javaVersion: 21.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-3.1-jetty', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
 
-          ## Web Servers:
+          # Web Servers:
           # Jetty
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-servers:jetty-10.0', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-servers:jetty-10.0', gradleVersion: '7.4.2' }
@@ -160,7 +160,7 @@ jobs:
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-servers:undertow-2.3', gradleVersion: '7.4.2' }
           - { javaVersion: 21.0, distribution: 'corretto', testModule: 'tests:web-servers:undertow-2.3', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
 
-          ## Http Clients:
+          # Http Clients:
           # URLConnection
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:urlconnection', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:urlconnection', gradleVersion: '7.4.2' }
