@@ -79,7 +79,6 @@ jobs:
           - { testModule: 'tests:web-frameworks:servlet-4-tomcat-9', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-5-tomcat-10', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-5-tomcat-10', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-          - { testModule: 'tests:web-frameworks:servlet-5-jetty-11', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-5-jetty-11', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-5-undertow-2', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-5-undertow-2', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
