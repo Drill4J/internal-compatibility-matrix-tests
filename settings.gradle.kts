@@ -97,6 +97,8 @@ include("tests:async:executor-service")
 //Reactor
 include("tests:async:reactor-3.5")
 include("tests:async:reactor-3.6")
+//Spring Task Execution
+include("tests:async:spring-task-execution-3.1")
 
 include("common-test")
 include("test-agent")
