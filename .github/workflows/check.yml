@@ -90,6 +90,7 @@ jobs:
       distribution: ${{ matrix.envVersions.distribution }}
       testModule: ${{ matrix.envVersions.testModule }}
       gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
   web-framework-tests:
     needs: build-agent
     strategy:
@@ -164,6 +165,7 @@ jobs:
       distribution: ${{ matrix.envVersions.distribution }}
       testModule: ${{ matrix.envVersions.testModule }}
       gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
   web-server-tests:
     needs: build-agent
     strategy:
@@ -200,6 +202,7 @@ jobs:
       distribution: ${{ matrix.envVersions.distribution }}
       testModule: ${{ matrix.envVersions.testModule }}
       gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
   http-client-tests:
     needs: build-agent
     strategy:
@@ -246,6 +249,7 @@ jobs:
       distribution: ${{ matrix.envVersions.distribution }}
       testModule: ${{ matrix.envVersions.testModule }}
       gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
   async-communication-tests:
     needs: build-agent
     strategy:
@@ -255,7 +259,7 @@ jobs:
           - { os: ubuntu-latest, preset: linuxX64 }
           - { os: windows-latest, preset: mingwX64 }
           - { os: macos-latest, preset: macosX64 }
-        envVersions:   
+        envVersions:
           # Async Communication
           # sReactor
           - { testModule: 'tests:async:reactor-3.5', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
@@ -270,3 +274,4 @@ jobs:
       distribution: ${{ matrix.envVersions.distribution }}
       testModule: ${{ matrix.envVersions.testModule }}
       gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
