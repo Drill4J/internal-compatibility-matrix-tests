@@ -140,6 +140,12 @@ jobs:
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-3.1-tomcat', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-3.1-undertow', gradleVersion: '7.4.2' }
           - { javaVersion: 21.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-3.1-jetty', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          # Apache CXF 3.4
+          - { testModule: 'tests:web-frameworks:cxf-3.4-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:cxf-3.4-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          # Jersey 2
+          - { testModule: 'tests:web-frameworks:jersey-2-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:jersey-2-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
 
           # Web Servers:
           # Jetty
