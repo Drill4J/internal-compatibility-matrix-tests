@@ -53,11 +53,12 @@ Run the test module with the test-agent:
 
 ### Asynchronous Communication
 
-| Name              | Versions | JDK | Tests | Notes |
-|-------------------|----------|-----|-------|-------|
-| ExecutorService   |          |     |       |       |
-| Reactor           |          |     |       |       |
-| Spring Scheduler  |          |     |       |       |
+| Name                                                                                                     | Versions | JDK  | Tests                                              | Notes |
+|----------------------------------------------------------------------------------------------------------|----------|------|----------------------------------------------------|-------|
+| [ExecutorService](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ExecutorService.html)   | jdk      | 8-17 | [executor-service](./tests/async/executor-service) |       |
+| [Reactor](https://projectreactor.io/)                                                                    | 3.5      | 8-17 | [reactor-3.5](./tests/async/reactor-3.5)           |       |
+| [Reactor](https://projectreactor.io/)                                                                    | 3.6      | 8-17 | [reactor-3.6](./tests/async/reactor-3.6)           |       |
+| [Spring Task Execution](https://docs.spring.io/spring-framework/reference/integration/scheduling.html)   | 6.1      | 17   | [spring-task-execution-3.1](./tests/async/spring-task-execution-3.1)   |      |
 
 ### HTTP Clients
 

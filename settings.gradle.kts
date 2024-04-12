@@ -91,5 +91,14 @@ include("tests:http-clients:spring-webclient-6.1")
 //Feign Client
 include("tests:http-clients:feign-client-13")
 
+//Asynchronous Communication
+//Service Executor
+include("tests:async:executor-service")
+//Reactor
+include("tests:async:reactor-3.5")
+include("tests:async:reactor-3.6")
+//Spring Task Execution
+include("tests:async:spring-task-execution-3.1")
+
 include("common-test")
 include("test-agent")

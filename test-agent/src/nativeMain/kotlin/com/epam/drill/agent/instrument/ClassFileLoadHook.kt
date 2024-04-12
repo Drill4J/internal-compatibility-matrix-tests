@@ -43,7 +43,8 @@ object ClassFileLoadHook {
         SSLEngineTransformer,
         KafkaTransformer,
         JettyTransformer,
-        ReactorTransformer
+        ReactorTransformer,
+        TTLTransformer
     )
 
     operator fun invoke(
