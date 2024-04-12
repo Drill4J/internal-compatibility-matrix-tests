@@ -15,15 +15,17 @@
  */
 package com.epam.drill.compatibility.matrix
 
-import org.springframework.test.web.reactive.server.expectBody
+import java.util.concurrent.Executors
+import java.util.concurrent.Callable
+import java.util.concurrent.Future
 
-class CompatibilityMatrixTest : SpringWebfluxMatrixTest() {
-    override fun `given Mono class, MonoTransformerObject must propagate drill context`() {
-        webTestClient.get().uri("/mono")
-            .header("drill-session-id", "session-1")
-            .exchange()
-            .expectStatus().isOk
-            .expectBody<String>()
-            .isEqualTo("mono-session-1")
+
+class CompatibilityMatrixTest : AsyncMatrixTest() {
+
+    override fun callAsyncCommunication(task: () -> String): Future<String> {
+        val executor = Executors.newSingleThreadExecutor()
+        return executor.submit(Callable {
+            task()
+        })
     }
 }

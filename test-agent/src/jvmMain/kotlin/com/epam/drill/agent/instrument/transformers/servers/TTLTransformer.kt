@@ -13,17 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.epam.drill.compatibility.matrix
+package com.epam.drill.agent.instrument.transformers.servers
 
-import org.springframework.test.web.reactive.server.expectBody
+import com.epam.drill.agent.instrument.*
+import com.epam.drill.agent.instrument.servers.TTLTransformerObject
 
-class CompatibilityMatrixTest : SpringWebfluxMatrixTest() {
-    override fun `given Mono class, MonoTransformerObject must propagate drill context`() {
-        webTestClient.get().uri("/mono")
-            .header("drill-session-id", "session-1")
-            .exchange()
-            .expectStatus().isOk
-            .expectBody<String>()
-            .isEqualTo("mono-session-1")
-    }
-}
+actual object TTLTransformer :
+    TransformerObject,
+    TTLTransformerObject(),
+    HeadersProcessor by DrillRequestHeadersProcessor(TestHeadersRetriever, TestRequestHolder),
+    ClassPathProvider by TestClassPathProvider

@@ -14,7 +14,6 @@ repositories {
 
 val nativeAgentLibName: String by parent!!.extra
 val microutilsLoggingVersion: String by parent!!.extra
-val springBootVersion = "2.7.18"
 
 dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")

@@ -200,7 +200,6 @@ jobs:
       distribution: ${{ matrix.envVersions.distribution }}
       testModule: ${{ matrix.envVersions.testModule }}
       gradleVersion: ${{ matrix.envVersions.gradleVersion }}
-
   http-client-tests:
     needs: build-agent
     strategy:
@@ -239,6 +238,30 @@ jobs:
           # Feign Client
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:feign-client-13', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:feign-client-13', gradleVersion: '7.4.2' }
+    uses: ./.github/workflows/template.yml
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+  async-communication-tests:
+    needs: build-agent
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+          - { os: windows-latest, preset: mingwX64 }
+          - { os: macos-latest, preset: macosX64 }
+        envVersions:   
+          # Async Communication
+          # sReactor
+          - { testModule: 'tests:async:reactor-3.5', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:async:reactor-3.5', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:async:reactor-3.6', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:async:reactor-3.6', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
     uses: ./.github/workflows/template.yml
     with:
       os: ${{ matrix.config.os }}
