@@ -62,7 +62,7 @@ jobs:
         with:
           name: agent-jar-${{matrix.config.preset}}
           path: test-agent/build/libs/drill-runtime.jar
-  check:
+  servlet-tests:
     needs: build-agent
     strategy:
       fail-fast: false
@@ -72,18 +72,35 @@ jobs:
           - { os: windows-latest, preset: mingwX64 }
           - { os: macos-latest, preset: macosX64 }
         envVersions:
-          # Servlets
           - { testModule: 'tests:web-frameworks:servlet-4-jetty-9', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-4-jetty-9', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-4-tomcat-9', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-4-tomcat-9', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-5-tomcat-10', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-5-tomcat-10', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-          - { testModule: 'tests:web-frameworks:servlet-5-jetty-11', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-5-jetty-11', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-5-undertow-2', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-5-undertow-2', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-6-tomcat-11', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+    uses: ./.github/workflows/template.yml
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
+  web-framework-tests:
+    needs: build-agent
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+          - { os: windows-latest, preset: mingwX64 }
+          - { os: macos-latest, preset: macosX64 }
+        envVersions:
           # Spring 1.5.22 (Only Spring MVC, WebFlux appears from 2.X version of Spring Boot)
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', gradleVersion: '7.4.2' }
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-mvc-1.5-tomcat', gradleVersion: '7.4.2' }
@@ -140,7 +157,25 @@ jobs:
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-3.1-tomcat', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-3.1-undertow', gradleVersion: '7.4.2' }
           - { javaVersion: 21.0, distribution: 'corretto', testModule: 'tests:web-frameworks:spring-webflux-3.1-jetty', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-
+    uses: ./.github/workflows/template.yml
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
+  web-server-tests:
+    needs: build-agent
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+          - { os: windows-latest, preset: mingwX64 }
+          - { os: macos-latest, preset: macosX64 }
+        envVersions:
           # Web Servers:
           # Jetty
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-servers:jetty-10.0', gradleVersion: '7.4.2' }
@@ -159,7 +194,25 @@ jobs:
           - { javaVersion: 11.0, distribution: 'corretto', testModule: 'tests:web-servers:undertow-2.3', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:web-servers:undertow-2.3', gradleVersion: '7.4.2' }
           - { javaVersion: 21.0, distribution: 'corretto', testModule: 'tests:web-servers:undertow-2.3', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-
+    uses: ./.github/workflows/template.yml
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
+  http-client-tests:
+    needs: build-agent
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+          - { os: windows-latest, preset: mingwX64 }
+          - { os: macos-latest, preset: macosX64 }
+        envVersions:
           # Http Clients:
           # URLConnection
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:urlconnection', gradleVersion: '7.4.2' }
@@ -188,42 +241,37 @@ jobs:
           # Feign Client
           - { javaVersion: 8.0, distribution: 'corretto', testModule: 'tests:http-clients:feign-client-13', gradleVersion: '7.4.2' }
           - { javaVersion: 17.0, distribution: 'corretto', testModule: 'tests:http-clients:feign-client-13', gradleVersion: '7.4.2' }
-
+    uses: ./.github/workflows/template.yml
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
+  async-communication-tests:
+    needs: build-agent
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+          - { os: windows-latest, preset: mingwX64 }
+          - { os: macos-latest, preset: macosX64 }
+        envVersions:
           # Async Communication
           # sReactor
           - { testModule: 'tests:async:reactor-3.5', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:async:reactor-3.5', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:async:reactor-3.6', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:async:reactor-3.6', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-    runs-on: ${{ matrix.config.os }}
-    steps:
-      - uses: actions/checkout@v3
-      - name: Download agent binary
-        uses: actions/download-artifact@v4
-        with:
-          pattern: agent-*-${{matrix.config.preset}}
-          path: agent/
-          merge-multiple: true
-      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
-        run: chmod +x ${{ github.workspace }}/gradlew
-      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
-        run: chmod +x ${{ github.workspace }}/setup-shared-libs.sh
-      - if: matrix.config.preset == 'linuxX64'
-        run: sudo apt-get install -y libtinfo5
-      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
-        run: ${{ github.workspace }}/setup-shared-libs.sh
-      - if: matrix.config.preset == 'mingwX64'
-        run: ${{ github.workspace }}/setup-shared-libs.bat
-      - name: Set-up kotlin version for java 21
-        if: matrix.envVersions.javaVersion == '21.0'
-        run: echo "kotlinVersion=${{matrix.envVersions.kotlinVersion}}" >> $GITHUB_ENV
-        shell: bash
-      - uses: actions/setup-java@v3
-        with:
-          java-version: ${{ matrix.envVersions.javaVersion }}
-          distribution: ${{ matrix.envVersions.distribution }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: ${{ matrix.envVersions.gradleVersion }}
-      - run: gradle check "-Dtest-agent.binaries=${{github.workspace}}/agent" --project-dir ${{matrix.envVersions.testModule}}
+    uses: ./.github/workflows/template.yml
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
