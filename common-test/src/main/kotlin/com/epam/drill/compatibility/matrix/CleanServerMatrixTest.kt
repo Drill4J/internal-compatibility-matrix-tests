@@ -62,7 +62,7 @@ abstract class CleanServerMatrixTest {
     private fun callHttpEndpoint(
         endpoint: String,
         headers: Map<String, String> = emptyMap(),
-        contentType: String = "plain/text",
+        contentType: String = "text/plain",
         body: String = "test-request"
     ): Pair<Map<String, String>, String> {
         lateinit var connection: HttpURLConnection

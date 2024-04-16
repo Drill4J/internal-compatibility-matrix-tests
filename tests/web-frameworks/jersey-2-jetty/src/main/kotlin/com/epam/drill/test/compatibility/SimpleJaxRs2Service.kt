@@ -15,16 +15,16 @@
  */
 package com.epam.drill.test.compatibility
 
-import org.springframework.scheduling.annotation.Async
-import org.springframework.stereotype.Service
-import java.util.concurrent.CompletableFuture
-import java.util.concurrent.Future
+import javax.ws.rs.Consumes
+import javax.ws.rs.POST
+import javax.ws.rs.Path
+import javax.ws.rs.Produces
+import javax.ws.rs.core.MediaType
 
-@Service
-open class SimpleAsyncService {
-    @Async
-    open fun doAsyncTask(task: () -> String): Future<String> {
-        val result = task()
-        return CompletableFuture.completedFuture(result)
-    }
+@Path("/")
+class SimpleJaxRs2Service {
+    @POST
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
+    fun echo(input: String): String = input
 }

@@ -71,6 +71,10 @@ include("tests:web-frameworks:spring-webflux-3.1-jetty")
 include("tests:web-frameworks:spring-webflux-3.1-netty")
 include("tests:web-frameworks:spring-webflux-3.1-tomcat")
 include("tests:web-frameworks:spring-webflux-3.1-undertow")
+//Apache CXF
+include("tests:web-frameworks:cxf-3.4-jetty")
+//Jersey
+include("tests:web-frameworks:jersey-2-jetty")
 
 //Http Clients
 //URLConnection
