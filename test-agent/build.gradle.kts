@@ -1,3 +1,4 @@
+import java.net.URI
 import com.hierynomus.gradle.license.tasks.LicenseCheck
 import com.hierynomus.gradle.license.tasks.LicenseFormat
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
@@ -8,7 +9,6 @@ import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.konan.target.presetName
-import java.net.URI
 
 plugins {
     kotlin("multiplatform")
@@ -18,10 +18,6 @@ plugins {
 
 group = rootProject.group
 version = rootProject.version
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = JavaVersion.current().toString()
-}
 
 repositories {
     mavenLocal()
@@ -51,6 +47,7 @@ kotlin {
             }
         }
     }
+    @Suppress("UNUSED_VARIABLE")
     sourceSets {
         targets.withType<KotlinNativeTarget>()[HostManager.host.presetName].compilations.forEach {
             it.defaultSourceSet.kotlin.srcDir("src/native${it.compilationName.capitalize()}/kotlin")
@@ -58,13 +55,14 @@ kotlin {
         }
         val commonMain by getting {
             dependencies {
-                implementation(project(":agent-instrumentation"))
                 implementation(project(":common"))
+                implementation(project(":logging"))
+                implementation(project(":agent-instrumentation"))
             }
         }
         val configureNativeMainDependencies: KotlinSourceSet.() -> Unit = {
-            dependsOn(commonMain)
             dependencies {
+                implementation(project(":jvmapi"))
                 implementation(project(":knasm"))
             }
         }
@@ -73,6 +71,9 @@ kotlin {
         val macosX64Main by getting(configuration = configureNativeMainDependencies)
     }
     tasks {
+        withType<KotlinCompile> {
+            kotlinOptions.jvmTarget = JavaVersion.current().toString()
+        }
         val filterOutCurrentPlatform: (KotlinNativeTarget) -> Boolean = {
             it.targetName != HostManager.host.presetName
         }
@@ -97,25 +98,33 @@ kotlin {
             .flatMap(KotlinNativeTarget::compilations)
             .onEach(copyNativeClassesTask)
             .onEach(cleanNativeClassesTask)
-
         val jvmMainCompilation = targets.withType<KotlinJvmTarget>()["jvm"].compilations["main"]
         val relocatePackages = setOf(
-            "ch.qos.logback",
             "org.slf4j",
+            "org.intellij.lang.annotations",
+            "org.jetbrains.annotations",
+            "net.bytebuddy",
+            "com.alibaba",
+            "ch.qos.logback",
+            "javassist",
+            "mu"
         )
         val runtimeJar by registering(ShadowJar::class) {
             mergeServiceFiles()
             isZip64 = true
             archiveFileName.set("drill-runtime.jar")
+            from(jvmMainCompilation.runtimeDependencyFiles, jvmMainCompilation.output)
+            relocate("kotlin", "kruntime")
+            relocate("kotlinx", "kruntimex")
             relocatePackages.forEach {
                 relocate(it, "${project.group}.shadow.$it")
             }
-            from(jvmMainCompilation.runtimeDependencyFiles, jvmMainCompilation.output)
             dependencies {
                 exclude("/META-INF/services/javax.servlet.ServletContainerInitializer")
                 exclude("/ch/qos/logback/classic/servlet/*")
             }
         }
+        assemble.get().dependsOn(runtimeJar)
     }
 }
 

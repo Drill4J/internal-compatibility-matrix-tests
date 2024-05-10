@@ -4,14 +4,23 @@ import org.jetbrains.kotlin.konan.target.presetName
 
 plugins {
     kotlin("jvm").apply(false)
+    kotlin("multiplatform").apply(false)
+    kotlin("plugin.serialization").apply(false)
+    id("com.github.johnrengelman.shadow").apply(false)
+    id("com.github.hierynomus.license").apply(false)
 }
 
 version = "0.0.1"
 group = "com.epam.drill.compatibility"
 
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
 subprojects {
-    val excludedModules = listOf("test-agent", "common-test")
-    if (name in excludedModules) return@subprojects
+    if (!projectDir.invariantSeparatorsPath.removePrefix(rootDir.invariantSeparatorsPath).startsWith("/tests/"))
+        return@subprojects
 
     tasks {
         withType<KotlinCompile> {
@@ -21,8 +30,8 @@ subprojects {
             val pathToBinary: String
             val pathToRuntimeJar: String
             val hostPresetName = HostManager.host.presetName
-            val targetJarName = "drill-runtime.jar"
-            val fileName = when {
+            val runtimeJarFileName = "drill-runtime.jar"
+            val binaryFileName = when {
                 HostManager.hostIsMingw -> "drill_agent.dll"
                 HostManager.hostIsMac -> "libdrill_agent.dylib"
                 else -> "libdrill_agent.so"
@@ -34,17 +43,18 @@ subprojects {
             if (property.isPresent) {
                 //GitHub action build
                 val binariesPath = property.get()
-                pathToBinary = "$binariesPath/$hostPresetName/drill-agentDebugShared/$fileName"
-                pathToRuntimeJar = "$binariesPath/$targetJarName"
+                pathToBinary = "$binariesPath/$hostPresetName/drill-agentDebugShared/$binaryFileName"
+                pathToRuntimeJar = "$binariesPath/$runtimeJarFileName"
             } else {
                 //Local build
                 val buildDir = project(":test-agent").buildDir.path
-                pathToBinary = "$buildDir/bin/$hostPresetName/drill-agentDebugShared/$fileName"
-                pathToRuntimeJar = "$buildDir/libs/$targetJarName"
+                pathToBinary = "$buildDir/bin/$hostPresetName/drill-agentDebugShared/$binaryFileName"
+                pathToRuntimeJar = "$buildDir/libs/$runtimeJarFileName"
             }
             jvmArgs = listOf(
                 "-agentpath:$pathToBinary=$pathToRuntimeJar"
             )
         }
     }
+
 }

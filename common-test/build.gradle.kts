@@ -30,10 +30,8 @@ dependencies {
     compileOnly(project(":common"))
 }
 
-tasks {
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = JavaVersion.current().toString()
-    }
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = JavaVersion.current().toString()
 }
 
 license {
