@@ -44,6 +44,16 @@ include("tests:web-servers:tomcat-11.0")
 include("tests:web-servers:tomcat-10.1")
 include("tests:web-servers:undertow-2.3")
 
+//Web-Socket Servers
+include("tests:websocket-servers:jetty-9.4")
+include("tests:websocket-servers:jetty-10.0")
+include("tests:websocket-servers:netty-4.1")
+include("tests:websocket-servers:tomcat-9.0")
+include("tests:websocket-servers:tomcat-10.1")
+include("tests:websocket-servers:tomcat-11.0")
+include("tests:websocket-servers:undertow-2.0")
+include("tests:websocket-servers:undertow-2.3")
+
 //Web Frameworks
 //Http Servlets
 include("tests:web-frameworks:servlet-4-tomcat-9")

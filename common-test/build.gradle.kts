@@ -25,6 +25,8 @@ dependencies {
     compileOnly("org.springframework.boot:spring-boot-autoconfigure:2.7.18")
     compileOnly("io.projectreactor:reactor-core:3.4.34")
     compileOnly("org.simpleframework:simple-http:6.0.1")
+    compileOnly("org.glassfish.tyrus:tyrus-client:1.20")
+    compileOnly("org.glassfish.tyrus:tyrus-container-grizzly-client:1.20")
 
     compileOnly(kotlin("test-junit"))
     compileOnly(project(":common"))
