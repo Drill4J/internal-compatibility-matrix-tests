@@ -86,6 +86,16 @@ include("tests:web-frameworks:spring-webflux-3.1-undertow")
 include("tests:web-frameworks:cxf-3.4-jetty")
 //Jersey
 include("tests:web-frameworks:jersey-2-jetty")
+//Spring MVC Web-Sockets
+include("tests:websocket-frameworks:spring-mvc-1.5-jetty")
+include("tests:websocket-frameworks:spring-mvc-1.5-tomcat")
+include("tests:websocket-frameworks:spring-mvc-1.5-undertow")
+include("tests:websocket-frameworks:spring-mvc-2.7-jetty")
+include("tests:websocket-frameworks:spring-mvc-2.7-tomcat")
+include("tests:websocket-frameworks:spring-mvc-2.7-undertow")
+include("tests:websocket-frameworks:spring-mvc-3.1-jetty")
+include("tests:websocket-frameworks:spring-mvc-3.1-tomcat")
+include("tests:websocket-frameworks:spring-mvc-3.1-undertow")
 
 //Http Clients
 //URLConnection
