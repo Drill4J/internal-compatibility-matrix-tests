@@ -24,7 +24,7 @@ import org.eclipse.jetty.websocket.jsr356.server.ServerContainer
 import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer
 import mu.KotlinLogging
 
-class CompatibilityMatrixTest : WebSocketServerMatrixTest() {
+class CompatibilityMatrixTest : JavaxWebSocketServerMatrixTest() {
 
     override val logger = KotlinLogging.logger {}
 

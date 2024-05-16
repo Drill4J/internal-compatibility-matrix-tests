@@ -16,16 +16,16 @@
 package com.epam.drill.compatibility.matrix
 
 import java.util.logging.LogManager
-import javax.websocket.server.ServerContainer
-import javax.websocket.server.ServerEndpointConfig
 import jakarta.servlet.ServletContextEvent
+import jakarta.websocket.server.ServerContainer
+import jakarta.websocket.server.ServerEndpointConfig
 import org.apache.catalina.servlets.DefaultServlet
 import org.apache.catalina.startup.Tomcat
 import org.apache.tomcat.websocket.server.Constants
 import org.apache.tomcat.websocket.server.WsContextListener
 import mu.KotlinLogging
 
-class CompatibilityMatrixTest : WebSocketServerMatrixTest() {
+class CompatibilityMatrixTest : JakartaWebSocketServerMatrixTest() {
 
     override val logger = KotlinLogging.logger {}
 

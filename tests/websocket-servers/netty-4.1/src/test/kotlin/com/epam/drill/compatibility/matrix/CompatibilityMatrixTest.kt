@@ -35,7 +35,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler
 import mu.KotlinLogging
 
-class CompatibilityMatrixTest : WebSocketServerMatrixTest() {
+class CompatibilityMatrixTest : JavaxWebSocketServerMatrixTest() {
 
     override val logger = KotlinLogging.logger {}
 

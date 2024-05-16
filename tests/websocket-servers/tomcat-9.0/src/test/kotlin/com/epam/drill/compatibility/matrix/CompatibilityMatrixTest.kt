@@ -25,7 +25,7 @@ import org.apache.tomcat.websocket.server.Constants
 import org.apache.tomcat.websocket.server.WsContextListener
 import mu.KotlinLogging
 
-class CompatibilityMatrixTest : WebSocketServerMatrixTest() {
+class CompatibilityMatrixTest : JavaxWebSocketServerMatrixTest() {
 
     override val logger = KotlinLogging.logger {}
 

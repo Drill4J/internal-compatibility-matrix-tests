@@ -22,18 +22,18 @@ import java.net.URI
 import java.nio.ByteBuffer
 import javax.websocket.ClientEndpointConfig
 import javax.websocket.CloseReason
-import javax.websocket.Endpoint
-import javax.websocket.EndpointConfig
-import javax.websocket.MessageHandler
-import javax.websocket.OnMessage
-import javax.websocket.Session
-import javax.websocket.server.ServerEndpoint
+import jakarta.websocket.Endpoint
+import jakarta.websocket.EndpointConfig
+import jakarta.websocket.MessageHandler
+import jakarta.websocket.OnMessage
+import jakarta.websocket.Session
+import jakarta.websocket.server.ServerEndpoint
 import org.glassfish.tyrus.client.ClientManager
 import mu.KLogger
 import com.epam.drill.agent.instrument.TestRequestHolder
 
 @Suppress("FunctionName")
-abstract class WebSocketServerMatrixTest {
+abstract class JakartaWebSocketServerMatrixTest {
     protected abstract val logger: KLogger
 
     protected companion object {
@@ -183,9 +183,9 @@ abstract class WebSocketServerMatrixTest {
         }
     }
 
-    private class ClientWebSocketEndpoint : Endpoint() {
+    private class ClientWebSocketEndpoint : javax.websocket.Endpoint() {
         val incomingMessages = mutableListOf<String>()
-        override fun onOpen(session: Session, config: EndpointConfig) {
+        override fun onOpen(session: javax.websocket.Session, config: javax.websocket.EndpointConfig) {
             session.addMessageHandler(String::class.java, incomingMessages::add)
             session.addMessageHandler(ByteBuffer::class.java) { message ->
                 incomingMessages.add(ByteArray(message.limit()).also(message::get).decodeToString())

@@ -25,7 +25,7 @@ import io.undertow.servlet.api.DeploymentManager
 import io.undertow.websockets.jsr.WebSocketDeploymentInfo
 import mu.KotlinLogging
 
-class CompatibilityMatrixTest : WebSocketServerMatrixTest() {
+class CompatibilityMatrixTest : JakartaWebSocketServerMatrixTest() {
 
     override val logger = KotlinLogging.logger {}
 
