@@ -96,6 +96,15 @@ include("tests:websocket-frameworks:spring-mvc-2.7-undertow")
 include("tests:websocket-frameworks:spring-mvc-3.1-jetty")
 include("tests:websocket-frameworks:spring-mvc-3.1-tomcat")
 include("tests:websocket-frameworks:spring-mvc-3.1-undertow")
+//Spring WebFlux Web-Sockets
+include("tests:websocket-frameworks:spring-webflux-2.7-jetty")
+include("tests:websocket-frameworks:spring-webflux-2.7-netty")
+include("tests:websocket-frameworks:spring-webflux-2.7-tomcat")
+include("tests:websocket-frameworks:spring-webflux-2.7-undertow")
+include("tests:websocket-frameworks:spring-webflux-3.1-jetty")
+include("tests:websocket-frameworks:spring-webflux-3.1-netty")
+include("tests:websocket-frameworks:spring-webflux-3.1-tomcat")
+include("tests:websocket-frameworks:spring-webflux-3.1-undertow")
 
 //Http Clients
 //URLConnection

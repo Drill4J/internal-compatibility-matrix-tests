@@ -23,6 +23,7 @@ dependencies {
     compileOnly("org.springframework:spring-beans:5.3.31")
     compileOnly("org.springframework:spring-web:5.3.31")
     compileOnly("org.springframework:spring-websocket:5.3.31")
+    compileOnly("org.springframework:spring-webflux:5.3.31")
     compileOnly("org.springframework:spring-context:5.3.31")
     compileOnly("org.springframework.boot:spring-boot-starter-test:2.7.18")
     compileOnly("org.springframework.boot:spring-boot-autoconfigure:2.7.18")
