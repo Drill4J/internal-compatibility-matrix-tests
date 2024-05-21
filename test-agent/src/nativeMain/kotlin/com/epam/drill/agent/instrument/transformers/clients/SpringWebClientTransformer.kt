@@ -15,11 +15,7 @@
  */
 package com.epam.drill.agent.instrument.transformers.clients
 
-import com.epam.drill.agent.instrument.*
-import com.epam.drill.agent.instrument.clients.WebClientTransformerObject
+import com.epam.drill.agent.instrument.AbstractTransformerObject
+import com.epam.drill.agent.instrument.TransformerObject
 
-actual object WebClientTransformer :
-    TransformerObject,
-    WebClientTransformerObject(),
-    HeadersProcessor by DrillRequestHeadersProcessor(TestHeadersRetriever, TestRequestHolder),
-    ClassPathProvider by TestClassPathProvider
+actual object SpringWebClientTransformer : TransformerObject, AbstractTransformerObject()

@@ -15,6 +15,11 @@
  */
 package com.epam.drill.agent.instrument.transformers.clients
 
-import com.epam.drill.agent.instrument.TransformerObject
+import com.epam.drill.agent.instrument.*
+import com.epam.drill.agent.instrument.clients.SpringWebClientTransformerObject
 
-expect object WebClientTransformer : TransformerObject
+actual object SpringWebClientTransformer :
+    TransformerObject,
+    SpringWebClientTransformerObject(),
+    HeadersProcessor by DrillRequestHeadersProcessor(TestHeadersRetriever, TestRequestHolder),
+    ClassPathProvider by TestClassPathProvider
