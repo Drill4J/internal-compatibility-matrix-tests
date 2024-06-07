@@ -8,20 +8,20 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.test.context.junit4.SpringRunner
-import org.springframework.web.socket.TextMessage
-import org.springframework.web.socket.WebSocketSession
+import org.springframework.web.reactive.handler.SimpleUrlHandlerMapping
+import org.springframework.web.reactive.socket.WebSocketHandler
+import org.springframework.web.reactive.socket.WebSocketMessage
+import org.springframework.web.reactive.socket.WebSocketSession
 import org.springframework.web.socket.config.annotation.EnableWebSocket
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
-import org.springframework.web.socket.handler.TextWebSocketHandler
+import reactor.core.publisher.Mono
 
 @RunWith(SpringRunner::class)
 @Suppress("FunctionName")
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-    classes = [SpringMVCWebSocketMatrixTest.TestWebSocketConfig::class]
+    classes = [SpringWebfluxWebSocketServerMatrixTest.TestWebSocketConfig::class]
 )
-open class SpringMVCWebSocketMatrixTest : AbstractWebSocketServerTest() {
+open class SpringWebfluxWebSocketServerMatrixTest : AbstractWebSocketServerTest() {
 
     @Value("\${local.server.port}")
     lateinit var serverPort: String
@@ -32,21 +32,21 @@ open class SpringMVCWebSocketMatrixTest : AbstractWebSocketServerTest() {
     @Test
     fun `test with session headers request`() = testSessionHeadersRequest("ws://localhost:$serverPort", "text")
 
-    open class TestWebSocketHandler : TextWebSocketHandler() {
-        override fun handleTextMessage(session: WebSocketSession, message: TextMessage) {
-            session.sendMessage(TextMessage(attachSessionHeaders(message.payload)))
-        }
+    open class TestWebSocketHandler : WebSocketHandler {
+        @Suppress("ReactiveStreamsTooLongSameOperatorsChain")
+        override fun handle(session: WebSocketSession): Mono<Void> = session.receive()
+            .map(WebSocketMessage::getPayloadAsText)
+            .map(AbstractWebSocketServerTest::attachSessionHeaders)
+            .map(session::textMessage)
+            .let(session::send)
     }
 
     @Configuration
     @EnableWebSocket
     @EnableAutoConfiguration
-    open class TestWebSocketConfig : WebSocketConfigurer {
-        override fun registerWebSocketHandlers(registry: WebSocketHandlerRegistry) {
-            registry.addHandler(testWebSocketHandler(), "/")
-        }
+    open class TestWebSocketConfig {
         @Bean
-        open fun testWebSocketHandler() = TestWebSocketHandler()
+        open fun handlerMapping() = SimpleUrlHandlerMapping(mapOf("/" to TestWebSocketHandler()), -1)
     }
 
 }

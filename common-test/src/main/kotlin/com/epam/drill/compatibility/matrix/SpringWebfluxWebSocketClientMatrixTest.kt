@@ -2,7 +2,6 @@ package com.epam.drill.compatibility.matrix
 
 import kotlin.test.Test
 import org.junit.runner.RunWith
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Bean
@@ -17,13 +16,9 @@ import reactor.core.publisher.Mono
 
 @RunWith(SpringRunner::class)
 @Suppress("FunctionName")
-@SpringBootTest(
-    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-    classes = [SpringWebfluxWebSocketMatrixTest.TestWebSocketConfig::class]
-)
-open class SpringWebfluxWebSocketMatrixTest : AbstractWebSocketServerTest() {
+@SpringBootTest(classes = [SpringWebfluxWebSocketClientMatrixTest.TestWebSocketConfig::class])
+open class SpringWebfluxWebSocketClientMatrixTest : AbstractWebSocketServerTest() {
 
-    @Value("\${local.server.port}")
     lateinit var serverPort: String
 
     @Test
