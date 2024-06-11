@@ -15,4 +15,21 @@
  */
 package com.epam.drill.compatibility.matrix
 
-class CompatibilityMatrixTest : SpringMVCWebSocketClientMatrixTest()
+import org.eclipse.jetty.websocket.jsr356.ClientContainer
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.web.socket.client.WebSocketClient
+import org.springframework.web.socket.client.standard.StandardWebSocketClient
+
+@ContextConfiguration(classes = [CompatibilityMatrixTest.TestWebSocketClientContainerConfig::class])
+class CompatibilityMatrixTest : SpringMVCWebSocketClientMatrixTest() {
+
+    @Configuration
+    open class TestWebSocketClientContainerConfig {
+        @Bean
+        open fun testWebSocketClient(): WebSocketClient =
+            StandardWebSocketClient(ClientContainer().also(ClientContainer::start))
+    }
+
+}
