@@ -10,20 +10,17 @@ import org.springframework.beans.factory.config.BeanDefinition
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Scope
-import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.WebSocketSession
 import org.springframework.web.socket.client.WebSocketClient
-import org.springframework.web.socket.config.annotation.EnableWebSocket
 import org.springframework.web.socket.handler.TextWebSocketHandler
 import com.epam.drill.agent.instrument.TestRequestHolder
 import com.epam.drill.common.agent.request.DrillRequest
 
 @RunWith(SpringRunner::class)
 @Suppress("FunctionName")
-@ContextConfiguration(classes = [SpringMVCWebSocketClientMatrixTest.TestWebSocketClientConfig::class])
-open class SpringMVCWebSocketClientMatrixTest : AbstractTestServerWebSocketTest() {
+abstract class SpringMVCWebSocketClientMatrixTest : AbstractTestServerWebSocketTest() {
 
     @Autowired
     lateinit var beanFactory: BeanFactory
@@ -67,15 +64,14 @@ open class SpringMVCWebSocketClientMatrixTest : AbstractTestServerWebSocketTest(
     }
 
     @Configuration
-    @EnableWebSocket
     @Suppress("SpringJavaInjectionPointsAutowiringInspection")
-    open class TestWebSocketClientConfig {
-        @Autowired
-        lateinit var webSocketClient: WebSocketClient
+    abstract class AbstractTestWebSocketClientConfig {
+        @Bean
+        abstract fun testWebSocketClient(): WebSocketClient
         @Bean
         @Scope(BeanDefinition.SCOPE_PROTOTYPE)
         open fun testWebSocketClientSession(address: String, handler: TextWebSocketHandler): WebSocketSession =
-            webSocketClient.doHandshake(handler, address).get()
+            testWebSocketClient().doHandshake(handler, address).get()
     }
 
     private class TestWebSocketHandler : TextWebSocketHandler() {

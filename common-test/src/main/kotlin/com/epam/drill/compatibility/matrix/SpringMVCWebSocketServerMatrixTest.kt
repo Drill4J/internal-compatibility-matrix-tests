@@ -21,7 +21,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     classes = [SpringMVCWebSocketServerMatrixTest.TestWebSocketConfig::class]
 )
-open class SpringMVCWebSocketServerMatrixTest : AbstractWebSocketServerTest() {
+abstract class SpringMVCWebSocketServerMatrixTest : AbstractWebSocketServerTest() {
 
     @Value("\${local.server.port}")
     lateinit var serverPort: String

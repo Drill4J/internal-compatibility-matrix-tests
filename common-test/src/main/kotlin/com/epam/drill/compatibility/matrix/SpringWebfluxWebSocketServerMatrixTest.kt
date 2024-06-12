@@ -21,7 +21,7 @@ import reactor.core.publisher.Mono
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     classes = [SpringWebfluxWebSocketServerMatrixTest.TestWebSocketConfig::class]
 )
-open class SpringWebfluxWebSocketServerMatrixTest : AbstractWebSocketServerTest() {
+abstract class SpringWebfluxWebSocketServerMatrixTest : AbstractWebSocketServerTest() {
 
     @Value("\${local.server.port}")
     lateinit var serverPort: String

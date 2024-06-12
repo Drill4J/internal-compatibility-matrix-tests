@@ -22,13 +22,13 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.web.socket.client.WebSocketClient
 import org.springframework.web.socket.client.standard.StandardWebSocketClient
 
-@ContextConfiguration(classes = [CompatibilityMatrixTest.TestWebSocketClientContainerConfig::class])
+@ContextConfiguration(classes = [CompatibilityMatrixTest.TestWebSocketClientConfig::class])
 class CompatibilityMatrixTest : SpringMVCWebSocketClientMatrixTest() {
 
     @Configuration
-    open class TestWebSocketClientContainerConfig {
+    open class TestWebSocketClientConfig: AbstractTestWebSocketClientConfig() {
         @Bean
-        open fun testWebSocketClient(): WebSocketClient =
+        override fun testWebSocketClient(): WebSocketClient =
             StandardWebSocketClient(ClientContainer().also(ClientContainer::start))
     }
 
