@@ -15,12 +15,11 @@
  */
 package com.epam.drill.compatibility.matrix
 
-import org.eclipse.jetty.websocket.jsr356.ClientContainer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.web.socket.client.WebSocketClient
-import org.springframework.web.socket.client.standard.StandardWebSocketClient
+import org.springframework.web.socket.client.jetty.JettyWebSocketClient
 
 @ContextConfiguration(classes = [CompatibilityMatrixTest.TestWebSocketClientConfig::class])
 class CompatibilityMatrixTest : SpringMVCWebSocketClientMatrixTest() {
@@ -28,8 +27,7 @@ class CompatibilityMatrixTest : SpringMVCWebSocketClientMatrixTest() {
     @Configuration
     open class TestWebSocketClientConfig: AbstractTestWebSocketClientConfig() {
         @Bean
-        override fun testWebSocketClient(): WebSocketClient =
-            StandardWebSocketClient(ClientContainer().also(ClientContainer::start))
+        override fun testWebSocketClient(): WebSocketClient = JettyWebSocketClient().also(JettyWebSocketClient::start)
     }
 
 }
