@@ -64,6 +64,10 @@ include("tests:websocket-clients:tomcat-11.0")
 include("tests:websocket-clients:undertow-2.0")
 include("tests:websocket-clients:undertow-2.3")
 
+//Web-Socket Per-Message Tests
+include("tests:websocket-messages:undertow-2.0")
+include("tests:websocket-messages:undertow-2.3")
+
 //Web Frameworks
 //Http Servlets
 include("tests:web-frameworks:servlet-4-tomcat-9")
