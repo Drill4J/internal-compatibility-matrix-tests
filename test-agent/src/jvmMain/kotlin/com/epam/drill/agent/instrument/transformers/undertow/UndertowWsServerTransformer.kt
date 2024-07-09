@@ -13,19 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.epam.drill.agent.instrument.transformers.servers
+package com.epam.drill.agent.instrument.transformers.undertow
 
 import com.epam.drill.agent.instrument.ClassPathProvider
-import com.epam.drill.agent.instrument.DrillRequestHeadersProcessor
 import com.epam.drill.agent.instrument.HeadersProcessor
 import com.epam.drill.agent.instrument.TestClassPathProvider
-import com.epam.drill.agent.instrument.TestHeadersRetriever
-import com.epam.drill.agent.instrument.TestRequestHolder
+import com.epam.drill.agent.instrument.TestHeadersProcessor
 import com.epam.drill.agent.instrument.TransformerObject
-import com.epam.drill.agent.instrument.servers.UndertowWsTransformerObject
+import com.epam.drill.agent.instrument.undertow.UndertowWsServerTransformerObject
 
-actual object UndertowWsTransformer :
+actual object UndertowWsServerTransformer :
     TransformerObject,
-    UndertowWsTransformerObject(),
-    HeadersProcessor by DrillRequestHeadersProcessor(TestHeadersRetriever, TestRequestHolder),
+    UndertowWsServerTransformerObject(),
+    HeadersProcessor by TestHeadersProcessor,
     ClassPathProvider by TestClassPathProvider
