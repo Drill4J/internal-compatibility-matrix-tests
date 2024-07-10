@@ -43,20 +43,24 @@ abstract class JavaxWebSocketMessagesMatrixTest : AbstractWebSocketMessagesTest(
                 "basic" -> (0 until count).map(body::plus).forEach {
                     TestRequestHolder.store(DrillRequest("$it-session", mapOf("drill-data" to "$it-data")))
                     session.basicRemote.sendText(it)
+                    TestRequestHolder.remove()
                 }
                 "async" -> (0 until count).map(body::plus).forEach {
                     TestRequestHolder.store(DrillRequest("$it-session", mapOf("drill-data" to "$it-data")))
                     session.asyncRemote.sendText(it)
+                    TestRequestHolder.remove()
                 }
             }
             "binary" -> when (sendType) {
                 "basic" -> (0 until count).map(body::plus).forEach {
                     TestRequestHolder.store(DrillRequest("$it-session", mapOf("drill-data" to "$it-data")))
                     session.basicRemote.sendBinary(ByteBuffer.wrap(it.encodeToByteArray()))
+                    TestRequestHolder.remove()
                 }
                 "async" -> (0 until count).map(body::plus).forEach {
                     TestRequestHolder.store(DrillRequest("$it-session", mapOf("drill-data" to "$it-data")))
                     session.asyncRemote.sendBinary(ByteBuffer.wrap(it.encodeToByteArray()))
+                    TestRequestHolder.remove()
                 }
             }
         }
@@ -72,6 +76,7 @@ abstract class JavaxWebSocketMessagesMatrixTest : AbstractWebSocketMessagesTest(
             if (session != null) {
                 TestRequestHolder.store(DrillRequest("$message-response-session", mapOf("drill-data" to "$message-response-data")))
                 session.basicRemote.sendText("$message-response")
+                TestRequestHolder.remove()
             }
         }
         fun processIncoming(message: ByteBuffer, session: Session?) {
@@ -81,6 +86,7 @@ abstract class JavaxWebSocketMessagesMatrixTest : AbstractWebSocketMessagesTest(
             if (session != null) {
                 TestRequestHolder.store(DrillRequest("$text-response-session", mapOf("drill-data" to "$text-response-data")))
                 session.basicRemote.sendBinary(ByteBuffer.wrap("$text-response".encodeToByteArray()))
+                TestRequestHolder.remove()
             }
         }
     }
