@@ -18,11 +18,10 @@ package com.epam.drill.compatibility.matrix
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.test.context.ContextConfiguration
-import org.springframework.web.reactive.socket.client.StandardWebSocketClient
-//import org.springframework.web.reactive.socket.client.UndertowWebSocketClient
+import org.springframework.web.reactive.socket.client.UndertowWebSocketClient
 import org.springframework.web.reactive.socket.client.WebSocketClient
-//import org.xnio.OptionMap
-//import org.xnio.Xnio
+import org.xnio.OptionMap
+import org.xnio.Xnio
 
 @ContextConfiguration(classes = [CompatibilityMatrixTest.TestWebSocketClientConfig::class])
 class CompatibilityMatrixTest : SpringWebfluxWebSocketMessagesMatrixTest() {
@@ -31,8 +30,7 @@ class CompatibilityMatrixTest : SpringWebfluxWebSocketMessagesMatrixTest() {
     open class TestWebSocketClientConfig: AbstractTestWebSocketClientConfig() {
         @Bean
         override fun testWebSocketClient(): WebSocketClient =
-            //UndertowWebSocketClient(Xnio.getInstance().createWorker(OptionMap.EMPTY))
-            StandardWebSocketClient()
+            UndertowWebSocketClient(Xnio.getInstance().createWorker(OptionMap.EMPTY))
     }
 
 }

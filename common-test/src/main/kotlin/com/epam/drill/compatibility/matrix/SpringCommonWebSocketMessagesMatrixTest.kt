@@ -47,9 +47,7 @@ abstract class SpringCommonWebSocketMessagesMatrixTest {
         count: Int = 10
     ): Pair<List<String>, List<DrillRequest?>>
 
-    private fun testPerMessageRequests(
-        payloadType: String
-    ) {
+    private fun testPerMessageRequests(payloadType: String) {
         TestRequestHolder.remove()
         serverEndpoint.incomingMessages.clear()
         serverEndpoint.incomingContexts.clear()

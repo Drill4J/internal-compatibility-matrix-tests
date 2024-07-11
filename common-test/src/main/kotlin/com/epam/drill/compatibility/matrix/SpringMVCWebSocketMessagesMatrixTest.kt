@@ -54,6 +54,7 @@ abstract class SpringMVCWebSocketMessagesMatrixTest : SpringCommonWebSocketMessa
                 "text" -> session.sendMessage(TextMessage(it))
                 "binary" -> session.sendMessage(BinaryMessage(it.encodeToByteArray()))
             }
+            TestRequestHolder.remove()
         }
         Thread.sleep(1000)
         session.close()

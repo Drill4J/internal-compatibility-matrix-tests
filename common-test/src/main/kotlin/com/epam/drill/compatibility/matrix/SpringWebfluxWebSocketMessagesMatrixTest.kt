@@ -29,6 +29,7 @@ import org.springframework.web.reactive.socket.WebSocketMessage
 import org.springframework.web.reactive.socket.WebSocketSession
 import org.springframework.web.reactive.socket.client.WebSocketClient
 import org.springframework.web.socket.config.annotation.EnableWebSocket
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import reactor.core.publisher.Sinks
 import com.epam.drill.agent.instrument.TestRequestHolder
@@ -49,8 +50,8 @@ abstract class SpringWebfluxWebSocketMessagesMatrixTest : SpringCommonWebSocketM
         while (this.session?.isOpen != true) Thread.sleep(100)
         (0 until count).map(body::plus).forEach {
             when (payloadType) {
-                "text" -> this.sendingMessages.tryEmitNext(it)
-                "binary" -> this.sendingMessages.tryEmitNext(it)
+                "text" -> this.sendingTexts.tryEmitNext(it)
+                "binary" -> this.sendingBinaries.tryEmitNext(it.encodeToByteArray())
             }
         }
         Thread.sleep(2000)
@@ -90,7 +91,8 @@ abstract class SpringWebfluxWebSocketMessagesMatrixTest : SpringCommonWebSocketM
     private class TestWebSocketClientHandler : WebSocketHandler, TestRequestEndpoint {
         override val incomingMessages = mutableListOf<String>()
         override val incomingContexts = mutableListOf<DrillRequest?>()
-        val sendingMessages: Sinks.Many<String> = Sinks.many().unicast().onBackpressureBuffer()
+        val sendingTexts: Sinks.Many<String> = Sinks.many().unicast().onBackpressureBuffer()
+        val sendingBinaries: Sinks.Many<ByteArray> = Sinks.many().unicast().onBackpressureBuffer()
         var session: WebSocketSession? = null
         override fun handle(session: WebSocketSession): Mono<Void> {
             this.session = session
@@ -99,11 +101,15 @@ abstract class SpringWebfluxWebSocketMessagesMatrixTest : SpringCommonWebSocketM
                 .map(incomingMessages::add)
                 .doOnNext { incomingContexts.add(TestRequestHolder.retrieve()) }
                 .then()
-            val output = sendingMessages.asFlux()
-                .doOnNext { TestRequestHolder.store(DrillRequest("$it-session", mapOf("drill-data" to "$it-data"))) }
-                .map(session::textMessage)
-                .let(session::send)
-            return Mono.zip(input, output).then()
+            val outputTexts = sendingTexts.asFlux().map(session::textMessage)
+            val outputBinaries = sendingBinaries.asFlux().map { session.binaryMessage { factory -> factory.wrap(it) } }
+            val output = Flux.merge(outputTexts, outputBinaries).doOnNext {
+                TestRequestHolder.store(DrillRequest(
+                    "${it.payloadAsText}-session",
+                    mapOf("drill-data" to "${it.payloadAsText}-data")
+                ))
+            }
+            return Mono.zip(input, session.send(output)).then()
         }
     }
 
