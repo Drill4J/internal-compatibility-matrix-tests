@@ -103,13 +103,13 @@ abstract class SpringWebfluxWebSocketMessagesMatrixTest : SpringCommonWebSocketM
                 .then()
             val outputTexts = sendingTexts.asFlux().map(session::textMessage)
             val outputBinaries = sendingBinaries.asFlux().map { session.binaryMessage { factory -> factory.wrap(it) } }
-            val output = Flux.merge(outputTexts, outputBinaries).doOnNext {
-                TestRequestHolder.store(DrillRequest(
-                    "${it.payloadAsText}-session",
-                    mapOf("drill-data" to "${it.payloadAsText}-data")
-                ))
+            val storeDrillRequest: (WebSocketMessage) -> Unit = {
+                TestRequestHolder.store(
+                    DrillRequest("${it.payloadAsText}-session", mapOf("drill-data" to "${it.payloadAsText}-data"))
+                )
             }
-            return Mono.zip(input, session.send(output)).then()
+            val output = Flux.merge(outputTexts, outputBinaries).doOnNext(storeDrillRequest).let(session::send)
+            return Mono.zip(input, output).then()
         }
     }
 
