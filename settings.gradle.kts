@@ -133,8 +133,11 @@ include("tests:websocket-clients-frameworks:spring-mvc-3.1-jetty")
 include("tests:websocket-clients-frameworks:spring-mvc-3.1-tomcat")
 include("tests:websocket-clients-frameworks:spring-mvc-3.1-undertow")
 //Spring MVC Web-Socket Per-Message Tests
+include("tests:websocket-messages-frameworks:spring-mvc-1.5-tomcat")
 include("tests:websocket-messages-frameworks:spring-mvc-1.5-undertow")
+include("tests:websocket-messages-frameworks:spring-mvc-2.7-tomcat")
 include("tests:websocket-messages-frameworks:spring-mvc-2.7-undertow")
+include("tests:websocket-messages-frameworks:spring-mvc-3.1-tomcat")
 include("tests:websocket-messages-frameworks:spring-mvc-3.1-undertow")
 //Spring WebFlux Web-Socket clients
 include("tests:websocket-clients-frameworks:spring-webflux-2.7-jetty")
