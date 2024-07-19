@@ -13,13 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.epam.drill.agent.instrument.transformers.clients
+package com.epam.drill.agent.instrument.transformers.tomcat
 
-import com.epam.drill.agent.instrument.*
-import com.epam.drill.agent.instrument.clients.TomcatWsClientTransformerObject
+import com.epam.drill.agent.instrument.AbstractTransformerObject
+import com.epam.drill.agent.instrument.TransformerObject
 
-actual object TomcatWsClientTransformer:
-    TransformerObject,
-    TomcatWsClientTransformerObject(),
-    HeadersProcessor by DrillRequestHeadersProcessor(TestHeadersRetriever, TestRequestHolder),
-    ClassPathProvider by TestClassPathProvider
+actual object TomcatWsMessagesTransformer : TransformerObject, AbstractTransformerObject()

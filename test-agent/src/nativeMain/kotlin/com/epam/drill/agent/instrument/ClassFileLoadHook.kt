@@ -26,9 +26,9 @@ import com.epam.drill.agent.instrument.transformers.clients.JettyWsClientTransfo
 import com.epam.drill.agent.instrument.transformers.clients.NettyWsClientTransformer
 import com.epam.drill.agent.instrument.transformers.clients.OkHttp3ClientTransformer
 import com.epam.drill.agent.instrument.transformers.clients.SpringWebClientTransformer
-import com.epam.drill.agent.instrument.transformers.clients.TomcatWsClientTransformer
 import com.epam.drill.agent.instrument.transformers.servers.*
 import com.epam.drill.agent.instrument.transformers.undertow.*
+import com.epam.drill.agent.instrument.transformers.tomcat.*
 import com.epam.drill.jvmapi.gen.Allocate
 import com.epam.drill.jvmapi.gen.jint
 import com.epam.drill.jvmapi.gen.jintVar
@@ -43,13 +43,14 @@ object ClassFileLoadHook {
         SpringWebClientTransformer,
         JettyWsClientTransformer,
         NettyWsClientTransformer,
-        TomcatWsClientTransformer,
         UndertowHttpServerTransformer,
         UndertowWsServerTransformer,
         UndertowWsClientTransformer,
         UndertowWsMessagesTransformer,
-        TomcatTransformer,
-        TomcatWsTransformer,
+        TomcatHttpServerTransformer,
+        TomcatWsServerTransformer,
+        TomcatWsClientTransformer,
+        TomcatWsMessagesTransformer,
         NettyTransformer,
         NettyWsTransformer,
         SSLEngineTransformer,

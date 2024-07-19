@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.epam.drill.agent.instrument.transformers.servers
+package com.epam.drill.agent.instrument.transformers.tomcat
 
 import com.epam.drill.agent.instrument.ClassPathProvider
 import com.epam.drill.agent.instrument.DrillRequestHeadersProcessor
@@ -22,10 +22,10 @@ import com.epam.drill.agent.instrument.TestClassPathProvider
 import com.epam.drill.agent.instrument.TestHeadersRetriever
 import com.epam.drill.agent.instrument.TestRequestHolder
 import com.epam.drill.agent.instrument.TransformerObject
-import com.epam.drill.agent.instrument.servers.TomcatWsTransformerObject
+import com.epam.drill.agent.instrument.tomcat.TomcatWsServerTransformerObject
 
-actual object TomcatWsTransformer :
+actual object TomcatWsServerTransformer :
     TransformerObject,
-    TomcatWsTransformerObject(),
+    TomcatWsServerTransformerObject(),
     HeadersProcessor by DrillRequestHeadersProcessor(TestHeadersRetriever, TestRequestHolder),
     ClassPathProvider by TestClassPathProvider

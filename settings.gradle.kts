@@ -65,6 +65,9 @@ include("tests:websocket-clients:undertow-2.0")
 include("tests:websocket-clients:undertow-2.3")
 
 //Web-Socket Per-Message Tests
+include("tests:websocket-messages:tomcat-9.0")
+include("tests:websocket-messages:tomcat-10.1")
+include("tests:websocket-messages:tomcat-11.0")
 include("tests:websocket-messages:undertow-2.0")
 include("tests:websocket-messages:undertow-2.3")
 
