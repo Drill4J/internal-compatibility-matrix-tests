@@ -13,18 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.epam.drill.agent.instrument.transformers.tomcat
+package com.epam.drill.agent.instrument.transformers.netty
 
-import com.epam.drill.agent.instrument.ClassPathProvider
-import com.epam.drill.agent.instrument.HeadersProcessor
-import com.epam.drill.agent.instrument.TestClassPathProvider
-import com.epam.drill.agent.instrument.TestHeadersProcessor
-import com.epam.drill.agent.instrument.TestHeadersRetriever
 import com.epam.drill.agent.instrument.TransformerObject
-import com.epam.drill.agent.instrument.tomcat.TomcatHttpServerTransformerObject
 
-actual object TomcatHttpServerTransformer :
-    TransformerObject,
-    TomcatHttpServerTransformerObject(TestHeadersRetriever),
-    HeadersProcessor by TestHeadersProcessor,
-    ClassPathProvider by TestClassPathProvider
+expect object NettyHttpServerTransformer : TransformerObject

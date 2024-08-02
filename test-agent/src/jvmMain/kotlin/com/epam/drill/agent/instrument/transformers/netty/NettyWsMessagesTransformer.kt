@@ -13,17 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.epam.drill.agent.instrument.transformers.tomcat
+package com.epam.drill.agent.instrument.transformers.netty
 
-import com.epam.drill.agent.instrument.ClassPathProvider
-import com.epam.drill.agent.instrument.HeadersProcessor
-import com.epam.drill.agent.instrument.TestClassPathProvider
-import com.epam.drill.agent.instrument.TestHeadersProcessor
-import com.epam.drill.agent.instrument.TransformerObject
-import com.epam.drill.agent.instrument.tomcat.TomcatWsServerTransformerObject
+import com.epam.drill.agent.instrument.*
+import com.epam.drill.agent.instrument.netty.NettyWsMessagesTransformerObject
 
-actual object TomcatWsServerTransformer :
+actual object NettyWsMessagesTransformer:
     TransformerObject,
-    TomcatWsServerTransformerObject(),
+    NettyWsMessagesTransformerObject(),
     HeadersProcessor by TestHeadersProcessor,
+    PayloadProcessor by TestPayloadProcessor,
     ClassPathProvider by TestClassPathProvider
