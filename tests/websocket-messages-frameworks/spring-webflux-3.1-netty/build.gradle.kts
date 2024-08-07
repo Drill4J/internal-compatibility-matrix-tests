@@ -19,6 +19,9 @@ val springBootVersion = "3.1.9"
 dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
     implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
+    testCompileOnly(project(":common"))
+    testCompileOnly(project(":agent-instrumentation"))
+    testCompileOnly(project(":test-agent"))
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")

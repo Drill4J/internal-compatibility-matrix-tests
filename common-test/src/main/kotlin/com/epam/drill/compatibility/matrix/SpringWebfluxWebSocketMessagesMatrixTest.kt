@@ -29,8 +29,9 @@ import org.springframework.web.reactive.socket.WebSocketMessage
 import org.springframework.web.reactive.socket.WebSocketSession
 import org.springframework.web.reactive.socket.client.WebSocketClient
 import org.springframework.web.socket.config.annotation.EnableWebSocket
+import reactor.core.publisher.Flux
+import reactor.core.publisher.FluxSink
 import reactor.core.publisher.Mono
-import reactor.core.publisher.Sinks
 import com.epam.drill.agent.instrument.TestRequestHolder
 import com.epam.drill.common.agent.request.DrillRequest
 
@@ -48,11 +49,13 @@ abstract class SpringWebfluxWebSocketMessagesMatrixTest : SpringCommonWebSocketM
         webSocketClient.execute(URI("ws://localhost:$serverPort"), this).subscribe()
         while (this.session?.isOpen != true) Thread.sleep(100)
         (0 until count).map(body::plus).forEach {
+            TestRequestHolder.store(DrillRequest("$it-session", mapOf("drill-data" to "$it-data")))
             when (payloadType) {
-                "text" -> this.sendingMessages.tryEmitNext(it)
-                "binary" -> this.sendingMessages.tryEmitNext(it.encodeToByteArray())
+                "text" -> this.sendingEmitter.next(it)
+                "binary" -> this.sendingEmitter.next(it.encodeToByteArray())
             }
             Thread.sleep(100)
+            TestRequestHolder.remove()
         }
         Thread.sleep(2000)
         this.session!!.close().block()
@@ -88,11 +91,12 @@ abstract class SpringWebfluxWebSocketMessagesMatrixTest : SpringCommonWebSocketM
             .let(session::send)
     }
 
-    private class TestWebSocketClientHandler : WebSocketHandler, TestRequestEndpoint {
+    protected class TestWebSocketClientHandler : WebSocketHandler, TestRequestEndpoint {
         override val incomingMessages = mutableListOf<String>()
         override val incomingContexts = mutableListOf<DrillRequest?>()
-        val sendingMessages: Sinks.Many<Any> = Sinks.many().unicast().onBackpressureBuffer()
         var session: WebSocketSession? = null
+        lateinit var sendingEmitter: FluxSink<Any>
+        private val sendingMessages: Flux<Any> = Flux.create { this.sendingEmitter = it; }
         override fun handle(session: WebSocketSession): Mono<Void> {
             this.session = session
             val input = session.receive()
@@ -100,12 +104,10 @@ abstract class SpringWebfluxWebSocketMessagesMatrixTest : SpringCommonWebSocketM
                 .map(incomingMessages::add)
                 .doOnNext { incomingContexts.add(TestRequestHolder.retrieve()) }
                 .then()
-            val output = sendingMessages.asFlux().map {
+            val output = sendingMessages.map {
                 if (it is ByteArray) {
-                    TestRequestHolder.store(DrillRequest("${it.decodeToString()}-session", mapOf("drill-data" to "${it.decodeToString()}-data")))
                     session.binaryMessage { factory -> factory.wrap(it) }
                 } else {
-                    TestRequestHolder.store(DrillRequest("$it-session", mapOf("drill-data" to "$it-data")))
                     session.textMessage(it.toString())
                 }
             }
