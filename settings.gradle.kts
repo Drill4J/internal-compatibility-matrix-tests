@@ -150,8 +150,10 @@ include("tests:websocket-messages-frameworks:spring-mvc-2.7-undertow")
 include("tests:websocket-messages-frameworks:spring-mvc-3.1-tomcat")
 include("tests:websocket-messages-frameworks:spring-mvc-3.1-undertow")
 //Spring WebFlux Web-Socket Per-Message Tests
+include("tests:websocket-messages-frameworks:spring-webflux-2.7-netty")
 include("tests:websocket-messages-frameworks:spring-webflux-2.7-tomcat")
 include("tests:websocket-messages-frameworks:spring-webflux-2.7-undertow")
+include("tests:websocket-messages-frameworks:spring-webflux-3.1-netty")
 include("tests:websocket-messages-frameworks:spring-webflux-3.1-tomcat")
 include("tests:websocket-messages-frameworks:spring-webflux-3.1-undertow")
 
