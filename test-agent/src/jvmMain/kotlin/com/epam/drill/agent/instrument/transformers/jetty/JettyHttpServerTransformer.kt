@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.epam.drill.agent.instrument.transformers.clients
+package com.epam.drill.agent.instrument.transformers.jetty
 
 import com.epam.drill.agent.instrument.*
-import com.epam.drill.agent.instrument.clients.JettyWsClientTransformerObject
+import com.epam.drill.agent.instrument.jetty.JettyHttpServerTransformerObject
 
-actual object JettyWsClientTransformer:
+actual object JettyHttpServerTransformer :
     TransformerObject,
-    JettyWsClientTransformerObject(),
+    JettyHttpServerTransformerObject(TestHeadersRetriever),
     HeadersProcessor by DrillRequestHeadersProcessor(TestHeadersRetriever, TestRequestHolder),
     ClassPathProvider by TestClassPathProvider
