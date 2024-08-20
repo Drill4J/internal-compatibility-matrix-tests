@@ -15,12 +15,6 @@
  */
 package com.epam.drill.agent.instrument.transformers.jetty
 
-import com.epam.drill.agent.instrument.*
-import com.epam.drill.agent.instrument.jetty.JettyWsMessagesTransformerObject
+import com.epam.drill.agent.instrument.TransformerObject
 
-actual object JettyWsMessagesTransformer:
-    TransformerObject,
-    JettyWsMessagesTransformerObject(),
-    HeadersProcessor by TestHeadersProcessor,
-    PayloadProcessor by TestPayloadProcessor,
-    ClassPathProvider by TestClassPathProvider
+expect object Jetty9WsMessagesTransformer : TransformerObject
