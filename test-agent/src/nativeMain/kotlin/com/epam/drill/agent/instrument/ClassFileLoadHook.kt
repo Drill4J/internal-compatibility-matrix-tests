@@ -58,6 +58,7 @@ object ClassFileLoadHook {
         JettyWsClientTransformer,
         Jetty9WsMessagesTransformer,
         Jetty10WsMessagesTransformer,
+        Jetty11WsMessagesTransformer,
         SSLEngineTransformer,
         KafkaTransformer,
         ReactorTransformer,
