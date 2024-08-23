@@ -54,11 +54,6 @@ object StubAdminClient {
         return HttpClients.createDefault().execute(
             HttpGet("http://$host:$port/echo")
         ).allHeaders.associate { it.name to it.value }
-//        HttpClientBuilder.create().build().run {
-//            val request = HttpGet("http://$host:$port/echo")
-//            val response = this.execute(request)
-//            return response.allHeaders.associate { it.name to it.value }
-//        }
     }
 
     private fun getStubData(): ServerData {
