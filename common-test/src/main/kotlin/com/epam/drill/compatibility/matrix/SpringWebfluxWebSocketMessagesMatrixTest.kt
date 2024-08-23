@@ -48,6 +48,7 @@ abstract class SpringWebfluxWebSocketMessagesMatrixTest : SpringCommonWebSocketM
     override fun callWebSocketEndpoint(payloadType: String, body: String, count: Int) = TestWebSocketClientHandler().run {
         webSocketClient.execute(URI("ws://localhost:$serverPort"), this).subscribe()
         while (this.session?.isOpen != true) Thread.sleep(100)
+        Thread.sleep(500)
         (0 until count).map(body::plus).forEach {
             TestRequestHolder.store(DrillRequest("$it-session", mapOf("drill-data" to "$it-data")))
             when (payloadType) {
