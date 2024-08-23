@@ -5,6 +5,8 @@ pluginManagement {
     val kotlinMultiplatformVersion: String by extra
     val shadowPluginVersion: String by extra
     val licenseVersion: String by extra
+    val psxpaulExecforkVersion: String by extra
+    val drillCiCdIntegrationVersion: String by extra
 
     plugins {
         kotlin("jvm") version kotlinVersion
@@ -13,6 +15,8 @@ pluginManagement {
 
         id("com.github.johnrengelman.shadow") version shadowPluginVersion
         id("com.github.hierynomus.license") version licenseVersion
+        id("com.github.psxpaul.execfork") version psxpaulExecforkVersion
+        id("com.epam.drill.integration.cicd") version drillCiCdIntegrationVersion
     }
 
     repositories {
@@ -34,6 +38,10 @@ includeSharedLib("jvmapi")
 includeSharedLib("common")
 includeSharedLib("logging")
 includeSharedLib("agent-instrumentation")
+
+include("common-test")
+include("test-agent")
+include("stub-server")
 
 //Tests
 //Web Servers
@@ -104,5 +112,10 @@ include("tests:async:reactor-3.6")
 //Spring Task Execution
 include("tests:async:spring-task-execution-3.1")
 
-include("common-test")
-include("test-agent")
+//Test Frameworks
+//JUnit
+include("tests:test-frameworks:junit-4")
+include("tests:test-frameworks:junit-5")
+//TestNG
+include("tests:test-frameworks:testng-6.1")
+include("tests:test-frameworks:testng-7.4")

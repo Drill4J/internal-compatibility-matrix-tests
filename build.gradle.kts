@@ -10,7 +10,7 @@ version = "0.0.1"
 group = "com.epam.drill.compatibility"
 
 subprojects {
-    val excludedModules = listOf("test-agent", "common-test")
+    val excludedModules = listOf("test-agent", "common-test", "stub-server")
     if (name in excludedModules) return@subprojects
 
     tasks {
