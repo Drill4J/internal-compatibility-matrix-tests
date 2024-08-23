@@ -23,7 +23,7 @@ import org.testng.annotations.*
 
 class TestNG6Test {
 
-    private val expectedTests = ExpectedTests("testng-6.1")
+    private val expectedTests = ExpectedTests()
 
     @BeforeClass
     fun initializeTestData() {

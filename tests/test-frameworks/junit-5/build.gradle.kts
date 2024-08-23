@@ -29,6 +29,7 @@ tasks {
     test {
         useJUnitPlatform()
 
+        systemProperties("sessionId" to "junit-5")
         environment("host" to rootProject.extra["testsAdminStubServerHost"])
         environment("port" to rootProject.extra["testsAdminStubServerPort"])
         dependsOn(":stub-server:serverStart")

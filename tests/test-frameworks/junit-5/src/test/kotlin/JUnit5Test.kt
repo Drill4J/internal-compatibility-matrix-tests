@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test
 class JUnit5Test {
 
     companion object {
-        private val expectedTests = ExpectedTests("junit-5")
+        private val expectedTests = ExpectedTests()
 
         @BeforeAll
         @JvmStatic

@@ -28,8 +28,7 @@ tasks {
 //    test {
 //        useTestNG()
 //
-//        ignoreFailures = true
-//
+//        systemProperties("sessionId" to "testng-6.1")
 //        environment("host" to rootProject.extra["testsAdminStubServerHost"])
 //        environment("port" to rootProject.extra["testsAdminStubServerPort"])
 //        dependsOn(":stub-server:serverStart")
