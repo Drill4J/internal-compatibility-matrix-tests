@@ -27,7 +27,7 @@ class TestNG7Test {
     @BeforeClass
     fun initializeTestData() {
         expectedTests.initializeTestData()
-    // expectedTests.add(this::class.java, ::testShouldSkip.name, TestResult.SKIPPED) TODO EPMDJ-10906
+        expectedTests.add(this::class.java, ::testShouldSkip.name, TestResult.SKIPPED)
     }
 
     @AfterClass

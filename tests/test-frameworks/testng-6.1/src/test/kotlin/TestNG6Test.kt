@@ -28,7 +28,7 @@ class TestNG6Test {
     @BeforeClass
     fun initializeTestData() {
         expectedTests.initializeTestData()
-        expectedTests.add(this::class.java, ::testShouldSkip.name, TestResult.PASSED)
+        expectedTests.add(this::class.java, ::testShouldSkip.name, TestResult.SKIPPED)
     }
 
     @AfterClass

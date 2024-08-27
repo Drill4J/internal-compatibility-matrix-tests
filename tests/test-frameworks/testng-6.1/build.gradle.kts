@@ -24,15 +24,14 @@ dependencies {
 val drillAutotestAgentVersion: String by parent!!.extra
 
 tasks {
-    //TODO: fix EPMDJ-10905
-//    test {
-//        useTestNG()
-//
-//        systemProperties("sessionId" to "testng-6.1")
-//        environment("host" to rootProject.extra["testsAdminStubServerHost"])
-//        environment("port" to rootProject.extra["testsAdminStubServerPort"])
-//        dependsOn(":stub-server:serverStart")
-//    }
+    test {
+        useTestNG()
+
+        systemProperties("sessionId" to "testng-6.1")
+        environment("host" to rootProject.extra["testsAdminStubServerHost"])
+        environment("port" to rootProject.extra["testsAdminStubServerPort"])
+        dependsOn(":stub-server:serverStart")
+    }
 }
 
 drill {
