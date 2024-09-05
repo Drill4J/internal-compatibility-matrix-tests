@@ -18,7 +18,7 @@ import org.testcontainers.junit.jupiter.Testcontainers
 
 @Testcontainers
 class Selenium4Test {
-    private val debuggerPort = 9222
+    private val debuggerPort = 9233
     private lateinit var driver: WebDriver
     private lateinit var mockServerClient: MockServerClient
 
@@ -40,12 +40,6 @@ class Selenium4Test {
         )
 
         org.testcontainers.Testcontainers.exposeHostPorts(debuggerPort)
-
-        driver = ChromeDriver(ChromeOptions().apply {
-            addArguments("--remote-debugging-port=$debuggerPort")
-            addArguments("--disable-search-engine-choice-screen")
-            addArguments("--headless")
-        })
     }
 
     @AfterEach
@@ -55,14 +49,37 @@ class Selenium4Test {
     }
 
     @Test
-    fun `selenium transformer adds Drill headers to requests`() {
+    fun `given 127 Chrome version, Selenium transformer should add Drill headers to requests`() {
+        driver = ChromeDriver(ChromeOptions().apply {
+            addArguments("--remote-debugging-port=$debuggerPort")
+            addArguments("--disable-search-engine-choice-screen")
+            addArguments("--headless")
+            setCapability("browserVersion", "127")
+        })
+
         driver.get("http://localhost:$PORT/")
 
         val requests = mockServerClient.retrieveRecordedRequests(
             HttpRequest.request().withMethod("GET")
                 .withHeader("drill-test-id")
         )
+        assertTrue(requests.isNotEmpty(), "MockServer did not receive a request with header 'drill-test-id'")
+    }
 
+    @Test
+    fun `given latest Chrome version, Selenium transformer should add Drill headers to requests`() {
+        driver = ChromeDriver(ChromeOptions().apply {
+            addArguments("--remote-debugging-port=$debuggerPort")
+            addArguments("--disable-search-engine-choice-screen")
+            addArguments("--headless")
+        })
+
+        driver.get("http://localhost:$PORT/")
+
+        val requests = mockServerClient.retrieveRecordedRequests(
+            HttpRequest.request().withMethod("GET")
+                .withHeader("drill-test-id")
+        )
         assertTrue(requests.isNotEmpty(), "MockServer did not receive a request with header 'drill-test-id'")
     }
 }
