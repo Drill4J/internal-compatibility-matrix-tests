@@ -30,8 +30,10 @@ object StubAdminClient {
         encodeDefaults = true
     }
 
+    val address = "http://$host:$port"
+
     fun clearTestSession(sessionId: String) {
-        val request = HttpPost("http://$host:$port/clear")
+        val request = HttpPost("$address/clear")
         request.entity = StringEntity(
             """{ "sessionId": "$sessionId" }""",
             ContentType.APPLICATION_JSON
@@ -52,13 +54,13 @@ object StubAdminClient {
 
     fun getEchoHeaders(): Map<String, String> {
         return HttpClients.createDefault().execute(
-            HttpGet("http://$host:$port/echo")
+            HttpGet("$address/echo")
         ).allHeaders.associate { it.name to it.value }
     }
 
     private fun getStubData(): ServerData {
         val response = HttpClients.createDefault().execute(
-            HttpGet("http://$host:$port/data")
+            HttpGet("$address/data")
         ).entity.content.reader().readText()
         return json.decodeFromString(ServerData.serializer(), response)
     }
