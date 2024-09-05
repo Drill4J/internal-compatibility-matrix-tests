@@ -17,24 +17,23 @@ repositories {
 
 val logbackVersion: String by parent!!.extra
 val drillAutotestAgentVersion: String by parent!!.extra
+val junitVersion: String = "5.10.0"
+val testcontainersVersion: String = "1.19.8"
+val mockserverVersion: String = "5.15.0"
+val seleniumVersion: String = "4.24.0"
 
 dependencies {
     testImplementation(project(":common-test"))
     testImplementation("ch.qos.logback:logback-classic:$logbackVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
+    testImplementation("org.mock-server:mockserver-netty:$mockserverVersion")
+    testImplementation("org.mock-server:mockserver-client-java:$mockserverVersion")
+    testImplementation("org.testcontainers:testcontainers:$testcontainersVersion")
+    testImplementation("org.testcontainers:selenium:$testcontainersVersion")
+    testImplementation("org.testcontainers:junit-jupiter:$testcontainersVersion")
+    testImplementation("org.testcontainers:mockserver:$testcontainersVersion")
 
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
-
-    testImplementation("org.testcontainers:junit-jupiter:1.15.2")
-
-    testImplementation("org.testcontainers:testcontainers:1.19.0")
-    testImplementation("org.testcontainers:selenium:1.19.0")
-    testImplementation("org.testcontainers:junit-jupiter:1.19.0")
-    testImplementation("org.testcontainers:mockserver:1.19.0")
-
-    testImplementation("org.seleniumhq.selenium:selenium-java:4.14.0")
-
-    testImplementation("org.mock-server:mockserver-netty:5.15.0")
-    testImplementation("org.mock-server:mockserver-client-java:5.15.0")
+    testImplementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
 }
 
 tasks {
@@ -48,11 +47,16 @@ tasks {
 }
 
 drill {
-    drillApiUrl = "http://" + rootProject.extra["testsAdminStubServerHost"] as String + ":" + rootProject.extra["testsAdminStubServerPort"] as Int + "/api"
+    drillApiUrl =
+        "http://" + rootProject.extra["testsAdminStubServerHost"] as String + ":" + rootProject.extra["testsAdminStubServerPort"] as Int + "/api"
     groupId = "drill-tests"
     enableTestAgent {
-        enabled = false
         version = drillAutotestAgentVersion
+        additionalParams = mapOf(
+            "devToolsProxyAddress" to "http://localhost:8093",
+            "withJsCoverage" to "false",
+            "devtoolsAddressReplaceLocalhost" to "host.testcontainers.internal"
+        )
     }
 }
 
