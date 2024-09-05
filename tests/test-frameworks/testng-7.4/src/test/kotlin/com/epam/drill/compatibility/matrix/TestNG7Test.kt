@@ -1,3 +1,5 @@
+package com.epam.drill.compatibility.matrix
+
 /**
  * Copyright 2020 - 2022 EPAM Systems
  *
@@ -17,11 +19,10 @@
 import com.epam.drill.compatibility.testframeworks.ExpectedTests
 import com.epam.drill.compatibility.stubs.TestResult
 import com.epam.drill.compatibility.testframeworks.isThereDrillContext
-import junit.framework.TestCase
 import org.testng.Assert.*
 import org.testng.annotations.*
 
-class TestNG6Test {
+class TestNG7Test {
 
     private val expectedTests = ExpectedTests()
 
@@ -52,7 +53,7 @@ class TestNG6Test {
 
     @Test(dataProvider = "dataProvider")
     fun parametrizedTest(int: Int?, string: String?) {
-        expectedTests.add(this::class.java,::parametrizedTest.name, TestResult.PASSED, listOf(int, string))
+        expectedTests.add(this::class.java, ::parametrizedTest.name, TestResult.PASSED, listOf(int, string))
         assertTrue(isThereDrillContext())
     }
 
