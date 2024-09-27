@@ -338,7 +338,7 @@ jobs:
           - { testModule: 'tests:test-frameworks:testng-7.4', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:test-frameworks:testng-7.4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           # Selenium 4
-          - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2', testReport: 'tests/test-frameworks/selenium-4' }
+          - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2', testReport: 'tests/test-frameworks/selenium-4' }
           - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2', testReport: 'tests/test-frameworks/selenium-4' }
     uses: ./.github/workflows/template.yml
     with:
