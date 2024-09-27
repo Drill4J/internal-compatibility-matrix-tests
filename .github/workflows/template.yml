@@ -57,4 +57,4 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: ${{ inputs.gradleVersion }}
-      - run: gradle ${{ inputs.testModule }}:check "-Dtest-agent.binaries=${{ github.workspace }}/agent" --stacktrace
+      - run: gradle ${{ inputs.testModule }}:check "-Dtest-agent.binaries=${{ github.workspace }}/agent" --info
