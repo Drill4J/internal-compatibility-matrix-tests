@@ -60,9 +60,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: ${{ inputs.gradleVersion }}
-      - run: gradle ${{ inputs.testModule }}:check "-Dtest-agent.binaries=${{ github.workspace }}/agent" --info
+      - id: gradle-check
+        run: gradle ${{ inputs.testModule }}:check "-Dtest-agent.binaries=${{ github.workspace }}/agent" --info
       - name: Upload test report
-        if: inputs.testReport != ''
+        if: steps.gradle-check.outcome == 'failure' && inputs.testReport != ''
         uses: actions/upload-artifact@v3
         with:
           name: test-report
