@@ -41,11 +41,12 @@ object StubAdminClient {
         HttpClients.createDefault().execute(request)
     }
 
-    fun pollTests(sessionId: String): List<TestInfo> {
+    fun pollTests(sessionId: String, expectedTests: Int): List<TestInfo> {
         var stubData = getStubData()
         val startTime = System.currentTimeMillis()
         val isTimeUp: () -> Boolean = { System.currentTimeMillis() - startTime > timeout }
-        while (!stubData.tests.containsKey(sessionId) && !isTimeUp()) {
+        val allExpectedTestsFinished: () -> Boolean = { (stubData.tests[sessionId]?.size ?: 0) >= expectedTests }
+        while (!isTimeUp() && !allExpectedTestsFinished()) {
             Thread.sleep(100)
             stubData = getStubData()
         }

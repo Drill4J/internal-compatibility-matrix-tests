@@ -28,7 +28,7 @@ class ExpectedTests(private val sessionId: String = System.getProperty("sessionI
     }
 
     fun getTestResults(): TestVerificationResults {
-        val actualTests = StubAdminClient.pollTests(sessionId)
+        val actualTests = StubAdminClient.pollTests(sessionId, expectedTests.size)
         val isSuccess = actualTests shouldContainsAllTests expectedTests
         return if (!isSuccess) {
             val actualTestData = actualTests.map { it.toTestData() }
