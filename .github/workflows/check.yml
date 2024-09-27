@@ -316,3 +316,36 @@ jobs:
       testModule: ${{ matrix.envVersions.testModule }}
       gradleVersion: ${{ matrix.envVersions.gradleVersion }}
       kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
+  test-framework-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+          - { os: windows-latest, preset: mingwX64 }
+          - { os: macos-12, preset: macosX64 }
+        envVersions:
+          # JUnit 4
+          - { testModule: 'tests:test-frameworks:junit-4', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:test-frameworks:junit-4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          # JUnit 5
+          - { testModule: 'tests:test-frameworks:junit-5', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:test-frameworks:junit-5', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          # TestNG 6
+          - { testModule: 'tests:test-frameworks:testng-6.1', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:test-frameworks:testng-6.1', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          # TestNG 7
+          - { testModule: 'tests:test-frameworks:testng-7.4', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:test-frameworks:testng-7.4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          # Selenium 4
+          - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+    uses: ./.github/workflows/template.yml
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
