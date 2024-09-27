@@ -47,7 +47,7 @@ tasks {
 }
 
 drill {
-    drillApiUrl =
+    apiUrl =
         "http://" + rootProject.extra["testsAdminStubServerHost"] as String + ":" + rootProject.extra["testsAdminStubServerPort"] as Int + "/api"
     groupId = "drill-tests"
     enableTestAgent {

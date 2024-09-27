@@ -49,7 +49,7 @@ class Selenium4Test {
     }
 
     @Test
-    fun `given 127 Chrome version, Selenium transformer should add Drill headers to requests`() {
+    fun `given Chrome 127 version, Selenium transformer should add Drill headers to requests`() {
         driver = ChromeDriver(ChromeOptions().apply {
             addArguments("--remote-debugging-port=$debuggerPort")
             addArguments("--disable-search-engine-choice-screen")
@@ -67,7 +67,7 @@ class Selenium4Test {
     }
 
     @Test
-    fun `given latest Chrome version, Selenium transformer should add Drill headers to requests`() {
+    fun `given Chrome latest version, Selenium transformer should add Drill headers to requests`() {
         driver = ChromeDriver(ChromeOptions().apply {
             addArguments("--remote-debugging-port=$debuggerPort")
             addArguments("--disable-search-engine-choice-screen")
