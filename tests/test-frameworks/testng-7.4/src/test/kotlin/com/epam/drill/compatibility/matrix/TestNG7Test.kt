@@ -29,7 +29,7 @@ class TestNG7Test {
     @BeforeClass
     fun initializeTestData() {
         expectedTests.initializeTestData()
-//      TODO Skipped tests are not detected in TestNG7
+//      TODO Skipped tests are unstable in TestNG7
 //        expectedTests.add(this::class.java, ::testShouldSkip.name, TestResult.SKIPPED)
 
     }
@@ -60,9 +60,9 @@ class TestNG7Test {
     }
 
 
-    @Test(enabled = false)
-    fun testShouldSkip() {
-    }
+//    @Test(enabled = false)
+//    fun testShouldSkip() {
+//    }
 
     //    TODO Figure out how to test the case when the test fails
 //    @Test

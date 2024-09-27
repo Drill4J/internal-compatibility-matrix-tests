@@ -29,7 +29,7 @@ class TestNG6Test {
     @BeforeClass
     fun initializeTestData() {
         expectedTests.initializeTestData()
-//      TODO Skipped tests are not detected in TestNG6
+//      TODO Skipped tests are unstable in TestNG6
 //        expectedTests.add(this::class.java, ::testShouldSkip.name, TestResult.SKIPPED)
     }
 
@@ -58,9 +58,9 @@ class TestNG6Test {
         assertTrue(isThereDrillContext())
     }
 
-    @Test(enabled = false)
-    fun testShouldSkip() {
-    }
+//    @Test(enabled = false)
+//    fun testShouldSkip() {
+//    }
 
     //    TODO Figure out how to test the case when the test fails
 //    @Test
