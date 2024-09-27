@@ -23,6 +23,9 @@ on:
       kotlinVersion:
         required: false
         type: string
+      testReport:
+        required: false
+        type: string
 
 jobs:
   run-tests:
@@ -58,3 +61,9 @@ jobs:
         with:
           gradle-version: ${{ inputs.gradleVersion }}
       - run: gradle ${{ inputs.testModule }}:check "-Dtest-agent.binaries=${{ github.workspace }}/agent" --info
+      - name: Upload test report
+        if: inputs.testReport != ''
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: /home/runner/work/internal-compatibility-matrix-tests/internal-compatibility-matrix-tests/${{ inputs.testReport }}/build/reports/tests/test

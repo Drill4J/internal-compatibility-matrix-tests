@@ -338,8 +338,8 @@ jobs:
           - { testModule: 'tests:test-frameworks:testng-7.4', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:test-frameworks:testng-7.4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           # Selenium 4
-          - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-          - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2', testReport: 'tests/test-frameworks/selenium-4' }
+          - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2', testReport: 'tests/test-frameworks/selenium-4' }
     uses: ./.github/workflows/template.yml
     with:
       os: ${{ matrix.config.os }}
@@ -349,3 +349,4 @@ jobs:
       testModule: ${{ matrix.envVersions.testModule }}
       gradleVersion: ${{ matrix.envVersions.gradleVersion }}
       kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
+      testReport: ${{ matrix.envVersions.testReport }}
