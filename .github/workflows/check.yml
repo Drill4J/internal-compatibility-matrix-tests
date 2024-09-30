@@ -322,7 +322,6 @@ jobs:
       matrix:
         config:
           - { os: ubuntu-latest, preset: linuxX64 }
-          - { os: windows-latest, preset: mingwX64 }
           - { os: macos-12, preset: macosX64 }
         envVersions:
           # JUnit 4
