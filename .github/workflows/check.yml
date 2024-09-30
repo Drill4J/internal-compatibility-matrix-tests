@@ -322,7 +322,8 @@ jobs:
       matrix:
         config:
           - { os: ubuntu-latest, preset: linuxX64 }
-          - { os: macos-12, preset: macosX64 }
+#          - { os: windows-latest, preset: mingwX64 }  TODO Selenium tests fail as the Testcontainers does not work on Windows
+#          - { os: macos-12, preset: macosX64 } TODO CI/CD plugin has issues with macOS, waiting for fixes in 0.1.4 version
         envVersions:
           # JUnit 4
           - { testModule: 'tests:test-frameworks:junit-4', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
