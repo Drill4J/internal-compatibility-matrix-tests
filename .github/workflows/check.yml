@@ -20,6 +20,8 @@ on:
       - 'gradle.properties'
       - '.github/**'
 
+env:
+  GH_USER_TOKEN: ${{ secrets.GH_USER_TOKEN }}
 jobs:
   build-agent:
     strategy:
