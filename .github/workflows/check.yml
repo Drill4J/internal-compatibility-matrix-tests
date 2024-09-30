@@ -21,301 +21,301 @@ on:
       - '.github/**'
 
 jobs:
-#  build-agent:
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        config:
-#          - { os: ubuntu-latest, preset: linuxX64 }
-#          - { os: windows-latest, preset: mingwX64 }
-#          - { os: macos-12, preset: macosX64 }
-#    runs-on: ${{ matrix.config.os }}
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: actions/setup-java@v3
-#        with:
-#          java-version: 8.0
-#          distribution: 'corretto'
-#      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
-#        run: chmod +x ${{ github.workspace }}/gradlew
-#      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
-#        run: chmod +x ${{ github.workspace }}/setup-shared-libs.sh
-#      - if: matrix.config.preset == 'linuxX64'
-#        run: sudo apt-get install -y libtinfo5
-#      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
-#        run: ${{ github.workspace }}/setup-shared-libs.sh
-#      - if: matrix.config.preset == 'mingwX64'
-#        run: ${{ github.workspace }}/setup-shared-libs.bat
-#      - name: Setup Gradle
-#        uses: gradle/actions/setup-gradle@v3
-#        with:
-#          gradle-version: 7.4.2
-#      - run: gradle :test-agent:runtimeJar :test-agent:build
-#      - name: Upload agent binary
-#        uses: actions/upload-artifact@master
-#        with:
-#          name: agent-binary-${{matrix.config.preset}}
-#          path: |
-#            test-agent/build/bin/**/*.dll
-#            test-agent/build/bin/**/*.so
-#            test-agent/build/bin/**/*.dylib
-#      - name: Upload agent jar
-#        uses: actions/upload-artifact@master
-#        with:
-#          name: agent-jar-${{matrix.config.preset}}
-#          path: test-agent/build/libs/drill-runtime.jar
-#  servlet-tests:
-#    needs: build-agent
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        config:
-#          - { os: ubuntu-latest, preset: linuxX64 }
-#          - { os: windows-latest, preset: mingwX64 }
-#          - { os: macos-12, preset: macosX64 }
-#        envVersions:
-#          - { testModule: 'tests:web-frameworks:servlet-4-jetty-9', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:servlet-4-jetty-9', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:servlet-4-jetty-9', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:web-frameworks:servlet-4-tomcat-9', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:servlet-4-tomcat-9', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:servlet-4-tomcat-9', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:web-frameworks:servlet-5-tomcat-10', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:servlet-5-tomcat-10', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:servlet-5-tomcat-10', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:web-frameworks:servlet-5-jetty-11', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:servlet-5-undertow-2', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:servlet-5-undertow-2', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:servlet-5-undertow-2', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:web-frameworks:servlet-6-tomcat-11', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:servlet-6-tomcat-11', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#    uses: ./.github/workflows/template.yml
-#    with:
-#      os: ${{ matrix.config.os }}
-#      preset: ${{ matrix.config.preset }}
-#      javaVersion: ${{ matrix.envVersions.javaVersion }}
-#      distribution: ${{ matrix.envVersions.distribution }}
-#      testModule: ${{ matrix.envVersions.testModule }}
-#      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
-#      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
-#  web-framework-tests:
-#    needs: build-agent
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        config:
-#          - { os: ubuntu-latest, preset: linuxX64 }
-#          - { os: windows-latest, preset: mingwX64 }
-#          - { os: macos-12, preset: macosX64 }
-#        envVersions:
-#          # Spring 1.5.22 (Only Spring MVC, WebFlux appears from 2.X version of Spring Boot)
-#          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 8.0, distribution: 'temurin', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 8.0, distribution: 'zulu', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 17.0, distribution: 'temurin', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 17.0, distribution: 'zulu', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 17.0, distribution: 'oracle', gradleVersion: '7.4.2' }
-#
-#          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-tomcat', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-tomcat', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#
-#          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-undertow', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-undertow', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#
-#          # Spring MVC 2.7.18
-#          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-jetty', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-jetty', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#
-#          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-tomcat', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-tomcat', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-tomcat', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-tomcat', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#
-#          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-undertow', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-undertow', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-undertow', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-undertow', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#
-#          # Spring Webflux 2.7.18
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-jetty', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-jetty', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-tomcat', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-tomcat', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-tomcat', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-tomcat', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-undertow', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-undertow', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-undertow', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-undertow', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 17.0, distribution: 'oracle', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 17.0, distribution: 'temurin', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 17.0, distribution: 'zulu', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#
-#          # Spring MVC 3.1.9
-#          - { testModule: 'tests:web-frameworks:spring-mvc-3.1-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-3.1-tomcat', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-3.1-undertow', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-mvc-3.1-undertow', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#
-#          # Spring Webflux 3.1.9
-#          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-jetty', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-tomcat', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-tomcat', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-undertow', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-undertow', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-netty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-netty', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#
-#          # Apache CXF 3.4
-#          - { testModule: 'tests:web-frameworks:cxf-3.4-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:cxf-3.4-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:cxf-3.4-jetty', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#
-#          # Jersey 2
-#          - { testModule: 'tests:web-frameworks:jersey-2-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-frameworks:jersey-2-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#    uses: ./.github/workflows/template.yml
-#    with:
-#      os: ${{ matrix.config.os }}
-#      preset: ${{ matrix.config.preset }}
-#      javaVersion: ${{ matrix.envVersions.javaVersion }}
-#      distribution: ${{ matrix.envVersions.distribution }}
-#      testModule: ${{ matrix.envVersions.testModule }}
-#      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
-#      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
-#  web-server-tests:
-#    needs: build-agent
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        config:
-#          - { os: ubuntu-latest, preset: linuxX64 }
-#          - { os: windows-latest, preset: mingwX64 }
-#          - { os: macos-12, preset: macosX64 }
-#        envVersions:
-#          # Web Servers:
-#          # Jetty
-#          - { testModule: 'tests:web-servers:jetty-10.0', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-servers:jetty-10.0', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-servers:jetty-10.0', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          # Netty:
-#          - { testModule: 'tests:web-servers:netty-4.1', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-servers:netty-4.1', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-servers:netty-4.1', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-servers:netty-4.1', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          # Tomcat:
-#          - { testModule: 'tests:web-servers:tomcat-10.1', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-servers:tomcat-11.0', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-servers:tomcat-11.0', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          # Undertow:
-#          - { testModule: 'tests:web-servers:undertow-2.3', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-servers:undertow-2.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:web-servers:undertow-2.3', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#    uses: ./.github/workflows/template.yml
-#    with:
-#      os: ${{ matrix.config.os }}
-#      preset: ${{ matrix.config.preset }}
-#      javaVersion: ${{ matrix.envVersions.javaVersion }}
-#      distribution: ${{ matrix.envVersions.distribution }}
-#      testModule: ${{ matrix.envVersions.testModule }}
-#      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
-#      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
-#  http-client-tests:
-#    needs: build-agent
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        config:
-#          - { os: ubuntu-latest, preset: linuxX64 }
-#          - { os: windows-latest, preset: mingwX64 }
-#          - { os: macos-12, preset: macosX64 }
-#        envVersions:
-#          # Http Clients:
-#          # URLConnection
-#          - { testModule: 'tests:http-clients:urlconnection', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:urlconnection', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:urlconnection', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          # Apache HttpClient
-#          - { testModule: 'tests:http-clients:apache-http-client-4.5', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:apache-http-client-4.5', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:apache-http-client-4.5', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:http-clients:apache-http-client-5.3', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:apache-http-client-5.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:apache-http-client-5.3', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          # OkHttp Client
-#          - { testModule: 'tests:http-clients:okhttp-client-3.12', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:okhttp-client-3.12', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:okhttp-client-3.12', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:http-clients:okhttp-client-3.14', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:okhttp-client-3.14', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:okhttp-client-3.14', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:http-clients:okhttp-client-4.12', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:http-clients:okhttp-client-4.12', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:http-clients:okhttp-client-4.12', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          # Spring RestTemplate
-#          - { testModule: 'tests:http-clients:spring-resttemplate-4.3', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:spring-resttemplate-4.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:spring-resttemplate-4.3', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:http-clients:spring-resttemplate-5.3', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:spring-resttemplate-5.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:spring-resttemplate-5.3', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          # Spring WebClient
-#          - { testModule: 'tests:http-clients:spring-webclient-5.3', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:spring-webclient-5.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:spring-webclient-5.3', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:http-clients:spring-webclient-6.1', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:http-clients:spring-webclient-6.1', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#          # Feign Client
-#          - { testModule: 'tests:http-clients:feign-client-13', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:http-clients:feign-client-13', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
-#          - { testModule: 'tests:http-clients:feign-client-13', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
-#    uses: ./.github/workflows/template.yml
-#    with:
-#      os: ${{ matrix.config.os }}
-#      preset: ${{ matrix.config.preset }}
-#      javaVersion: ${{ matrix.envVersions.javaVersion }}
-#      distribution: ${{ matrix.envVersions.distribution }}
-#      testModule: ${{ matrix.envVersions.testModule }}
-#      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
-#      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
-#  async-communication-tests:
-#    needs: build-agent
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        config:
-#          - { os: ubuntu-latest, preset: linuxX64 }
-#          - { os: windows-latest, preset: mingwX64 }
-#          - { os: macos-12, preset: macosX64 }
-#        envVersions:
-#          # Async Communication
-#          # sReactor
-#          - { testModule: 'tests:async:reactor-3.5', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:async:reactor-3.5', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:async:reactor-3.6', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:async:reactor-3.6', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#    uses: ./.github/workflows/template.yml
-#    with:
-#      os: ${{ matrix.config.os }}
-#      preset: ${{ matrix.config.preset }}
-#      javaVersion: ${{ matrix.envVersions.javaVersion }}
-#      distribution: ${{ matrix.envVersions.distribution }}
-#      testModule: ${{ matrix.envVersions.testModule }}
-#      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
-#      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
+  build-agent:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+          - { os: windows-latest, preset: mingwX64 }
+          - { os: macos-12, preset: macosX64 }
+    runs-on: ${{ matrix.config.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: 8.0
+          distribution: 'corretto'
+      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
+        run: chmod +x ${{ github.workspace }}/gradlew
+      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
+        run: chmod +x ${{ github.workspace }}/setup-shared-libs.sh
+      - if: matrix.config.preset == 'linuxX64'
+        run: sudo apt-get install -y libtinfo5
+      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
+        run: ${{ github.workspace }}/setup-shared-libs.sh
+      - if: matrix.config.preset == 'mingwX64'
+        run: ${{ github.workspace }}/setup-shared-libs.bat
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 7.4.2
+      - run: gradle :test-agent:runtimeJar :test-agent:build
+      - name: Upload agent binary
+        uses: actions/upload-artifact@master
+        with:
+          name: agent-binary-${{matrix.config.preset}}
+          path: |
+            test-agent/build/bin/**/*.dll
+            test-agent/build/bin/**/*.so
+            test-agent/build/bin/**/*.dylib
+      - name: Upload agent jar
+        uses: actions/upload-artifact@master
+        with:
+          name: agent-jar-${{matrix.config.preset}}
+          path: test-agent/build/libs/drill-runtime.jar
+  servlet-tests:
+    needs: build-agent
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+          - { os: windows-latest, preset: mingwX64 }
+          - { os: macos-12, preset: macosX64 }
+        envVersions:
+          - { testModule: 'tests:web-frameworks:servlet-4-jetty-9', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:servlet-4-jetty-9', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:servlet-4-jetty-9', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:web-frameworks:servlet-4-tomcat-9', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:servlet-4-tomcat-9', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:servlet-4-tomcat-9', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:web-frameworks:servlet-5-tomcat-10', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:servlet-5-tomcat-10', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:servlet-5-tomcat-10', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:web-frameworks:servlet-5-jetty-11', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:servlet-5-undertow-2', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:servlet-5-undertow-2', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:servlet-5-undertow-2', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:web-frameworks:servlet-6-tomcat-11', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:servlet-6-tomcat-11', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+    uses: ./.github/workflows/template.yml
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
+  web-framework-tests:
+    needs: build-agent
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+          - { os: windows-latest, preset: mingwX64 }
+          - { os: macos-12, preset: macosX64 }
+        envVersions:
+          # Spring 1.5.22 (Only Spring MVC, WebFlux appears from 2.X version of Spring Boot)
+          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 8.0, distribution: 'temurin', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 8.0, distribution: 'zulu', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 17.0, distribution: 'temurin', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 17.0, distribution: 'zulu', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 17.0, distribution: 'oracle', gradleVersion: '7.4.2' }
+
+          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-tomcat', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-tomcat', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+
+          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-undertow', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-1.5-undertow', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+
+          # Spring MVC 2.7.18
+          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-jetty', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-jetty', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+
+          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-tomcat', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-tomcat', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-tomcat', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-tomcat', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+
+          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-undertow', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-undertow', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-undertow', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-2.7-undertow', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+
+          # Spring Webflux 2.7.18
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-jetty', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-jetty', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-tomcat', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-tomcat', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-tomcat', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-tomcat', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-undertow', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-undertow', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-undertow', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-undertow', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 17.0, distribution: 'oracle', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 17.0, distribution: 'temurin', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 17.0, distribution: 'zulu', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-2.7-netty', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+
+          # Spring MVC 3.1.9
+          - { testModule: 'tests:web-frameworks:spring-mvc-3.1-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-3.1-tomcat', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-3.1-undertow', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-mvc-3.1-undertow', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+
+          # Spring Webflux 3.1.9
+          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-jetty', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-tomcat', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-tomcat', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-undertow', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-undertow', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-netty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:spring-webflux-3.1-netty', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+
+          # Apache CXF 3.4
+          - { testModule: 'tests:web-frameworks:cxf-3.4-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:cxf-3.4-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:cxf-3.4-jetty', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+
+          # Jersey 2
+          - { testModule: 'tests:web-frameworks:jersey-2-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-frameworks:jersey-2-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+    uses: ./.github/workflows/template.yml
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
+  web-server-tests:
+    needs: build-agent
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+          - { os: windows-latest, preset: mingwX64 }
+          - { os: macos-12, preset: macosX64 }
+        envVersions:
+          # Web Servers:
+          # Jetty
+          - { testModule: 'tests:web-servers:jetty-10.0', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-servers:jetty-10.0', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-servers:jetty-10.0', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          # Netty:
+          - { testModule: 'tests:web-servers:netty-4.1', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-servers:netty-4.1', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-servers:netty-4.1', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-servers:netty-4.1', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          # Tomcat:
+          - { testModule: 'tests:web-servers:tomcat-10.1', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-servers:tomcat-11.0', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-servers:tomcat-11.0', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          # Undertow:
+          - { testModule: 'tests:web-servers:undertow-2.3', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-servers:undertow-2.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:web-servers:undertow-2.3', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+    uses: ./.github/workflows/template.yml
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
+  http-client-tests:
+    needs: build-agent
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+          - { os: windows-latest, preset: mingwX64 }
+          - { os: macos-12, preset: macosX64 }
+        envVersions:
+          # Http Clients:
+          # URLConnection
+          - { testModule: 'tests:http-clients:urlconnection', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:urlconnection', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:urlconnection', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          # Apache HttpClient
+          - { testModule: 'tests:http-clients:apache-http-client-4.5', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:apache-http-client-4.5', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:apache-http-client-4.5', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:http-clients:apache-http-client-5.3', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:apache-http-client-5.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:apache-http-client-5.3', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          # OkHttp Client
+          - { testModule: 'tests:http-clients:okhttp-client-3.12', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:okhttp-client-3.12', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:okhttp-client-3.12', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:http-clients:okhttp-client-3.14', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:okhttp-client-3.14', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:okhttp-client-3.14', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:http-clients:okhttp-client-4.12', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:http-clients:okhttp-client-4.12', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:http-clients:okhttp-client-4.12', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          # Spring RestTemplate
+          - { testModule: 'tests:http-clients:spring-resttemplate-4.3', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:spring-resttemplate-4.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:spring-resttemplate-4.3', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:http-clients:spring-resttemplate-5.3', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:spring-resttemplate-5.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:spring-resttemplate-5.3', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          # Spring WebClient
+          - { testModule: 'tests:http-clients:spring-webclient-5.3', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:spring-webclient-5.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:spring-webclient-5.3', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:http-clients:spring-webclient-6.1', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:http-clients:spring-webclient-6.1', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+          # Feign Client
+          - { testModule: 'tests:http-clients:feign-client-13', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:http-clients:feign-client-13', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
+          - { testModule: 'tests:http-clients:feign-client-13', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
+    uses: ./.github/workflows/template.yml
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
+  async-communication-tests:
+    needs: build-agent
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+          - { os: windows-latest, preset: mingwX64 }
+          - { os: macos-12, preset: macosX64 }
+        envVersions:
+          # Async Communication
+          # sReactor
+          - { testModule: 'tests:async:reactor-3.5', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:async:reactor-3.5', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:async:reactor-3.6', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:async:reactor-3.6', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+    uses: ./.github/workflows/template.yml
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
   test-framework-tests:
     strategy:
       fail-fast: false
