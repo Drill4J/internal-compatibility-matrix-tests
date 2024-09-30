@@ -43,6 +43,7 @@ class Selenium4Test {
         .apply {
             withExposedPorts(8080)
             portBindings = listOf("8093:8080")
+            withAccessToHost(true)
         }
 
     @BeforeEach
@@ -69,7 +70,7 @@ class Selenium4Test {
         driver = ChromeDriver(ChromeOptions().apply {
             addArguments("--remote-debugging-port=$debuggerPort")
             addArguments("--disable-search-engine-choice-screen")
-            addArguments("--headless")
+            addArguments("--headless=new")
             setCapability("browserVersion", "127")
         })
 
@@ -83,12 +84,11 @@ class Selenium4Test {
     }
 
     @Test
-    @Disabled
     fun `given Chrome latest version, Selenium transformer should add Drill headers to requests`() {
         driver = ChromeDriver(ChromeOptions().apply {
             addArguments("--remote-debugging-port=$debuggerPort")
             addArguments("--disable-search-engine-choice-screen")
-            addArguments("--headless")
+            addArguments("--headless=new")
         })
 
         driver.get("http://localhost:$PORT/")
