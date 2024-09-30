@@ -61,6 +61,8 @@ jobs:
         with:
           gradle-version: ${{ inputs.gradleVersion }}
       - name: Run tests
+        env:
+          GH_USER_TOKEN: ${{ secrets.GH_USER_TOKEN }}
         run: gradle ${{ inputs.testModule }}:check "-Dtest-agent.binaries=${{ github.workspace }}/agent" --info
       - name: Upload test report
         if: failure() && inputs.testReport != ''
