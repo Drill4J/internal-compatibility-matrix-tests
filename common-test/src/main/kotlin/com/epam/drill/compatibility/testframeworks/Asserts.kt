@@ -58,7 +58,11 @@ infix fun List<TestInfo>.shouldContainsAllTests(expected: Collection<TestData>):
  * and there was a drill context in the current client thread.
  */
 fun isThereDrillContext(): Boolean {
-    return StubAdminClient.getEchoHeaders()
+    return isThereDrillContext { StubAdminClient.getEchoHeaders() }
+}
+
+fun isThereDrillContext(clientCall: () -> Map<String, String>): Boolean {
+    return clientCall()
         .mapKeys { it.key.lowercase() }
         .containsKey("drill-test-id")
 }

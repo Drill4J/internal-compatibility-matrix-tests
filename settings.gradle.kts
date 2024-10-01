@@ -121,3 +121,5 @@ include("tests:test-frameworks:testng-6.1")
 include("tests:test-frameworks:testng-7.4")
 //Selenium
 include("tests:test-frameworks:selenium-4")
+//Rest Assured
+include("tests:test-frameworks:rest-assured-5.3")

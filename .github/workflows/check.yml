@@ -342,6 +342,9 @@ jobs:
           # Selenium 4
           - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2', testReport: 'tests/test-frameworks/selenium-4' }
           - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2', testReport: 'tests/test-frameworks/selenium-4' }
+          # RestAssured 5.3
+          - { testModule: 'tests:test-frameworks:rest-assured-5.3', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2'}
+          - { testModule: 'tests:test-frameworks:rest-assured-5.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2'}
     uses: ./.github/workflows/template.yml
     with:
       os: ${{ matrix.config.os }}
