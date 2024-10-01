@@ -45,6 +45,13 @@ kotlin {
                 }
             }
         }
+        macosArm64(configure = configureNativeTarget).apply {
+            if (macosLd64.toBoolean()) {
+                binaries.all {
+                    linkerOpts("-ld64")
+                }
+            }
+        }
         mingwX64(configure = configureNativeTarget).apply {
             binaries.all {
                 linkerOpts("-lpsapi", "-lwsock32", "-lws2_32", "-lmswsock")
@@ -71,6 +78,7 @@ kotlin {
         val mingwX64Main by getting(configuration = configureNativeMainDependencies)
         val linuxX64Main by getting(configuration = configureNativeMainDependencies)
         val macosX64Main by getting(configuration = configureNativeMainDependencies)
+        val macosArm64Main by getting(configuration = configureNativeMainDependencies)
     }
     tasks {
         val filterOutCurrentPlatform: (KotlinNativeTarget) -> Boolean = {

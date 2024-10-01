@@ -29,6 +29,7 @@ jobs:
           - { os: ubuntu-latest, preset: linuxX64 }
           - { os: windows-latest, preset: mingwX64 }
           - { os: macos-12, preset: macosX64 }
+          - { os: macos-14, preset: macosArm64 }
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v3
@@ -36,13 +37,13 @@ jobs:
         with:
           java-version: 8.0
           distribution: 'corretto'
-      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
+      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64' || matrix.config.preset == 'macosArm64'
         run: chmod +x ${{ github.workspace }}/gradlew
-      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
+      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64' || matrix.config.preset == 'macosArm64'
         run: chmod +x ${{ github.workspace }}/setup-shared-libs.sh
       - if: matrix.config.preset == 'linuxX64'
         run: sudo apt-get install -y libtinfo5
-      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64'
+      - if: matrix.config.preset == 'linuxX64' || matrix.config.preset == 'macosX64' || matrix.config.preset == 'macosArm64'
         run: ${{ github.workspace }}/setup-shared-libs.sh
       - if: matrix.config.preset == 'mingwX64'
         run: ${{ github.workspace }}/setup-shared-libs.bat
@@ -70,9 +71,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { os: ubuntu-latest, preset: linuxX64 }
-          - { os: windows-latest, preset: mingwX64 }
-          - { os: macos-12, preset: macosX64 }
+#          - { os: ubuntu-latest, preset: linuxX64 }
+#          - { os: windows-latest, preset: mingwX64 }
+#          - { os: macos-12, preset: macosX64 }
+          - { os: macos-14, preset: macosArm64 }
         envVersions:
           - { testModule: 'tests:web-frameworks:servlet-4-jetty-9', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-4-jetty-9', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
@@ -104,9 +106,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { os: ubuntu-latest, preset: linuxX64 }
-          - { os: windows-latest, preset: mingwX64 }
-          - { os: macos-12, preset: macosX64 }
+#          - { os: ubuntu-latest, preset: linuxX64 }
+#          - { os: windows-latest, preset: mingwX64 }
+#          - { os: macos-12, preset: macosX64 }
+          - { os: macos-14, preset: macosArm64 }
         envVersions:
           # Spring 1.5.22 (Only Spring MVC, WebFlux appears from 2.X version of Spring Boot)
           - { testModule: 'tests:web-frameworks:spring-mvc-1.5-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
@@ -202,9 +205,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { os: ubuntu-latest, preset: linuxX64 }
-          - { os: windows-latest, preset: mingwX64 }
-          - { os: macos-12, preset: macosX64 }
+#          - { os: ubuntu-latest, preset: linuxX64 }
+#          - { os: windows-latest, preset: mingwX64 }
+#          - { os: macos-12, preset: macosX64 }
+          - { os: macos-14, preset: macosArm64 }
         envVersions:
           # Web Servers:
           # Jetty
@@ -239,9 +243,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { os: ubuntu-latest, preset: linuxX64 }
-          - { os: windows-latest, preset: mingwX64 }
-          - { os: macos-12, preset: macosX64 }
+#          - { os: ubuntu-latest, preset: linuxX64 }
+#          - { os: windows-latest, preset: mingwX64 }
+#          - { os: macos-12, preset: macosX64 }
+          - { os: macos-14, preset: macosArm64 }
         envVersions:
           # Http Clients:
           # URLConnection
@@ -297,9 +302,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { os: ubuntu-latest, preset: linuxX64 }
-          - { os: windows-latest, preset: mingwX64 }
-          - { os: macos-12, preset: macosX64 }
+#          - { os: ubuntu-latest, preset: linuxX64 }
+#          - { os: windows-latest, preset: mingwX64 }
+#          - { os: macos-12, preset: macosX64 }
+          - { os: macos-14, preset: macosArm64 }
         envVersions:
           # Async Communication
           # sReactor

@@ -1,14 +1,13 @@
 rootProject.name = "internal-compatibility-matrix-tests"
 
 pluginManagement {
-    val kotlinVersion = System.getenv("kotlinVersion") ?: "1.6.0"
-    val kotlinMultiplatformVersion: String by extra
+    val kotlinVersion: String by extra
     val shadowPluginVersion: String by extra
     val licenseVersion: String by extra
 
     plugins {
         kotlin("jvm") version kotlinVersion
-        kotlin("multiplatform") version kotlinMultiplatformVersion
+        kotlin("multiplatform") version kotlinVersion
         kotlin("plugin.serialization") version kotlinVersion
 
         id("com.github.johnrengelman.shadow") version shadowPluginVersion
