@@ -29,7 +29,6 @@ dependencies {
     compileOnly("org.simpleframework:simple-http:6.0.1")
 
     compileOnly(kotlin("test-junit"))
-    compileOnly(project(":common"))
 
     api("org.jetbrains.kotlinx:kotlinx-serialization-core:$kotlinxSerializationVersion")
     api("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
