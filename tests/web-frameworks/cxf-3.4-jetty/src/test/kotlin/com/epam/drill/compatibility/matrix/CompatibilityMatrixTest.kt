@@ -15,7 +15,7 @@
  */
 package com.epam.drill.compatibility.matrix
 
-import com.epam.drill.test.compatibility.SimpleJaxRs2Service
+import com.epam.test.drill.compatibility.SimpleJaxRs2Service
 import mu.KotlinLogging
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean
 import org.junit.AfterClass

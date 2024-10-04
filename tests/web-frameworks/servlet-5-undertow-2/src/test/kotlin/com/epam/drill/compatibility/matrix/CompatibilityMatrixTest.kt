@@ -15,7 +15,7 @@
  */
 package com.epam.drill.compatibility.matrix
 
-import com.epam.drill.test.compatibility.SimpleHttpServlet5
+import com.epam.test.drill.compatibility.SimpleHttpServlet5
 import io.undertow.Handlers
 import io.undertow.Undertow
 import io.undertow.servlet.Servlets

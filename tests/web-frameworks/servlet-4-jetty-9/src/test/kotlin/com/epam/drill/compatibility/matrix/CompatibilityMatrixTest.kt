@@ -15,7 +15,7 @@
  */
 package com.epam.drill.compatibility.matrix
 
-import com.epam.drill.test.compatibility.SimpleHttpServlet4
+import com.epam.test.drill.compatibility.SimpleHttpServlet4
 import mu.KotlinLogging
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
@@ -31,6 +31,8 @@ class CompatibilityMatrixTest: CleanServerMatrixTest() {
     override fun withHttpServer(block: (String) -> Unit) {
         block("http://localhost:${server.port}/")
     }
+
+    override fun getClassUnderTest(): Class<*> = SimpleHttpServlet4::class.java
 
     companion object {
         private lateinit var server: Server

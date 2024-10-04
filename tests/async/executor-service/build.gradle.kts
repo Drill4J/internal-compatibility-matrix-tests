@@ -19,7 +19,6 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
-    testImplementation(project(":common"))
 }
 
 license {

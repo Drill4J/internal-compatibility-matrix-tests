@@ -15,8 +15,8 @@
  */
 package com.epam.drill.compatibility.matrix
 
-import com.epam.drill.test.compatibility.AsyncApplication
-import com.epam.drill.test.compatibility.SimpleAsyncService
+import com.epam.test.drill.compatibility.AsyncApplication
+import com.epam.test.drill.compatibility.SimpleAsyncService
 import org.junit.jupiter.params.aggregator.AggregateWith
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired

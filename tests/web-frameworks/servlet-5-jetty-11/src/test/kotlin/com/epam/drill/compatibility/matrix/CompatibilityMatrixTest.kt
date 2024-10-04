@@ -15,7 +15,7 @@
  */
 package com.epam.drill.compatibility.matrix
 
-import com.epam.drill.test.compatibility.SimpleHttpServlet5
+import com.epam.test.drill.compatibility.SimpleHttpServlet5
 import mu.KotlinLogging
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector

@@ -19,25 +19,9 @@ dependencies {
     testImplementation("org.testng:testng:7.4.0")
 }
 
-val drillAutotestAgentVersion: String by parent!!.extra
-
 tasks {
     test {
         useTestNG()
-
-        systemProperties("sessionId" to "testng-7.4")
-        environment("host" to rootProject.extra["testsAdminStubServerHost"])
-        environment("port" to rootProject.extra["testsAdminStubServerPort"])
-        dependsOn(":stub-server:serverStart")
-    }
-}
-
-drill {
-    apiUrl = "http://" + rootProject.extra["testsAdminStubServerHost"] as String + ":" + rootProject.extra["testsAdminStubServerPort"] as Int + "/api"
-    groupId = "drill-tests"
-    enableTestAgent {
-        version = drillAutotestAgentVersion
-        additionalParams = mapOf("sessionId" to "testng-7.4")
     }
 }
 

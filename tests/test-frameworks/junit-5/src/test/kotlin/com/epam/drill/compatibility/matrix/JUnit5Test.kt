@@ -15,8 +15,9 @@ package com.epam.drill.compatibility.matrix
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import com.epam.drill.compatibility.testframeworks.ExpectedTests
+import com.epam.drill.compatibility.testframeworks.isThereDrillContext
 import com.epam.drill.compatibility.stubs.TestResult
-import com.epam.drill.compatibility.testframeworks.*
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeAll

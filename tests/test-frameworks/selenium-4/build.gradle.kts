@@ -14,7 +14,6 @@ repositories {
 }
 
 val logbackVersion: String by parent!!.extra
-val drillAutotestAgentVersion: String by parent!!.extra
 val junitVersion: String = "5.10.0"
 val testcontainersVersion: String = "1.19.8"
 val mockserverVersion: String = "5.15.0"
@@ -37,19 +36,14 @@ dependencies {
 tasks {
     test {
         useJUnitPlatform()
-
-        environment("host" to rootProject.extra["testsAdminStubServerHost"])
-        environment("port" to rootProject.extra["testsAdminStubServerPort"])
-        dependsOn(":stub-server:serverStart")
     }
 }
 
+val drillTestAgentVersion: String by extra
 drill {
-    apiUrl =
-        "http://" + rootProject.extra["testsAdminStubServerHost"] as String + ":" + rootProject.extra["testsAdminStubServerPort"] as Int + "/api"
-    groupId = "drill-tests"
+    groupId = "drill-compatibility-tests"
     enableTestAgent {
-        version = drillAutotestAgentVersion
+        version = drillTestAgentVersion
         additionalParams = mapOf(
             "devToolsProxyAddress" to "http://localhost:8093",
             "withJsCoverage" to "false",
