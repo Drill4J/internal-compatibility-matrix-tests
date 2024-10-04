@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.epam.drill.compatibility.stubs.AddTestsPayload
-import com.epam.drill.compatibility.stubs.ServerData
-import com.epam.drill.compatibility.stubs.SessionIdPayload
-import com.epam.drill.compatibility.stubs.SessionPayload
+import com.epam.drill.compatibility.stubs.*
 import com.sun.net.httpserver.*
 import kotlinx.serialization.json.Json
 import java.net.*
@@ -71,6 +68,30 @@ class StubAdminServer(
             httpExchange.put {
                 val request = httpExchange.requestBody.reader().readText()
                 storage.addSession(json.decodeFromString(SessionPayload.serializer(), request))
+                sendOk()
+            }
+        }
+        httpServer.createContext("/api/data-ingest/instances") { httpExchange ->
+            httpExchange.put {
+                val request = httpExchange.requestBody.reader().readText()
+                storage.addInstance(json.decodeFromString(InstancePayload.serializer(), request))
+                sendOk()
+            }
+        }
+        httpServer.createContext("/api/data-ingest/builds") { httpExchange ->
+            httpExchange.put {
+                sendOk()
+            }
+        }
+        httpServer.createContext("/api/data-ingest/coverage") { httpExchange ->
+            httpExchange.post {
+                val request = httpExchange.requestBody.reader().readText()
+                storage.addCoverage(json.decodeFromString(CoveragePayload.serializer(), request))
+                sendOk()
+            }
+        }
+        httpServer.createContext("/api/data-ingest/methods") { httpExchange ->
+            httpExchange.put {
                 sendOk()
             }
         }

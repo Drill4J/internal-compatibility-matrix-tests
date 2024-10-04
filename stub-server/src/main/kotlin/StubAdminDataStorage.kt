@@ -13,33 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.epam.drill.compatibility.stubs.AddTestsPayload
-import com.epam.drill.compatibility.stubs.ServerData
-import com.epam.drill.compatibility.stubs.SessionPayload
-import com.epam.drill.compatibility.stubs.TestInfo
+import com.epam.drill.compatibility.stubs.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentLinkedQueue
 
 class StubAdminDataStorage {
-    private val sessions = ConcurrentLinkedQueue<SessionPayload>()
-    private val tests = ConcurrentHashMap<String, List<TestInfo>>()
+    private val data = ServerData(ConcurrentHashMap(), ConcurrentHashMap(), ConcurrentHashMap(), ConcurrentHashMap())
 
     fun addTestsMetadata(testsMetadata: AddTestsPayload) {
-        tests.compute(testsMetadata.sessionId) { _, oldValue ->
-            if (oldValue != null)
-                oldValue + testsMetadata.tests
-            else
-                testsMetadata.tests
+        val sessionTests = data.tests.computeIfAbsent(testsMetadata.sessionId) { ConcurrentHashMap() }
+        testsMetadata.tests.forEach { testInfo ->
+            sessionTests[testInfo.id] = testInfo
         }
     }
 
     fun addSession(sessionPayload: SessionPayload) {
-        sessions.add(sessionPayload)
+        data.sessions[sessionPayload.id] = sessionPayload
     }
 
-    fun getData() = ServerData(tests, sessions.toList())
+    fun addInstance(instancePayload: InstancePayload) {
+        data.instances[instancePayload.instanceId] = instancePayload
+    }
+
+    fun addCoverage(coveragePayload: CoveragePayload) {
+        val instanceData = data.coverage.computeIfAbsent(coveragePayload.instanceId) { ConcurrentHashMap() }
+        coveragePayload.coverage.forEach { coverage ->
+            val testData = instanceData.computeIfAbsent(coverage.testId) { ConcurrentHashMap() }
+            val classProbes = testData.computeIfAbsent(coverage.classname) { BooleanArray(coverage.probes.size) }
+            classProbes.forEachIndexed { index, probe ->
+                classProbes[index] = probe || coverage.probes[index]
+            }
+        }
+    }
+
+    fun getData() = data
 
     fun clearSession(sessionId: String) {
-        tests.remove(sessionId)
+        data.tests.remove(sessionId)
     }
 }

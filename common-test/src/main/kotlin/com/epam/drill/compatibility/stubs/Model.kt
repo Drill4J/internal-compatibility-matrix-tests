@@ -17,10 +17,16 @@ package com.epam.drill.compatibility.stubs
 
 import kotlinx.serialization.Serializable
 
+typealias ClassProbes = MutableMap<String, BooleanArray>
+typealias TestCoverageMap = MutableMap<String, ClassProbes>
+typealias TestMap = MutableMap<String, TestInfo>
+
 @Serializable
 data class ServerData(
-    val tests: Map<String, List<TestInfo>>,
-    val sessions: List<SessionPayload>,
+    val sessions: MutableMap<String, SessionPayload>,
+    val tests: MutableMap<String, TestMap>,
+    val instances: MutableMap<String, InstancePayload>,
+    val coverage: MutableMap<String, TestCoverageMap>,
 )
 
 data class TestData(
@@ -91,4 +97,26 @@ class SessionPayload(
 @Serializable
 data class SessionIdPayload(
     val sessionId: String
+)
+
+@Serializable
+class CoveragePayload(
+    val instanceId: String,
+    val coverage: Array<SingleClassCoveragePayload>,
+)
+
+@Serializable
+class SingleClassCoveragePayload(
+    val classname: String,
+    val testId: String,
+    val probes: BooleanArray
+)
+
+@Serializable
+class InstancePayload(
+    val groupId: String,
+    val appId: String,
+    val instanceId: String,
+    val commitSha: String?,
+    val buildVersion: String?,
 )

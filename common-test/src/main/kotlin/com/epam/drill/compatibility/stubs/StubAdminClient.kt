@@ -42,15 +42,47 @@ object StubAdminClient {
     }
 
     fun pollTests(sessionId: String, expectedTests: Int): List<TestInfo> {
+        val data = pollData { (it.tests[sessionId]?.size ?: 0) >= expectedTests }
+        return data.tests[sessionId]?.values?.toList() ?: emptyList()
+    }
+
+    fun pollCoverage(instanceId: String?, testId: String, classId: String): BooleanArray {
+        return if (instanceId != null) {
+            pollCoverageByInstance(instanceId, testId, classId)
+        } else {
+            pollCoverageByTest(testId, classId)
+        }
+    }
+
+    fun pollCoverageByInstance(instanceId: String, testId: String, classId: String): BooleanArray {
+        val hasProbesByInstanceAndTestAndClass: (ServerData) -> Boolean = { data ->
+            data.coverage[instanceId]?.get(testId)?.get(classId)?.isNotEmpty() ?: false
+        }
+        val data = pollData { hasProbesByInstanceAndTestAndClass(it) }
+        return data.coverage[instanceId]?.get(testId)?.get(classId) ?: BooleanArray(0)
+    }
+
+    fun pollCoverageByTest(testId: String, classId: String): BooleanArray {
+        val hasProbesByTestAndClass: (TestCoverageMap) -> Boolean = { testMap ->
+            testMap[testId]?.get(classId)?.isNotEmpty() ?: false
+        }
+        val hasProbesByInstanceAndTestAndClass: (ServerData) -> Boolean = { data ->
+            data.coverage.values.any { hasProbesByTestAndClass(it) }
+        }
+        val data = pollData { hasProbesByInstanceAndTestAndClass(it) }
+        return data.coverage.values.find { hasProbesByTestAndClass(it) }?.get(testId)?.get(classId) ?: BooleanArray(0)
+    }
+
+    private fun pollData(expectedDataHasArrived:  (ServerData) -> Boolean): ServerData {
         var stubData = getStubData()
         val startTime = System.currentTimeMillis()
         val isTimeUp: () -> Boolean = { System.currentTimeMillis() - startTime > timeout }
-        val allExpectedTestsFinished: () -> Boolean = { (stubData.tests[sessionId]?.size ?: 0) >= expectedTests }
-        while (!isTimeUp() && !allExpectedTestsFinished()) {
+        while (!isTimeUp() && !expectedDataHasArrived(stubData)) {
             Thread.sleep(100)
             stubData = getStubData()
         }
-        return stubData.tests[sessionId] ?: emptyList()
+        println(stubData)
+        return stubData
     }
 
     fun getEchoHeaders(): Map<String, String> {
