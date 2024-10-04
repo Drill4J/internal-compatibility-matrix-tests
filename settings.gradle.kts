@@ -1,7 +1,7 @@
 rootProject.name = "internal-compatibility-matrix-tests"
 
 pluginManagement {
-    val kotlinVersion = System.getenv("kotlinVersion") ?: "1.6.0"
+    val kotlinVersion = System.getenv("kotlinVersion") ?: "1.9.20"
     val kotlinMultiplatformVersion: String by extra
     val shadowPluginVersion: String by extra
     val licenseVersion: String by extra
@@ -10,7 +10,6 @@ pluginManagement {
 
     plugins {
         kotlin("jvm") version kotlinVersion
-        kotlin("multiplatform") version kotlinMultiplatformVersion
         kotlin("plugin.serialization") version kotlinVersion
 
         id("com.github.johnrengelman.shadow") version shadowPluginVersion
@@ -26,21 +25,7 @@ pluginManagement {
     }
 }
 
-val sharedLibsLocalPath: String by extra
-val includeSharedLib: Settings.(String) -> Unit = {
-    include(it)
-    project(":$it").projectDir = file(sharedLibsLocalPath).resolve(it)
-}
-
-includeSharedLib("logging-native")
-includeSharedLib("knasm")
-includeSharedLib("jvmapi")
-includeSharedLib("common")
-includeSharedLib("logging")
-includeSharedLib("agent-instrumentation")
-
 include("common-test")
-include("test-agent")
 include("stub-server")
 
 //Tests
