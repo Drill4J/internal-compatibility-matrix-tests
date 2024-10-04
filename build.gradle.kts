@@ -45,8 +45,7 @@ subprojects {
             buildVersion = project.version.toString()
             packagePrefixes = arrayOf("com/epam/test/drill/compatibility")
             enableAppAgent {
-//        version = drillAppAgentVersion
-                zipPath = "C:\\projects\\epam\\drill4j\\java-agent\\build\\distributions\\java-agent\\mingwX64-0.9.3.zip"
+                version = drillAppAgentVersion
             }
         }
     }
