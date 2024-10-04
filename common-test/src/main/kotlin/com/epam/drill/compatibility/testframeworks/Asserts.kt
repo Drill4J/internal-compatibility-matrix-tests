@@ -20,6 +20,10 @@ import com.epam.drill.compatibility.stubs.TestData
 import com.epam.drill.compatibility.stubs.TestInfo
 import java.lang.reflect.Field
 
+const val DRILL_TEST_ID = "drill-test-id"
+const val DRILL_SESSION_ID = "drill-session-id"
+const val TEST_CONTEXT_NONE = "TEST_CONTEXT_NONE"
+
 fun TestInfo.toTestData(): TestData = TestData(
     testClass = this.details.path,
     testName = this.details.testName,
@@ -65,5 +69,10 @@ fun isThereDrillContext(clientCall: () -> Map<String, String>): Boolean {
     return clientCall()
         .mapKeys { it.key.lowercase() }
         .containsKey("drill-test-id")
+}
+
+fun isTestCoveredCode(instanceId: String?, testId: String, classUnderTest: Class<*>): Boolean {
+    val className = classUnderTest.name.replace(".", "/")
+    return StubAdminClient.pollCoverage(instanceId, testId, className).isNotEmpty()
 }
 
