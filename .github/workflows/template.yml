@@ -32,6 +32,11 @@ jobs:
     runs-on: ${{ inputs.os }}
     steps:
       - uses: actions/checkout@v3
+      - name: Restore Drill4J cache
+        uses: actions/cache@v2
+        with:
+          path: $HOME/.drill
+          key: drill-cache-${{ runner.os }}
       - name: Download agent binary
         uses: actions/download-artifact@v4
         with:
@@ -54,6 +59,11 @@ jobs:
           gradle-version: ${{ inputs.gradleVersion }}
       - name: Run tests
         run: gradle ${{ inputs.testModule }}:check "-Dtest-agent.binaries=${{ github.workspace }}/agent" --info
+      - name: Update Drill4J cache
+        uses: actions/cache@v2
+        with:
+          path: $HOME/.drill
+          key: drill-cache-${{ runner.os }}
       - name: Upload test report
         if: failure() && inputs.testReport != ''
         uses: actions/upload-artifact@v3
