@@ -40,14 +40,6 @@ jobs:
           merge-multiple: true
       - if: inputs.preset == 'linuxX64' || inputs.preset == 'macosX64'
         run: chmod +x ${{ github.workspace }}/gradlew
-      - if: inputs.preset == 'linuxX64' || inputs.preset == 'macosX64'
-        run: chmod +x ${{ github.workspace }}/setup-shared-libs.sh
-      - if: inputs.preset == 'linuxX64'
-        run: sudo apt-get install -y libtinfo5
-      - if: inputs.preset == 'linuxX64' || inputs.preset == 'macosX64'
-        run: ${{ github.workspace }}/setup-shared-libs.sh
-      - if: inputs.preset == 'mingwX64'
-        run: ${{ github.workspace }}/setup-shared-libs.bat
       - name: Set-up kotlin version
         if: inputs.javaVersion == '21' || inputs.kotlinVersion != ''
         run: echo "kotlinVersion=${{ inputs.kotlinVersion }}" >> $GITHUB_ENV
