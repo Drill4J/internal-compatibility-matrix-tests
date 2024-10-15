@@ -37,6 +37,8 @@ jobs:
         with:
           name: drill-agents
           path: ~/.drill
+      - name: List .drill files
+        run: ls ~/.drill/agents
       - name: Set-up kotlin version
         if: inputs.javaVersion == '21' || inputs.kotlinVersion != ''
         run: echo "kotlinVersion=${{ inputs.kotlinVersion }}" >> $GITHUB_ENV
