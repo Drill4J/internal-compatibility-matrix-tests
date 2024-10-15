@@ -35,7 +35,7 @@ jobs:
       - name: Download .drill folder
         uses: actions/download-artifact@v4
         with:
-          name: drill-agents
+          name: drill-agents-${{ inputs.os }}
           path: ~/.drill/agents
       - name: List .drill files
         run: ls ~/.drill/agents
