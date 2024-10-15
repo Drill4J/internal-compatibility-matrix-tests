@@ -23,6 +23,24 @@ on:
 env:
   GH_USER_TOKEN: ${{ secrets.GH_USER_TOKEN }}
 jobs:
+  download-agents:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: 17.0
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 7.4.2
+      - name: Download Drill4J Agents
+        run: gradle drillDownloadAgents
+      - name: Update Drill4J cache
+        uses: actions/cache@v2
+        with:
+          path: $HOME/.drill
+          key: drill-cache
   servlet-tests:
     strategy:
       fail-fast: false
@@ -48,6 +66,7 @@ jobs:
           - { testModule: 'tests:web-frameworks:servlet-6-tomcat-11', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:servlet-6-tomcat-11', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
     uses: ./.github/workflows/template.yml
+    needs: download-agents
     with:
       os: ${{ matrix.config.os }}
       preset: ${{ matrix.config.preset }}
@@ -145,6 +164,7 @@ jobs:
           - { testModule: 'tests:web-frameworks:jersey-2-jetty', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-frameworks:jersey-2-jetty', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
     uses: ./.github/workflows/template.yml
+    needs: download-agents
     with:
       os: ${{ matrix.config.os }}
       preset: ${{ matrix.config.preset }}
@@ -181,6 +201,7 @@ jobs:
           - { testModule: 'tests:web-servers:undertow-2.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:web-servers:undertow-2.3', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
     uses: ./.github/workflows/template.yml
+    needs: download-agents
     with:
       os: ${{ matrix.config.os }}
       preset: ${{ matrix.config.preset }}
@@ -238,6 +259,7 @@ jobs:
           - { testModule: 'tests:http-clients:feign-client-13', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2', kotlinVersion: '1.9.20' }
           - { testModule: 'tests:http-clients:feign-client-13', javaVersion: 21.0, distribution: 'corretto', gradleVersion: '8.5', kotlinVersion: '1.9.20' }
     uses: ./.github/workflows/template.yml
+    needs: download-agents
     with:
       os: ${{ matrix.config.os }}
       preset: ${{ matrix.config.preset }}
@@ -262,6 +284,7 @@ jobs:
           - { testModule: 'tests:async:reactor-3.6', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
           - { testModule: 'tests:async:reactor-3.6', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
     uses: ./.github/workflows/template.yml
+    needs: download-agents
     with:
       os: ${{ matrix.config.os }}
       preset: ${{ matrix.config.preset }}
@@ -298,6 +321,7 @@ jobs:
           - { testModule: 'tests:test-frameworks:rest-assured-5.3', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2'}
           - { testModule: 'tests:test-frameworks:rest-assured-5.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2'}
     uses: ./.github/workflows/template.yml
+    needs: download-agents
     with:
       os: ${{ matrix.config.os }}
       preset: ${{ matrix.config.preset }}
