@@ -36,7 +36,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: drill-agents
-          path: $HOME/.drill
+          path: ~/.drill
       - name: Set-up kotlin version
         if: inputs.javaVersion == '21' || inputs.kotlinVersion != ''
         run: echo "kotlinVersion=${{ inputs.kotlinVersion }}" >> $GITHUB_ENV
