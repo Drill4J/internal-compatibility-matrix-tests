@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Download .drill folder
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: drill-agents
           path: $HOME/.drill
