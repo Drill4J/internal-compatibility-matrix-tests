@@ -43,11 +43,6 @@ jobs:
           name: drill-agents
           path: ~/.drill/**/*
           if-no-files-found: error
-      - name: Update Drill4J cache
-        uses: actions/cache@v2
-        with:
-          path: $HOME/.drill
-          key: drill-cache
   servlet-tests:
     strategy:
       fail-fast: false
