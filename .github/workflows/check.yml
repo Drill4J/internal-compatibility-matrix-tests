@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: drill-agents
-          path: ~/.drill
+          path: ~/.drill/agents
           if-no-files-found: error
   servlet-tests:
     strategy:

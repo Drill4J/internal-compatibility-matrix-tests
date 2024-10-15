@@ -36,7 +36,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: drill-agents
-          path: ~/.drill
+          path: ~/.drill/agents
       - name: List .drill files
         run: ls ~/.drill/agents
       - name: Set-up kotlin version
