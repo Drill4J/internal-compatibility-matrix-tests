@@ -37,6 +37,11 @@ jobs:
           gradle-version: 7.4.2
       - name: Download Drill4J Agents
         run: gradle drillDownloadAgents
+      - name: Upload .drill folder as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: drill-agents
+          path: $HOME/.drill
       - name: Update Drill4J cache
         uses: actions/cache@v2
         with:

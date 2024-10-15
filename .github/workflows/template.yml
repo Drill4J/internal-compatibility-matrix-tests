@@ -32,11 +32,11 @@ jobs:
     runs-on: ${{ inputs.os }}
     steps:
       - uses: actions/checkout@v3
-      - name: Restore Drill4J cache
-        uses: actions/cache@v2
+      - name: Download .drill folder
+        uses: actions/download-artifact@v2
         with:
+          name: drill-agents
           path: $HOME/.drill
-          key: drill-cache
       - name: Set-up kotlin version
         if: inputs.javaVersion == '21' || inputs.kotlinVersion != ''
         run: echo "kotlinVersion=${{ inputs.kotlinVersion }}" >> $GITHUB_ENV
