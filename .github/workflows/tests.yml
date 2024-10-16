@@ -10,6 +10,8 @@ on:
 jobs:
   download-agents:
     runs-on: ${{ matrix.os }}
+    env:
+      GH_USER_TOKEN: ${{ secrets.GH_USER_TOKEN }}
     strategy:
       fail-fast: true
       matrix:
