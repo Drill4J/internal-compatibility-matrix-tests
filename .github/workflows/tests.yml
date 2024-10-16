@@ -63,7 +63,8 @@ jobs:
         id: determine-kotlin
         run: |
           if [[ ${{ matrix.java-version }} -ge 21 ]]; then
-            echo "kotlin-version=1.9.20" >> $GITHUB_ENV                                          
+            echo "kotlin-version=1.9.20" >> $GITHUB_ENV
+          fi
 
       - name: Determine Gradle Version
         id: determine-gradle
@@ -72,6 +73,7 @@ jobs:
             echo "gradle-version=8.5" >> $GITHUB_ENV
           else
             echo "gradle-version=7.4.2" >> $GITHUB_ENV
+          fi
 
       - name: Set-up Gradle ${{ env.gradle-version }}
         uses: gradle/actions/setup-gradle@v3
