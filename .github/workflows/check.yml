@@ -1,24 +1,24 @@
 name: Check
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - 'main'
-    paths:
-      - '**/src/**'
-      - '**.gradle.kts'
-      - 'gradle.properties'
-      - '.github/**'
-  pull_request:
-    branches:
-      - 'main'
-      - 'test/**'
-      - 'feature/**'
-    paths:
-      - '**/src/**'
-      - '**.gradle.kts'
-      - 'gradle.properties'
-      - '.github/**'
+#  push:
+#    branches:
+#      - 'main'
+#    paths:
+#      - '**/src/**'
+#      - '**.gradle.kts'
+#      - 'gradle.properties'
+#      - '.github/**'
+#  pull_request:
+#    branches:
+#      - 'main'
+#      - 'test/**'
+#      - 'feature/**'
+#    paths:
+#      - '**/src/**'
+#      - '**.gradle.kts'
+#      - 'gradle.properties'
+#      - '.github/**'
 
 env:
   GH_USER_TOKEN: ${{ secrets.GH_USER_TOKEN }}

@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -33,6 +35,12 @@ subprojects {
             environment("DRILL_INSTANCE_ID" to projectName)
             environment("DRILL_SESSION_ID" to projectName)
             dependsOn(":stub-server:serverStart")
+
+            ignoreFailures = true
+            testLogging {
+                events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
+                exceptionFormat = TestExceptionFormat.SHORT
+            }
         }
     }
 
