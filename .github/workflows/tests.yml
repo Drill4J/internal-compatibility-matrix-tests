@@ -9,6 +9,11 @@ on:
     branches:
       - 'test/**'
       - 'feature/**'
+    paths:
+      - '**/src/**'
+      - '**.gradle.kts'
+      - 'gradle.properties'
+      - '.github/**'
 jobs:
   download-agents:
     runs-on: ${{ matrix.os }}
