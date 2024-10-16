@@ -33,7 +33,7 @@ jobs:
       - name: Upload .drill folder as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: drill-agents-${{ matrix.config.os }}
+          name: drill-agents-${{ matrix.os }}
           path: ~/.drill/agents
           if-no-files-found: error
   test_matrix:
@@ -47,7 +47,7 @@ jobs:
       - name: Download .drill folder
         uses: actions/download-artifact@v4
         with:
-          name: drill-agents-${{ inputs.os }}
+          name: drill-agents-${{ matrix.os }}
           path: ~/.drill/agents
 
       - name: Set up Java ${{ matrix.java-version }}
