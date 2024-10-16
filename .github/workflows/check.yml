@@ -279,66 +279,66 @@ jobs:
       testModule: ${{ matrix.envVersions.testModule }}
       gradleVersion: ${{ matrix.envVersions.gradleVersion }}
       kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
-#  async-communication-tests:
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        config:
-#          - { os: ubuntu-latest, preset: linuxX64 }
-#          - { os: windows-latest, preset: mingwX64 }
-#          - { os: macos-12, preset: macosX64 }
-#        envVersions:
-#          # Async Communication
-#          # sReactor
-#          - { testModule: 'tests:async:reactor-3.5', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:async:reactor-3.5', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:async:reactor-3.6', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:async:reactor-3.6', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#    uses: ./.github/workflows/template.yml
-#    needs: download-agents
-#    with:
-#      os: ${{ matrix.config.os }}
-#      preset: ${{ matrix.config.preset }}
-#      javaVersion: ${{ matrix.envVersions.javaVersion }}
-#      distribution: ${{ matrix.envVersions.distribution }}
-#      testModule: ${{ matrix.envVersions.testModule }}
-#      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
-#      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
-#  test-framework-tests:
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        config:
-#          - { os: ubuntu-latest, preset: linuxX64 }
-##          - { os: windows-latest, preset: mingwX64 }  TODO Selenium tests fail as the Testcontainers does not work on Windows
-##          - { os: macos-12, preset: macosX64 } TODO CI/CD plugin has issues with macOS, waiting for fixes in 0.1.4 version
-#        envVersions:
-#          # JUnit 4
-#          - { testModule: 'tests:test-frameworks:junit-4', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:test-frameworks:junit-4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          # JUnit 5
-#          - { testModule: 'tests:test-frameworks:junit-5', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:test-frameworks:junit-5', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          # TestNG 6
-#          - { testModule: 'tests:test-frameworks:testng-6.1', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:test-frameworks:testng-6.1', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          # TestNG 7
-#          - { testModule: 'tests:test-frameworks:testng-7.4', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          - { testModule: 'tests:test-frameworks:testng-7.4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
-#          # Selenium 4
-#          - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2', testReport: 'tests/test-frameworks/selenium-4' }
-#          - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2', testReport: 'tests/test-frameworks/selenium-4' }
-#          # RestAssured 5.3
-#          - { testModule: 'tests:test-frameworks:rest-assured-5.3', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2'}
-#          - { testModule: 'tests:test-frameworks:rest-assured-5.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2'}
-#    uses: ./.github/workflows/template.yml
-#    needs: download-agents
-#    with:
-#      os: ${{ matrix.config.os }}
-#      preset: ${{ matrix.config.preset }}
-#      javaVersion: ${{ matrix.envVersions.javaVersion }}
-#      distribution: ${{ matrix.envVersions.distribution }}
-#      testModule: ${{ matrix.envVersions.testModule }}
-#      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
-#      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
-#      testReport: ${{ matrix.envVersions.testReport }}
+  async-communication-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+          - { os: windows-latest, preset: mingwX64 }
+          - { os: macos-12, preset: macosX64 }
+        envVersions:
+          # Async Communication
+          # sReactor
+          - { testModule: 'tests:async:reactor-3.5', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:async:reactor-3.5', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:async:reactor-3.6', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:async:reactor-3.6', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+    uses: ./.github/workflows/template.yml
+    needs: download-agents
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
+  test-framework-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, preset: linuxX64 }
+#          - { os: windows-latest, preset: mingwX64 }  TODO Selenium tests fail as the Testcontainers does not work on Windows
+#          - { os: macos-12, preset: macosX64 } TODO CI/CD plugin has issues with macOS, waiting for fixes in 0.1.4 version
+        envVersions:
+          # JUnit 4
+          - { testModule: 'tests:test-frameworks:junit-4', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:test-frameworks:junit-4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          # JUnit 5
+          - { testModule: 'tests:test-frameworks:junit-5', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:test-frameworks:junit-5', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          # TestNG 6
+          - { testModule: 'tests:test-frameworks:testng-6.1', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:test-frameworks:testng-6.1', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          # TestNG 7
+          - { testModule: 'tests:test-frameworks:testng-7.4', javaVersion: 8.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          - { testModule: 'tests:test-frameworks:testng-7.4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2' }
+          # Selenium 4
+          - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2', testReport: 'tests/test-frameworks/selenium-4' }
+          - { testModule: 'tests:test-frameworks:selenium-4', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2', testReport: 'tests/test-frameworks/selenium-4' }
+          # RestAssured 5.3
+          - { testModule: 'tests:test-frameworks:rest-assured-5.3', javaVersion: 11.0, distribution: 'corretto', gradleVersion: '7.4.2'}
+          - { testModule: 'tests:test-frameworks:rest-assured-5.3', javaVersion: 17.0, distribution: 'corretto', gradleVersion: '7.4.2'}
+    uses: ./.github/workflows/template.yml
+    needs: download-agents
+    with:
+      os: ${{ matrix.config.os }}
+      preset: ${{ matrix.config.preset }}
+      javaVersion: ${{ matrix.envVersions.javaVersion }}
+      distribution: ${{ matrix.envVersions.distribution }}
+      testModule: ${{ matrix.envVersions.testModule }}
+      gradleVersion: ${{ matrix.envVersions.gradleVersion }}
+      kotlinVersion: ${{ matrix.envVersions.kotlinVersion }}
+      testReport: ${{ matrix.envVersions.testReport }}
