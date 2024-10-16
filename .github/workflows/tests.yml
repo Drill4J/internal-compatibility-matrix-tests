@@ -59,21 +59,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Determine Kotlin version
+      - name: Determine Kotlin version for Java 21 and greater
         id: determine-kotlin
-        run: |
-          if [[ ${{ matrix.java-version }} -ge 21 ]]; then
-            echo "kotlin-version=1.9.20" >> $GITHUB_ENV
-          fi
+        if: matrix.java-version >= 21
+        run: echo "kotlin-version=1.9.20" >> $GITHUB_ENV
 
-      - name: Determine Gradle Version
-        id: determine-gradle
-        run: |
-          if [[ ${{ matrix.java-version }} -ge 21 ]]; then
-            echo "gradle-version=8.5" >> $GITHUB_ENV
-          else
-            echo "gradle-version=7.4.2" >> $GITHUB_ENV
-          fi
+      - name: Determine Gradle Version for Java 21 and greater
+        id: determine-gradle 21gr
+        if: matrix.java-version >= 21
+        run: echo "gradle-version=8.5" >> $GITHUB_ENV
+
+      - name: Determine Gradle Version for Java 20 and lower
+        id: determine-gradle 21lw
+        if: matrix.java-version < 21
+        run: echo "gradle-version=7.4.2" >> $GITHUB_ENV
 
       - name: Set-up Gradle ${{ env.gradle-version }}
         uses: gradle/actions/setup-gradle@v3
