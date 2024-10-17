@@ -68,7 +68,7 @@ includeIfSupport("tests:web-frameworks:servlet-4-jetty-9", 8..maxJavaVersion)
 includeIfSupport("tests:web-frameworks:servlet-5-tomcat-10", 11..maxJavaVersion)
 includeIfSupport("tests:web-frameworks:servlet-5-jetty-11", 17..maxJavaVersion)
 includeIfSupport("tests:web-frameworks:servlet-5-undertow-2", 11..maxJavaVersion)
-includeIfSupport("tests:web-frameworks:servlet-5-glassfish-7", 8..maxJavaVersion)
+//includeIfSupport("tests:web-frameworks:servlet-5-glassfish-7", 11..maxJavaVersion) TODO Fails with JDWP Transport dt_socket failed to initialize
 includeIfSupport("tests:web-frameworks:servlet-6-tomcat-11", 17..maxJavaVersion)
 //Spring MVC
 includeIfSupport("tests:web-frameworks:spring-mvc-1.5-jetty", 8..17)
