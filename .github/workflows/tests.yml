@@ -80,7 +80,7 @@ jobs:
           add-job-summary: 'on-failure'
 
       - name: Run tests
-        run: gradle testAggregateTestReport
+        run: gradle test
 
       - name: Test Report (Linux)
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -96,9 +96,7 @@ jobs:
         with:
           check_name: Test Report (${{ matrix.os}},${{ matrix.java-version}})
           files: |
-            tests/**/build/test-results/test/TEST-*.xml
-            
-            - name: Test Report
+            tests/**/build/test-results/test/TEST-*.xml                      
 
       - name: Test Report (MacOS)
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
@@ -108,9 +106,9 @@ jobs:
           files: |
             tests/**/build/test-results/test/TEST-*.xml
 
-      - name: Upload aggregated test report
-        uses: actions/upload-artifact@v4
-        if: success() || failure()
-        with:
-          name: aggregated-results-${{ matrix.os }}-java${{ matrix.java-version }}
-          path: build/reports/tests/unit-test/aggregated-results/
+#      - name: Upload aggregated test report
+#        uses: actions/upload-artifact@v4
+#        if: success() || failure()
+#        with:
+#          name: aggregated-results-${{ matrix.os }}-java${{ matrix.java-version }}
+#          path: build/reports/tests/unit-test/aggregated-results/
