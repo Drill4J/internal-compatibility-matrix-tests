@@ -79,3 +79,11 @@ jobs:
 
       - name: Run tests
         run: gradle test
+
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: JUnit Tests
+          path: tests/**/build/test-results/test/TEST-*.xml
+          reporter: java-junit
