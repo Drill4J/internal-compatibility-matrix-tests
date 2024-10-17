@@ -26,6 +26,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: 7.4.2
+          add-job-summary: 'on-failure'
       - name: Download Drill4J Agents
         run: gradle drillDownloadAgents --info
       - name: List .drill files
@@ -76,7 +77,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: ${{ env.gradle-version }}
-          add-job-summary: 'never'
+          add-job-summary: 'on-failure'
 
       - name: Run tests
         run: gradle test
@@ -85,6 +86,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: startsWith(matrix.os, 'ubuntu-') && (success() || failure())
         with:
+          check_name: Test Report (${{ matrix.os}},${{ matrix.java-version}})
           files: |
             tests/**/build/test-results/test/TEST-*.xml
 
@@ -92,6 +94,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/windows@v2
         if: startsWith(matrix.os, 'windows-') && (success() || failure())
         with:
+          check_name: Test Report (${{ matrix.os}},${{ matrix.java-version}})
           files: |
             tests/**/build/test-results/test/TEST-*.xml
             
@@ -101,6 +104,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
         if: startsWith(matrix.os, 'macos-') && (success() || failure())
         with:
+          check_name: Test Report (${{ matrix.os}},${{ matrix.java-version}})
           files: |
             tests/**/build/test-results/test/TEST-*.xml
 
