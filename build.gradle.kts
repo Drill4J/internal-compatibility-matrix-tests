@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm").apply(false)
     id("com.epam.drill.integration.cicd")
+    id("test-report-aggregation")
 }
 
 version = "0.0.1"
@@ -41,6 +42,7 @@ subprojects {
                 events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
                 exceptionFormat = TestExceptionFormat.SHORT
             }
+//            dependsOn(":testAggregateTestReport")
         }
     }
 
@@ -65,6 +67,26 @@ subprojects {
             enableTestAgent {
                 version = drillTestAgentVersion
             }
+        }
+    }
+}
+
+allprojects {
+    afterEvaluate {
+        if (project.path.matches(Regex("^:tests:[^:]+:[^:]+$"))) {
+            rootProject.dependencies {
+                println("Adding test report aggregation for ${project.path}")
+                testReportAggregation(project(project.path))
+            }
+        }
+    }
+}
+
+reporting {
+    reports {
+        val testAggregateTestReport by creating(AggregateTestReport::class) {
+            testType.set(TestSuiteType.UNIT_TEST)
+
         }
     }
 }
