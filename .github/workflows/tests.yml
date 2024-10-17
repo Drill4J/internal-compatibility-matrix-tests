@@ -108,9 +108,11 @@ jobs:
           files: |
             tests/**/build/test-results/test/TEST-*.xml
 
+      - name: List files
+        run: ls -R build/reports/tests/unit-test/aggregated-results
       - name: Upload aggregated test report
         uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
-          name: aggregated-results-${{ matrix.os }}-${{ matrix.java-version }}
-          path: ./build/reports/tests/unit-test/aggregated-results
+          name: aggregated-results-${{ matrix.os }}-java${{ matrix.java-version }}
+          path: build/reports/tests/unit-test/aggregated-results/
