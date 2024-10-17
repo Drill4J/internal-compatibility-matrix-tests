@@ -22,6 +22,7 @@ import org.glassfish.jersey.jetty.JettyHttpContainerFactory
 import org.glassfish.jersey.server.ResourceConfig
 import org.junit.AfterClass
 import org.junit.BeforeClass
+import java.net.ServerSocket
 
 
 class CompatibilityMatrixTest: CleanServerMatrixTest() {
@@ -34,6 +35,7 @@ class CompatibilityMatrixTest: CleanServerMatrixTest() {
     override fun getClassUnderTest(): Class<*> = SimpleJaxRs2Service::class.java
 
     companion object {
+        private val port = ServerSocket(0).use { it.localPort }
         private lateinit var server: Server
 
         @BeforeClass
@@ -41,7 +43,7 @@ class CompatibilityMatrixTest: CleanServerMatrixTest() {
         fun setUp() {
             val config = ResourceConfig()
             config.register(SimpleJaxRs2Service::class.java)
-            server = JettyHttpContainerFactory.createServer(java.net.URI("http://localhost:8989/"), config)
+            server = JettyHttpContainerFactory.createServer(java.net.URI("http://localhost:$port/"), config)
             server.start()
         }
 
