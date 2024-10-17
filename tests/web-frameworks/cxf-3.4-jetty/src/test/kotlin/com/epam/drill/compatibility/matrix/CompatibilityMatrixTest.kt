@@ -20,6 +20,7 @@ import mu.KotlinLogging
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean
 import org.junit.AfterClass
 import org.junit.BeforeClass
+import java.net.ServerSocket
 
 
 class CompatibilityMatrixTest: CleanServerMatrixTest() {
@@ -30,13 +31,14 @@ class CompatibilityMatrixTest: CleanServerMatrixTest() {
     }
 
     companion object {
+        private val port = ServerSocket(0).use { it.localPort }
         private lateinit var server: JAXRSServerFactoryBean
 
         @BeforeClass
         @JvmStatic
         fun setUp() {
             server = JAXRSServerFactoryBean()
-            server.address = "http://localhost:8989/"
+            server.address = "http://localhost:$port/"
             server.setResourceClasses(SimpleJaxRs2Service::class.java)
             server.create()
         }
