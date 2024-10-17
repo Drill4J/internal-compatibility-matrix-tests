@@ -130,6 +130,6 @@ includeIfSupport("tests:test-frameworks:junit-5", 8..17)
 includeIfSupport("tests:test-frameworks:testng-6.1", 8..17)
 includeIfSupport("tests:test-frameworks:testng-7.4", 8..17)
 //Selenium
-includeIfSupport("tests:test-frameworks:selenium-4", 8..17, listOf(linux, macos))
+includeIfSupport("tests:test-frameworks:selenium-4", 11..17, listOf(linux, macos))
 //Rest Assured
 includeIfSupport("tests:test-frameworks:rest-assured-5.3", 8..17)
