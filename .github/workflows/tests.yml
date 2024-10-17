@@ -76,6 +76,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: ${{ env.gradle-version }}
+          add-job-summary: 'on-failure'
 
       - name: Run tests
         run: gradle test
@@ -85,5 +86,5 @@ jobs:
         if: success() || failure()
         with:
           name: JUnit Tests
-          path: tests/**/build/test-results/test/TEST-*.xml
+          path: 'tests/**/build/test-results/test/TEST-*.xml'
           reporter: java-junit
