@@ -13,7 +13,10 @@ group = "com.epam.drill.compatibility"
 
 subprojects {
     val excludedModules = listOf("common-test", "stub-server")
-    val appAgentTestModules = listOf("web-servers", "web-frameworks", "http-clients", "async")
+    val appAgentTestModules = listOf("web-servers", "web-frameworks", "http-clients", "async",
+        "websocket-clients", "websocket-clients-frameworks",
+        "websocket-servers", "websocket-servers-frameworks",
+        "websocket-messages", "websocket-messages-frameworks")
     val testAgentTestModules = listOf("test-frameworks")
 
     val projectName = name
@@ -32,6 +35,7 @@ subprojects {
             environment("DRILL_IS_COMPATIBILITY_TESTS" to true)
             environment("DRILL_USE_PROTOBUF_SERIALIZER" to false)
             environment("DRILL_USE_GZIP_COMPRESSION" to false)
+            environment("DRILL_IS_WS_MESSAGE" to true)
             environment("DRILL_SCAN_CLASS_DELAY" to "1000")
             environment("DRILL_INSTANCE_ID" to projectName)
             environment("DRILL_SESSION_ID" to projectName)
