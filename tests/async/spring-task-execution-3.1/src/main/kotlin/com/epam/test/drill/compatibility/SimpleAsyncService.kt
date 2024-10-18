@@ -20,9 +20,6 @@ import org.springframework.stereotype.Service
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Future
 
-<<<<<<<< HEAD:test-agent/src/commonMain/kotlin/com/epam/drill/agent/instrument/transformers/clients/SpringWebClientTransformer.kt
-expect object SpringWebClientTransformer : TransformerObject
-========
 @Service
 open class SimpleAsyncService {
     @Async
@@ -31,4 +28,3 @@ open class SimpleAsyncService {
         return CompletableFuture.completedFuture(result)
     }
 }
->>>>>>>> origin/main:tests/async/spring-task-execution-3.1/src/main/kotlin/com/epam/test/drill/compatibility/SimpleAsyncService.kt

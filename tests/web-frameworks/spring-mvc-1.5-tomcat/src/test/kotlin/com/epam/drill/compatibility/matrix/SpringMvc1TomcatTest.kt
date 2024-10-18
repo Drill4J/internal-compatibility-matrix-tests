@@ -13,14 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-<<<<<<<< HEAD:test-agent/src/commonMain/kotlin/com/epam/drill/agent/instrument/transformers/netty/NettyHttpServerTransformer.kt
-package com.epam.drill.agent.instrument.transformers.netty
-
-import com.epam.drill.agent.instrument.TransformerObject
-
-expect object NettyHttpServerTransformer : TransformerObject
-========
 package com.epam.drill.compatibility.matrix
 
 class SpringMvc1TomcatTest : SpringMVCMatrixTest()
->>>>>>>> origin/main:tests/web-frameworks/spring-mvc-1.5-tomcat/src/test/kotlin/com/epam/drill/compatibility/matrix/SpringMvc1TomcatTest.kt

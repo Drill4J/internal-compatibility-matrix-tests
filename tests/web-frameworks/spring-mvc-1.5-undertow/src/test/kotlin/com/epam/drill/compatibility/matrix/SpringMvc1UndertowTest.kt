@@ -13,14 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-<<<<<<<< HEAD:test-agent/src/commonMain/kotlin/com/epam/drill/agent/instrument/transformers/jetty/JettyHttpServerTransformer.kt
-package com.epam.drill.agent.instrument.transformers.jetty
-
-import com.epam.drill.agent.instrument.TransformerObject
-
-expect object JettyHttpServerTransformer : TransformerObject
-========
 package com.epam.drill.compatibility.matrix
 
 class SpringMvc1UndertowTest : SpringMVCMatrixTest()
->>>>>>>> origin/main:tests/web-frameworks/spring-mvc-1.5-undertow/src/test/kotlin/com/epam/drill/compatibility/matrix/SpringMvc1UndertowTest.kt
