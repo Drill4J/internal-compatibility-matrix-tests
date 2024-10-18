@@ -21,8 +21,8 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.web.reactive.socket.client.ReactorNettyWebSocketClient
 import org.springframework.web.reactive.socket.client.WebSocketClient
 
-@ContextConfiguration(classes = [CompatibilityMatrixTest.TestWebSocketClientConfig::class])
-class CompatibilityMatrixTest : SpringWebfluxWebSocketClientMatrixTest() {
+@ContextConfiguration(classes = [SpringWebfluxWsClient3NettyTest.TestWebSocketClientConfig::class])
+class SpringWebfluxWsClient3NettyTest : SpringWebfluxWebSocketClientMatrixTest() {
 
     @Configuration
     open class TestWebSocketClientConfig: AbstractTestWebSocketClientConfig() {
