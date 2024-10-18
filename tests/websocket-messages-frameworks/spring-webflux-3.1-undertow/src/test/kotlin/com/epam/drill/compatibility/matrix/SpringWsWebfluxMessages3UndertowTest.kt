@@ -23,8 +23,8 @@ import org.springframework.web.reactive.socket.client.WebSocketClient
 import org.xnio.OptionMap
 import org.xnio.Xnio
 
-@ContextConfiguration(classes = [SpringWebfluxWsClient3UndertowTest.TestWebSocketClientConfig::class])
-class SpringWebfluxWsClient3UndertowTest : SpringWebfluxWebSocketClientMatrixTest() {
+@ContextConfiguration(classes = [SpringWsWebfluxMessages3UndertowTest.TestWebSocketClientConfig::class])
+class SpringWsWebfluxMessages3UndertowTest : SpringWebfluxWebSocketMessagesMatrixTest() {
 
     @Configuration
     open class TestWebSocketClientConfig: AbstractTestWebSocketClientConfig() {

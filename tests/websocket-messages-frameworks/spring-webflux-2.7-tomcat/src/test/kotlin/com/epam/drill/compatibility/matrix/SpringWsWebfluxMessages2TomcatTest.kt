@@ -18,16 +18,16 @@ package com.epam.drill.compatibility.matrix
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.test.context.ContextConfiguration
-import org.springframework.web.reactive.socket.client.StandardWebSocketClient
+import org.springframework.web.reactive.socket.client.TomcatWebSocketClient
 import org.springframework.web.reactive.socket.client.WebSocketClient
 
-@ContextConfiguration(classes = [SpringWebfluxWsMessages3JettyTest.TestWebSocketClientConfig::class])
-class SpringWebfluxWsMessages3JettyTest : SpringWebfluxWebSocketMessagesMatrixTest() {
+@ContextConfiguration(classes = [SpringWsWebfluxMessages2TomcatTest.TestWebSocketClientConfig::class])
+class SpringWsWebfluxMessages2TomcatTest : SpringWebfluxWebSocketMessagesMatrixTest() {
 
     @Configuration
     open class TestWebSocketClientConfig: AbstractTestWebSocketClientConfig() {
         @Bean
-        override fun testWebSocketClient(): WebSocketClient = StandardWebSocketClient()
+        override fun testWebSocketClient(): WebSocketClient = TomcatWebSocketClient()
     }
 
 }

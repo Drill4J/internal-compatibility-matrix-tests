@@ -21,8 +21,8 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.web.reactive.socket.client.JettyWebSocketClient
 import org.springframework.web.reactive.socket.client.WebSocketClient
 
-@ContextConfiguration(classes = [SpringWebfluxWsClient2JettyTest.TestWebSocketClientConfig::class])
-class SpringWebfluxWsClient2JettyTest : SpringWebfluxWebSocketClientMatrixTest() {
+@ContextConfiguration(classes = [SpringWsWebfluxClient2JettyTest.TestWebSocketClientConfig::class])
+class SpringWsWebfluxClient2JettyTest : SpringWebfluxWebSocketClientMatrixTest() {
 
     @Configuration
     open class TestWebSocketClientConfig: AbstractTestWebSocketClientConfig() {

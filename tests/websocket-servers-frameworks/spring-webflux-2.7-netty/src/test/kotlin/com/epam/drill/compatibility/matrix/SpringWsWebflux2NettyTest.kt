@@ -15,4 +15,4 @@
  */
 package com.epam.drill.compatibility.matrix
 
-class SpringWebfluxWs3TomcatTest : SpringWebfluxWebSocketServerMatrixTest()
+class SpringWsWebflux2NettyTest : SpringWebfluxWebSocketServerMatrixTest()
