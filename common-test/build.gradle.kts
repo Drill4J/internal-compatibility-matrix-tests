@@ -3,6 +3,7 @@ import java.net.URI
 
 plugins {
     kotlin("jvm")
+    kotlin("plugin.serialization")
     id("com.github.hierynomus.license")
 }
 
@@ -10,6 +11,7 @@ group = rootProject.group
 version = rootProject.version
 
 val microutilsLoggingVersion: String by parent!!.extra
+val kotlinxSerializationVersion: String by parent!!.extra
 
 repositories {
     mavenCentral()
@@ -36,7 +38,10 @@ dependencies {
     compileOnly("org.glassfish.tyrus:tyrus-container-grizzly-server:1.20")
 
     compileOnly(kotlin("test-junit"))
-    compileOnly(project(":common"))
+
+    api("org.jetbrains.kotlinx:kotlinx-serialization-core:$kotlinxSerializationVersion")
+    api("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
+    implementation("org.apache.httpcomponents:httpclient:4.5.14")
 }
 
 tasks.withType<KotlinCompile> {

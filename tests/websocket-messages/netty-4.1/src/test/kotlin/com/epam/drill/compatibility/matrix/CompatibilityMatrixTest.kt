@@ -52,7 +52,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler
 import io.netty.handler.codec.http.websocketx.WebSocketVersion
 import com.epam.drill.agent.instrument.TestRequestHolder
-import com.epam.drill.common.agent.request.DrillRequest
+import com.epam.drill.compatibility.context.DrillRequest
 
 class CompatibilityMatrixTest : JavaxWebSocketMessagesMatrixTest() {
 

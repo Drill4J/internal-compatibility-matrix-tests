@@ -33,7 +33,7 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.FluxSink
 import reactor.core.publisher.Mono
 import com.epam.drill.agent.instrument.TestRequestHolder
-import com.epam.drill.common.agent.request.DrillRequest
+import com.epam.drill.compatibility.context.DrillRequest
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(

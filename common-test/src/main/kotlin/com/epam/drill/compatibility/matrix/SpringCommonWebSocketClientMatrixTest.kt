@@ -21,7 +21,7 @@ import kotlin.test.assertNull
 import org.junit.runner.RunWith
 import org.springframework.test.context.junit4.SpringRunner
 import com.epam.drill.agent.instrument.TestRequestHolder
-import com.epam.drill.common.agent.request.DrillRequest
+import com.epam.drill.compatibility.context.DrillRequest
 
 @RunWith(SpringRunner::class)
 @Suppress("FunctionName")

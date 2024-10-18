@@ -26,8 +26,9 @@ import org.simpleframework.http.core.Container
 import org.simpleframework.http.core.ContainerSocketProcessor
 import org.simpleframework.transport.connect.SocketConnection
 import com.epam.drill.agent.instrument.TestRequestHolder
-import com.epam.drill.common.agent.request.DrillRequest
-import mu.KLogger
+import com.epam.drill.compatibility.context.DrillRequest
+import com.epam.drill.compatibility.testframeworks.DRILL_SESSION_ID
+import com.epam.drill.compatibility.testframeworks.DRILL_TEST_ID
 
 @Suppress("FunctionName")
 abstract class ClientMatrixTest {
@@ -39,19 +40,19 @@ abstract class ClientMatrixTest {
         val responseHeaders = response.first
         val responseBody = response.second
         assertNull(TestRequestHolder.retrieve())
-        assertNull(responseHeaders["drill-session-id"])
-        assertNull(responseHeaders["drill-header-data"])
+        assertNull(responseHeaders[DRILL_SESSION_ID])
+        assertNull(responseHeaders[DRILL_TEST_ID])
         assertEquals("test-request", responseBody)
     }
 
     @Test
     open fun `test request with existing thread session data`() = withHttpServer(returnHeaders = true) {
-        TestRequestHolder.store(DrillRequest("session-123", mapOf("drill-header-data" to "test-data")))
+        TestRequestHolder.store(DrillRequest("session-123", mapOf(DRILL_TEST_ID to "test-data")))
         val response = callHttpEndpoint(it)
         val responseHeaders = response.first
         val responseBody = response.second
-        assertEquals("session-123-returned", responseHeaders["drill-session-id"])
-        assertEquals("test-data-returned", responseHeaders["drill-header-data"])
+        assertEquals("session-123-returned", responseHeaders[DRILL_SESSION_ID])
+        assertEquals("test-data-returned", responseHeaders[DRILL_TEST_ID])
         assertEquals("test-request", responseBody)
     }
 
@@ -82,8 +83,8 @@ abstract class ClientMatrixTest {
                     .forEach { response.setValue(it.key, "${it.value}-returned") }
             }
             if (produceHeaders) {
-                response.setValue("drill-session-id", "session-123-produced")
-                response.setValue("drill-header-data", "test-data-produced")
+                response.setValue(DRILL_SESSION_ID, "session-123-produced")
+                response.setValue(DRILL_TEST_ID, "test-data-produced")
             }
             response.status = Status.OK
             response.outputStream.write(request.inputStream.readBytes())

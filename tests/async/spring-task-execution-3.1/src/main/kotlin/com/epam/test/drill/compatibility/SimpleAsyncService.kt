@@ -1,0 +1,34 @@
+/**
+ * Copyright 2020 - 2022 EPAM Systems
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.epam.test.drill.compatibility
+
+import org.springframework.scheduling.annotation.Async
+import org.springframework.stereotype.Service
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.Future
+
+<<<<<<<< HEAD:test-agent/src/commonMain/kotlin/com/epam/drill/agent/instrument/transformers/clients/SpringWebClientTransformer.kt
+expect object SpringWebClientTransformer : TransformerObject
+========
+@Service
+open class SimpleAsyncService {
+    @Async
+    open fun doAsyncTask(task: () -> String): Future<String> {
+        val result = task()
+        return CompletableFuture.completedFuture(result)
+    }
+}
+>>>>>>>> origin/main:tests/async/spring-task-execution-3.1/src/main/kotlin/com/epam/test/drill/compatibility/SimpleAsyncService.kt

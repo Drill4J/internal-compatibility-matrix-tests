@@ -23,7 +23,7 @@ import org.springframework.web.reactive.socket.client.ReactorNettyWebSocketClien
 import org.springframework.web.reactive.socket.client.WebSocketClient
 import com.epam.drill.agent.instrument.TestPayloadProcessor
 import com.epam.drill.agent.instrument.TestRequestHolder
-import com.epam.drill.common.agent.request.DrillRequest
+import com.epam.drill.compatibility.context.DrillRequest
 
 @ContextConfiguration(classes = [CompatibilityMatrixTest.TestWebSocketClientConfig::class])
 class CompatibilityMatrixTest : SpringWebfluxWebSocketMessagesMatrixTest() {

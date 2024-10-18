@@ -34,7 +34,7 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 import org.springframework.web.socket.handler.AbstractWebSocketHandler
 import com.epam.drill.agent.instrument.TestRequestHolder
-import com.epam.drill.common.agent.request.DrillRequest
+import com.epam.drill.compatibility.context.DrillRequest
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(

@@ -15,17 +15,28 @@
  */
 package com.epam.drill.agent.instrument
 
-import com.epam.drill.common.agent.request.DrillRequest
-import com.epam.drill.common.agent.request.RequestHolder
+import com.epam.drill.compatibility.context.DrillRequest
+import com.epam.test.drill.DrillTestContext
 
-object TestRequestHolder : RequestHolder {
+@Deprecated("Use DrillTestContext instead")
+object TestRequestHolder {
+    private val testContext = DrillTestContext()
 
-    private val localRequest = ThreadLocal<DrillRequest>()
+    fun remove() = testContext.remove()
 
-    override fun remove() = localRequest.remove()
+    fun retrieve(): DrillRequest? {
+        val context = testContext.retrieve()
+        return if (context != null) {
+            DrillRequest(context["drill-session-id"] as String, context)
+        } else
+            null
+    }
 
-    override fun retrieve(): DrillRequest? = localRequest.get()
-
-    override fun store(drillRequest: DrillRequest) = localRequest.set(drillRequest)
+    fun store(drillRequest: DrillRequest) {
+        val context = HashMap<String, String>()
+        context.putAll(drillRequest.headers)
+        context.put("drill-session-id", drillRequest.drillSessionId)
+        testContext.store(context)
+    }
 
 }

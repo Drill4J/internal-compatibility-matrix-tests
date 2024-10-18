@@ -25,7 +25,7 @@ import jakarta.websocket.OnMessage
 import jakarta.websocket.Session
 import jakarta.websocket.server.ServerEndpoint
 import com.epam.drill.agent.instrument.TestRequestHolder
-import com.epam.drill.common.agent.request.DrillRequest
+import com.epam.drill.compatibility.context.DrillRequest
 
 abstract class JakartaWebSocketMessagesMatrixTest : AbstractWebSocketMessagesTest() {
 
