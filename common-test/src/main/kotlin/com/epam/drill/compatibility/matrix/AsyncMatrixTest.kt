@@ -16,7 +16,7 @@
 package com.epam.drill.compatibility.matrix
 
 import com.epam.drill.agent.instrument.TestRequestHolder
-import com.epam.drill.common.agent.request.DrillRequest
+import com.epam.drill.compatibility.context.DrillRequest
 import java.util.concurrent.Future
 import kotlin.test.Test
 import kotlin.test.assertEquals

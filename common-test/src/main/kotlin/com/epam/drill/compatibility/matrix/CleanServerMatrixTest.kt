@@ -16,55 +16,56 @@
 package com.epam.drill.compatibility.matrix
 
 import com.epam.drill.agent.instrument.TestRequestHolder
+import com.epam.drill.compatibility.testframeworks.DRILL_SESSION_ID
+import com.epam.drill.compatibility.testframeworks.DRILL_TEST_ID
+import com.epam.drill.compatibility.testframeworks.TEST_CONTEXT_NONE
+import com.epam.drill.compatibility.testframeworks.isTestCoveredCode
 import mu.KLogger
 import java.net.HttpURLConnection
 import java.net.URL
-import java.util.*
-import kotlin.test.assertEquals
-import kotlin.test.Test
+import kotlin.test.*
 
 @Suppress("FunctionName")
 abstract class CleanServerMatrixTest {
     protected abstract val logger: KLogger
+    private val agentInstanceId: String? = System.getenv("DRILL_INSTANCE_ID")
 
     @Test
     fun `test with empty headers request`() = withHttpServer {
-        TestRequestHolder.remove()
+        TestRequestHolder.remove() // necessary while HttpURLConnection is being instrumented by Drill4J
         val response = callHttpEndpoint(it)
-        val responseHeaders = response.first
-        val responseBody = response.second
-        val drillHeaders = responseHeaders.filterKeys(Objects::nonNull).filterKeys { it.startsWith("drill-") }
-        assertEquals(2, drillHeaders.size)
-        assertEquals("test-agent", responseHeaders["drill-agent-id"])
-        assertEquals("test-admin:8080", responseHeaders["drill-admin-url"])
-        assertEquals("test-request", responseBody)
+        assertNull(response.headers[DRILL_SESSION_ID])
+        assertNull(response.headers[DRILL_TEST_ID])
+        assertEquals("test-request", response.body)
+        getClassUnderTest()?.let { assertTrue(isTestCoveredCode(agentInstanceId, TEST_CONTEXT_NONE, it))  }
     }
 
     @Test
-    fun `test with session headers request`() = withHttpServer {
-        TestRequestHolder.remove()
-        val requestHeaders = mapOf(
-            "drill-session-id" to "session-123",
-            "drill-header-data" to "test-data"
-        )
-        val response = callHttpEndpoint(it, requestHeaders)
-        val responseHeaders = response.first
-        val responseBody = response.second
-        assertEquals("test-agent", responseHeaders["drill-agent-id"])
-        assertEquals("test-admin:8080", responseHeaders["drill-admin-url"])
-        assertEquals("session-123", responseHeaders["drill-session-id"])
-        assertEquals("test-data", responseHeaders["drill-header-data"])
-        assertEquals("test-request", responseBody)
+    fun `test with session headers request`() {
+        val testId = "test-data"
+        withHttpServer { endpoint ->
+            val requestHeaders = mapOf(
+                DRILL_SESSION_ID to "session-123",
+                DRILL_TEST_ID to testId
+            )
+            val response = callHttpEndpoint(endpoint, requestHeaders)
+            assertEquals("session-123", response.headers[DRILL_SESSION_ID])
+            assertEquals(testId, response.headers[DRILL_TEST_ID])
+            assertEquals("test-request", response.body)
+            getClassUnderTest()?.let { assertTrue(isTestCoveredCode(agentInstanceId, testId, it))  }
+        }
     }
 
     protected abstract fun withHttpServer(block: (String) -> Unit)
+
+    protected open fun getClassUnderTest(): Class<*>? = null
 
     private fun callHttpEndpoint(
         endpoint: String,
         headers: Map<String, String> = emptyMap(),
         contentType: String = "text/plain",
         body: String = "test-request"
-    ): Pair<Map<String, String>, String> {
+    ): HttpResponse {
         lateinit var connection: HttpURLConnection
         try {
             logger.trace { "callHttpEndpoint: Requesting $endpoint: headers=$headers, body=$body" }
@@ -77,13 +78,24 @@ abstract class CleanServerMatrixTest {
             connection.doOutput = true
             connection.outputStream.write(body.encodeToByteArray())
             connection.outputStream.close()
+            val responseCode = connection.responseCode
             val responseHeaders = connection.headerFields.mapValues { it.value.joinToString(",") }
             val responseBody = connection.inputStream.readBytes().decodeToString()
             connection.inputStream.close()
             logger.trace { "callHttpEndpoint: Response from $endpoint: headers=$responseHeaders, body=$responseBody" }
-            return responseHeaders to responseBody
+            return HttpResponse(
+                status = responseCode,
+                headers = responseHeaders,
+                body = responseBody
+            )
         } finally {
             connection.disconnect()
         }
     }
 }
+
+data class HttpResponse(
+    val status: Int,
+    val headers: Map<String, String>,
+    val body: String
+)
