@@ -15,19 +15,26 @@
  */
 package com.epam.drill.compatibility.matrix
 
+import javax.websocket.WebSocketContainer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.web.socket.client.WebSocketClient
 import org.springframework.web.socket.client.standard.StandardWebSocketClient
+import io.undertow.websockets.jsr.UndertowContainerProvider
 
-@ContextConfiguration(classes = [CompatibilityMatrixTest.TestWebSocketClientConfig::class])
-class CompatibilityMatrixTest : SpringMVCWebSocketClientMatrixTest() {
+@ContextConfiguration(classes = [SpringWsClient1UndertowTest.TestWebSocketClientConfig::class])
+class SpringWsClient1UndertowTest : SpringMVCWebSocketClientMatrixTest() {
 
     @Configuration
     open class TestWebSocketClientConfig: AbstractTestWebSocketClientConfig() {
         @Bean
-        override fun testWebSocketClient(): WebSocketClient = StandardWebSocketClient()
+        override fun testWebSocketClient(): WebSocketClient =
+            StandardWebSocketClient(CustomUndertowContainerProvider().container)
+    }
+
+    private class CustomUndertowContainerProvider : UndertowContainerProvider() {
+        public override fun getContainer(): WebSocketContainer = super.getContainer()
     }
 
 }
