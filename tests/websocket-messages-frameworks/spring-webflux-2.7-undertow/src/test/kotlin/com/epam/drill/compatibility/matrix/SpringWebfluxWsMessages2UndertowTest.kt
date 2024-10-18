@@ -18,16 +18,19 @@ package com.epam.drill.compatibility.matrix
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.test.context.ContextConfiguration
-import org.springframework.web.socket.client.WebSocketClient
-import org.springframework.web.socket.client.jetty.JettyWebSocketClient
+import org.springframework.web.reactive.socket.client.UndertowWebSocketClient
+import org.springframework.web.reactive.socket.client.WebSocketClient
+import org.xnio.OptionMap
+import org.xnio.Xnio
 
-@ContextConfiguration(classes = [CompatibilityMatrixTest.TestWebSocketClientConfig::class])
-class CompatibilityMatrixTest : SpringMVCWebSocketMessagesMatrixTest() {
+@ContextConfiguration(classes = [SpringWebfluxWsMessages2UndertowTest.TestWebSocketClientConfig::class])
+class SpringWebfluxWsMessages2UndertowTest : SpringWebfluxWebSocketMessagesMatrixTest() {
 
     @Configuration
     open class TestWebSocketClientConfig: AbstractTestWebSocketClientConfig() {
         @Bean
-        override fun testWebSocketClient(): WebSocketClient = JettyWebSocketClient().also(JettyWebSocketClient::start)
+        override fun testWebSocketClient(): WebSocketClient =
+            UndertowWebSocketClient(Xnio.getInstance().createWorker(OptionMap.EMPTY))
     }
 
 }

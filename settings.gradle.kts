@@ -144,7 +144,7 @@ includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-2.7-undertow", 8
 includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-3.1-jetty", 17..maxJavaVersion)
 includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-3.1-tomcat", 17..maxJavaVersion)
 includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-3.1-undertow", 17..maxJavaVersion)
-////Spring WebFlux Web-Sockets
+//Spring WebFlux Web-Sockets
 includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-2.7-jetty", 8..maxJavaVersion)
 includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-2.7-netty", 8..maxJavaVersion)
 includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-2.7-tomcat", 8..maxJavaVersion)
@@ -153,7 +153,7 @@ includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-3.1-jetty", 
 includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-3.1-netty", 17..maxJavaVersion)
 includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-3.1-tomcat", 17..maxJavaVersion)
 includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-3.1-undertow", 17..maxJavaVersion)
-////Spring MVC Web-Socket clients
+//Spring MVC Web-Socket clients
 includeIfSupport("tests:websocket-clients-frameworks:spring-mvc-1.5-jetty", 8..17)
 includeIfSupport("tests:websocket-clients-frameworks:spring-mvc-1.5-tomcat", 8..17)
 includeIfSupport("tests:websocket-clients-frameworks:spring-mvc-1.5-undertow", 8..17)
@@ -163,7 +163,7 @@ includeIfSupport("tests:websocket-clients-frameworks:spring-mvc-2.7-undertow", 8
 includeIfSupport("tests:websocket-clients-frameworks:spring-mvc-3.1-jetty", 17..maxJavaVersion)
 includeIfSupport("tests:websocket-clients-frameworks:spring-mvc-3.1-tomcat", 17..maxJavaVersion)
 includeIfSupport("tests:websocket-clients-frameworks:spring-mvc-3.1-undertow", 17..maxJavaVersion)
-////Spring WebFlux Web-Socket clients
+//Spring WebFlux Web-Socket clients
 includeIfSupport("tests:websocket-clients-frameworks:spring-webflux-2.7-jetty", 8..maxJavaVersion)
 includeIfSupport("tests:websocket-clients-frameworks:spring-webflux-2.7-netty", 8..maxJavaVersion)
 includeIfSupport("tests:websocket-clients-frameworks:spring-webflux-2.7-tomcat", 8..maxJavaVersion)
@@ -172,22 +172,22 @@ includeIfSupport("tests:websocket-clients-frameworks:spring-webflux-3.1-jetty", 
 includeIfSupport("tests:websocket-clients-frameworks:spring-webflux-3.1-netty", 17..maxJavaVersion)
 includeIfSupport("tests:websocket-clients-frameworks:spring-webflux-3.1-tomcat", 17..maxJavaVersion)
 includeIfSupport("tests:websocket-clients-frameworks:spring-webflux-3.1-undertow", 17..maxJavaVersion)
-////Spring MVC Web-Socket Per-Message Tests
-//include("tests:websocket-messages-frameworks:spring-mvc-1.5-jetty")
-//include("tests:websocket-messages-frameworks:spring-mvc-1.5-tomcat")
-//include("tests:websocket-messages-frameworks:spring-mvc-1.5-undertow")
-//include("tests:websocket-messages-frameworks:spring-mvc-2.7-jetty")
-//include("tests:websocket-messages-frameworks:spring-mvc-2.7-tomcat")
-//include("tests:websocket-messages-frameworks:spring-mvc-2.7-undertow")
-//include("tests:websocket-messages-frameworks:spring-mvc-3.1-jetty")
-//include("tests:websocket-messages-frameworks:spring-mvc-3.1-tomcat")
-//include("tests:websocket-messages-frameworks:spring-mvc-3.1-undertow")
-////Spring WebFlux Web-Socket Per-Message Tests
-//include("tests:websocket-messages-frameworks:spring-webflux-2.7-jetty")
-//include("tests:websocket-messages-frameworks:spring-webflux-2.7-netty")
-//include("tests:websocket-messages-frameworks:spring-webflux-2.7-tomcat")
-//include("tests:websocket-messages-frameworks:spring-webflux-2.7-undertow")
-//include("tests:websocket-messages-frameworks:spring-webflux-3.1-jetty")
-//include("tests:websocket-messages-frameworks:spring-webflux-3.1-netty")
-//include("tests:websocket-messages-frameworks:spring-webflux-3.1-tomcat")
-//include("tests:websocket-messages-frameworks:spring-webflux-3.1-undertow")
+//Spring MVC Web-Socket Per-Message Tests
+includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-1.5-jetty", 8..17)
+includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-1.5-tomcat", 8..17)
+includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-1.5-undertow", 8..17)
+includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-2.7-jetty", 8..maxJavaVersion)
+includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-2.7-tomcat", 8..maxJavaVersion)
+includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-2.7-undertow", 8..maxJavaVersion)
+includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-3.1-jetty", 17..maxJavaVersion)
+includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-3.1-tomcat", 17..maxJavaVersion)
+includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-3.1-undertow", 17..maxJavaVersion)
+//Spring WebFlux Web-Socket Per-Message Tests
+includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-2.7-jetty", 8..maxJavaVersion)
+//includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-2.7-netty", 8..maxJavaVersion) TODO Depends on com.epam.drill.agent.instrument.TestPayloadProcessor
+includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-2.7-tomcat", 8..maxJavaVersion)
+includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-2.7-undertow", 8..maxJavaVersion)
+includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-3.1-jetty", 17..maxJavaVersion)
+//includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-3.1-netty", 17..maxJavaVersion) TODO Depends on com.epam.drill.agent.instrument.TestPayloadProcessor
+includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-3.1-tomcat", 17..maxJavaVersion)
+includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-3.1-undertow", 17..maxJavaVersion)

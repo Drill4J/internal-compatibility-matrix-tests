@@ -46,7 +46,6 @@ subprojects {
                 events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
                 exceptionFormat = TestExceptionFormat.SHORT
             }
-//            dependsOn(":testAggregateTestReport")
         }
     }
 

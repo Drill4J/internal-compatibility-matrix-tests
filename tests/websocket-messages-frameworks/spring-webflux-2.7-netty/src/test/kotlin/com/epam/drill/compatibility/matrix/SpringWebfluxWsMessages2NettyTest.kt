@@ -25,8 +25,8 @@ import com.epam.drill.agent.instrument.TestPayloadProcessor
 import com.epam.drill.agent.instrument.TestRequestHolder
 import com.epam.drill.compatibility.context.DrillRequest
 
-@ContextConfiguration(classes = [CompatibilityMatrixTest.TestWebSocketClientConfig::class])
-class CompatibilityMatrixTest : SpringWebfluxWebSocketMessagesMatrixTest() {
+@ContextConfiguration(classes = [SpringWebfluxWsMessages2NettyTest.TestWebSocketClientConfig::class])
+class SpringWebfluxWsMessages2NettyTest : SpringWebfluxWebSocketMessagesMatrixTest() {
 
     override fun callWebSocketEndpoint(payloadType: String, body: String, count: Int) = TestWebSocketClientHandler().run {
         webSocketClient.execute(URI("ws://localhost:$serverPort"), this).subscribe()

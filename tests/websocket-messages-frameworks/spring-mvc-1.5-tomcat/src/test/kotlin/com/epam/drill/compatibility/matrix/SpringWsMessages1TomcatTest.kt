@@ -21,8 +21,8 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.web.socket.client.WebSocketClient
 import org.springframework.web.socket.client.standard.StandardWebSocketClient
 
-@ContextConfiguration(classes = [CompatibilityMatrixTest.TestWebSocketClientConfig::class])
-class CompatibilityMatrixTest : SpringMVCWebSocketMessagesMatrixTest() {
+@ContextConfiguration(classes = [SpringWsMessages1TomcatTest.TestWebSocketClientConfig::class])
+class SpringWsMessages1TomcatTest : SpringMVCWebSocketMessagesMatrixTest() {
 
     @Configuration
     open class TestWebSocketClientConfig: AbstractTestWebSocketClientConfig() {

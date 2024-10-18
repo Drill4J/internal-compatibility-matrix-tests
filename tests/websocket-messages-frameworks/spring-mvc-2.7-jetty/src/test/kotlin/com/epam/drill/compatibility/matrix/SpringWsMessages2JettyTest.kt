@@ -19,15 +19,15 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.web.socket.client.WebSocketClient
-import org.springframework.web.socket.client.standard.StandardWebSocketClient
+import org.springframework.web.socket.client.jetty.JettyWebSocketClient
 
-@ContextConfiguration(classes = [CompatibilityMatrixTest.TestWebSocketClientConfig::class])
-class CompatibilityMatrixTest : SpringMVCWebSocketMessagesMatrixTest() {
+@ContextConfiguration(classes = [SpringWsMessages2JettyTest.TestWebSocketClientConfig::class])
+class SpringWsMessages2JettyTest : SpringMVCWebSocketMessagesMatrixTest() {
 
     @Configuration
     open class TestWebSocketClientConfig: AbstractTestWebSocketClientConfig() {
         @Bean
-        override fun testWebSocketClient(): WebSocketClient = StandardWebSocketClient()
+        override fun testWebSocketClient(): WebSocketClient = JettyWebSocketClient().also(JettyWebSocketClient::start)
     }
 
 }
