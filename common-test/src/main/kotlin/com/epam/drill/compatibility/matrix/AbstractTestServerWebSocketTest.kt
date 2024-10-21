@@ -16,7 +16,6 @@
 package com.epam.drill.compatibility.matrix
 
 import java.nio.ByteBuffer
-import java.util.logging.LogManager
 import javax.websocket.EndpointConfig
 import javax.websocket.HandshakeResponse
 import javax.websocket.OnMessage
@@ -30,9 +29,8 @@ import org.glassfish.tyrus.server.Server
 
 abstract class AbstractTestServerWebSocketTest {
 
-    protected fun withWebSocketServer(block: (String) -> Unit) = Server(TestRequestServerEndpoint::class.java).run {
+    protected fun withWebSocketServer(block: (String) -> Unit) = Server(null, -1, null, null, TestRequestServerEndpoint::class.java).run {
         try {
-            LogManager.getLogManager().readConfiguration(ClassLoader.getSystemResourceAsStream("logging.properties"))
             this.start()
             block("ws://localhost:${this.port}")
         } finally {
