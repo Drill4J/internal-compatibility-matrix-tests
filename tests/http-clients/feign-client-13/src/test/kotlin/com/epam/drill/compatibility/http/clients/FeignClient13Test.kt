@@ -27,7 +27,7 @@ interface MyApiClient {
     fun postRequest(@HeaderMap headers: Map<String, String>, body: String): Response
 }
 
-class CompatibilityMatrixTest : ClientMatrixTest() {
+class FeignClient13Test : ClientMatrixTest() {
     override fun callHttpEndpoint(
         endpoint: String,
         headers: Map<String, String>,

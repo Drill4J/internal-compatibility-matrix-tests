@@ -26,7 +26,7 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 
 
-class CompatibilityMatrixTest: CleanServerMatrixTest() {
+class Servlet4Jetty9Test: CleanServerMatrixTest() {
     override val logger = KotlinLogging.logger {}
 
     override fun withHttpServer(block: (String) -> Unit) {
