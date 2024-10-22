@@ -151,7 +151,7 @@ if ("web-sockets" !in ignoreTests) {
     //Web-Sockets
     //Web-Socket Servers
     includeIfSupport("tests:websocket-servers:jetty-9.4", 8..17)
-    includeIfSupport("tests:websocket-servers:jetty-10.0", 8..17)
+    includeIfSupport("tests:websocket-servers:jetty-10.0", 11..17)
     includeIfSupport("tests:websocket-servers:netty-4.1", 8..17)
     includeIfSupport("tests:websocket-servers:tomcat-9.0", 8..17)
     includeIfSupport("tests:websocket-servers:tomcat-10.1", 11..17)
@@ -161,7 +161,7 @@ if ("web-sockets" !in ignoreTests) {
 
     //Web-Socket Clients
     includeIfSupport("tests:websocket-clients:jetty-9.4", 8..17)
-    includeIfSupport("tests:websocket-clients:jetty-10.0", 8..17)
+    includeIfSupport("tests:websocket-clients:jetty-10.0", 11..17)
     includeIfSupport("tests:websocket-clients:netty-4.1", 8..17)
     includeIfSupport("tests:websocket-clients:tomcat-9.0", 8..17)
     includeIfSupport("tests:websocket-clients:tomcat-10.1", 11..17)
