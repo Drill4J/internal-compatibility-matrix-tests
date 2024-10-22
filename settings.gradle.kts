@@ -154,20 +154,20 @@ if ("web-sockets" !in ignoreTests) {
     includeIfSupport("tests:websocket-servers:jetty-10.0", 8..17)
     includeIfSupport("tests:websocket-servers:netty-4.1", 8..17)
     includeIfSupport("tests:websocket-servers:tomcat-9.0", 8..17)
-    includeIfSupport("tests:websocket-servers:tomcat-10.1", 8..17)
-    includeIfSupport("tests:websocket-servers:tomcat-11.0", 8..17)
-    includeIfSupport("tests:websocket-servers:undertow-2.0", 8..17)
-    includeIfSupport("tests:websocket-servers:undertow-2.3", 8..17)
+    includeIfSupport("tests:websocket-servers:tomcat-10.1", 11..17)
+    includeIfSupport("tests:websocket-servers:tomcat-11.0", 17..17)
+    includeIfSupport("tests:websocket-servers:undertow-2.0", 11..17)
+    includeIfSupport("tests:websocket-servers:undertow-2.3", 11..17)
 
     //Web-Socket Clients
     includeIfSupport("tests:websocket-clients:jetty-9.4", 8..17)
     includeIfSupport("tests:websocket-clients:jetty-10.0", 8..17)
     includeIfSupport("tests:websocket-clients:netty-4.1", 8..17)
     includeIfSupport("tests:websocket-clients:tomcat-9.0", 8..17)
-    includeIfSupport("tests:websocket-clients:tomcat-10.1", 8..17)
-    includeIfSupport("tests:websocket-clients:tomcat-11.0", 8..17)
-    includeIfSupport("tests:websocket-clients:undertow-2.0", 8..17)
-    includeIfSupport("tests:websocket-clients:undertow-2.3", 8..17)
+    includeIfSupport("tests:websocket-clients:tomcat-10.1", 11..17)
+    includeIfSupport("tests:websocket-clients:tomcat-11.0", 17..17)
+    includeIfSupport("tests:websocket-clients:undertow-2.0", 11..17)
+    includeIfSupport("tests:websocket-clients:undertow-2.3", 11..17)
 
     //Web-Socket Server Frameworks
     //Spring WebSocket
