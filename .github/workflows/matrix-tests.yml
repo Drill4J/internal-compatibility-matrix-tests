@@ -1,4 +1,4 @@
-name: Compatibility Matrix Tests
+name: Matrix Tests
 
 on:
   push:

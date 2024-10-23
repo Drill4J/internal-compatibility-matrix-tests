@@ -1,4 +1,4 @@
-name: Compatibility Matrix Tests
+name: Tests
 
 on:
   workflow_dispatch:
