@@ -11,8 +11,8 @@ on:
         description: 'Java version (8, 11, 17, 21)'
         required: true
         default: '17'
-      ignoreTests:
-        description: 'Ignore tests (websockets, test-frameworks, ...)'
+      skipTests:
+        description: 'Skip tests (websockets, test-frameworks, ...)'
         required: false
 jobs:
   tests:
@@ -44,7 +44,7 @@ jobs:
       - name: Run tests
         env:
           GH_USER_TOKEN: ${{ secrets.GH_USER_TOKEN }}
-          ignoreTests: ${{ github.event.inputs.ignoreTests }}
+          skipTests: ${{ github.event.inputs.skipTests }}
         run: gradle test
 
       - name: Test Report (Linux)

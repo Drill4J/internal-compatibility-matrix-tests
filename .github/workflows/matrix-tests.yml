@@ -79,7 +79,7 @@ jobs:
           add-job-summary: 'on-failure'
 
       - name: Run tests
-        if: matrix.os != 'macos-14' || matrix.java != '8' #TODO Known issue with MacOS 14+ and Java 8
+        if: matrix.os != 'macos-14' || matrix.java-version != '8' #TODO Known issue with MacOS 14+ and Java 8
         run: gradle test
 
       - name: Test Report (Linux)
