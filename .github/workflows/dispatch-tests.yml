@@ -43,6 +43,7 @@ jobs:
 
       - name: Run tests
         env:
+          GH_USER_TOKEN: ${{ secrets.GH_USER_TOKEN }}
           ignoreTests: ${{ github.event.inputs.ignoreTests }}
         run: gradle test
 
@@ -60,7 +61,7 @@ jobs:
         with:
           check_name: Test Report (${{ matrix.os}},${{ matrix.java-version}})
           files: |
-            tests/**/build/test-results/test/TEST-*.xml                      
+            tests\**\build\test-results\test\TEST-*.xml                      
 
       - name: Test Report (MacOS)
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
