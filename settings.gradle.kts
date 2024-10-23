@@ -1,7 +1,7 @@
 rootProject.name = "internal-compatibility-matrix-tests"
 
 pluginManagement {
-    val kotlinVersion = System.getenv("kotlinVersion") ?: "1.9.20"
+    val kotlinVersion: String by extra
     val kotlinMultiplatformVersion: String by extra
     val shadowPluginVersion: String by extra
     val licenseVersion: String by extra
@@ -54,10 +54,10 @@ include("common-test")
 include("stub-server")
 
 
-val ignoreTests = (System.getenv("ignoreTests") ?: "").split(",").map { it.trim() }.filter { it.isNotEmpty() }.toSet()
+val skipTests = (System.getenv("skipTests") ?: "").split(",").map { it.trim() }.filter { it.isNotEmpty() }.toSet()
 
 //Tests
-if ("web-servers" !in ignoreTests) {
+if ("web-servers" !in skipTests) {
     //Web Servers
     //includeIfSupport("tests:web-servers:netty-4.1", 8..maxJavaVersion) TODO Fails with java.lang.AssertionError: actual value is not null expected null, but was:<session-123>
     includeIfSupport("tests:web-servers:jetty-10.0", 11..maxJavaVersion)
@@ -66,7 +66,7 @@ if ("web-servers" !in ignoreTests) {
 //    includeIfSupport("tests:web-servers:undertow-2.3", 11..maxJavaVersion) //TODO java.io.IOException: Server returned HTTP response code: 500 for URL: http://localhost:37799
 }
 
-if ("web-frameworks" !in ignoreTests) {
+if ("web-frameworks" !in skipTests) {
     //Web Frameworks
     //Http Servlets
     includeIfSupport("tests:web-frameworks:servlet-4-tomcat-9", 8..maxJavaVersion)
@@ -101,7 +101,7 @@ if ("web-frameworks" !in ignoreTests) {
     includeIfSupport("tests:web-frameworks:jersey-2-jetty", 8..17)
 }
 
-if ("http-clients" !in ignoreTests) {
+if ("http-clients" !in skipTests) {
     //Http Clients
     //URLConnection
     includeIfSupport("tests:http-clients:urlconnection", 8..maxJavaVersion)
@@ -122,7 +122,7 @@ if ("http-clients" !in ignoreTests) {
     includeIfSupport("tests:http-clients:feign-client-13", 8..maxJavaVersion)
 }
 
-if ("async" !in ignoreTests) {
+if ("async" !in skipTests) {
     //Asynchronous Communication
     //Service Executor
     includeIfSupport("tests:async:executor-service", 8..maxJavaVersion)
@@ -133,7 +133,7 @@ if ("async" !in ignoreTests) {
     //includeIfSupport("tests:async:spring-task-execution-3.1", 17..maxJavaVersion) TODO Fails with org.junit.ComparisonFailure: expected:<test-[session-123]> but was:<test-[null]>
 }
 
-if ("test-frameworks" !in ignoreTests) {
+if ("test-frameworks" !in skipTests) {
     //Test Frameworks
     //JUnit
     includeIfSupport("tests:test-frameworks:junit-4", 8..17)
@@ -147,7 +147,7 @@ if ("test-frameworks" !in ignoreTests) {
     includeIfSupport("tests:test-frameworks:rest-assured-5.3", 8..17)
 }
 
-if ("web-sockets" !in ignoreTests) {
+if ("web-sockets" !in skipTests) {
     //Web-Sockets
     //Web-Socket Servers
     includeIfSupport("tests:websocket-servers:jetty-9.4", 8..17)
