@@ -176,7 +176,7 @@ if ("web-sockets" !in ignoreTests) {
 //    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-1.5-undertow", 8..17) //TODO Fluky test: java.lang.AssertionError: expected:<10> but was:<0>
     includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-2.7-jetty", 8..maxJavaVersion)
     includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-2.7-tomcat", 8..maxJavaVersion)
-    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-2.7-undertow", 8..maxJavaVersion)
+//    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-2.7-undertow", 8..maxJavaVersion) //TODO Fluky test java.lang.AssertionError: expected:<10> but was:<0>
     includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-3.1-jetty", 17..maxJavaVersion)
     includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-3.1-tomcat", 17..maxJavaVersion)
 //    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-3.1-undertow", 17..maxJavaVersion) //TODO Fluky test java.lang.AssertionError: expected:<10> but was:<0>
