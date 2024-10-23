@@ -20,7 +20,6 @@ dependencies {
     implementation("io.projectreactor:reactor-core:3.6.5")
     testImplementation(kotlin("test-junit"))
     testImplementation(project(":common-test"))
-    testImplementation(project(":common"))
 }
 
 license {
