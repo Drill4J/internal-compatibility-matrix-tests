@@ -16,7 +16,6 @@ pluginManagement {
         id("com.github.hierynomus.license") version licenseVersion
         id("com.github.psxpaul.execfork") version psxpaulExecforkVersion
         id("com.epam.drill.integration.cicd") version drillCiCdIntegrationVersion
-        id("test-report-aggregation")
     }
 
     repositories {
