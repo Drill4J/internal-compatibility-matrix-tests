@@ -16,7 +16,6 @@ pluginManagement {
         id("com.github.hierynomus.license") version licenseVersion
         id("com.github.psxpaul.execfork") version psxpaulExecforkVersion
         id("com.epam.drill.integration.cicd") version drillCiCdIntegrationVersion
-        id("test-report-aggregation")
     }
 
     repositories {
@@ -136,15 +135,15 @@ if ("async" !in skipTests) {
 if ("test-frameworks" !in skipTests) {
     //Test Frameworks
     //JUnit
-    includeIfSupport("tests:test-frameworks:junit-4", 8..17)
-    includeIfSupport("tests:test-frameworks:junit-5", 8..17)
+    includeIfSupport("tests:test-frameworks:junit-4", 8..maxJavaVersion)
+    includeIfSupport("tests:test-frameworks:junit-5", 8..maxJavaVersion)
     //TestNG
-    includeIfSupport("tests:test-frameworks:testng-6.1", 8..17)
-    includeIfSupport("tests:test-frameworks:testng-7.4", 8..17)
+    includeIfSupport("tests:test-frameworks:testng-6.1", 8..maxJavaVersion)
+    includeIfSupport("tests:test-frameworks:testng-7.4", 8..maxJavaVersion)
     //Selenium
-    includeIfSupport("tests:test-frameworks:selenium-4", 11..17, listOf(linux))
+    includeIfSupport("tests:test-frameworks:selenium-4", 11..maxJavaVersion, listOf(linux))
     //Rest Assured
-    includeIfSupport("tests:test-frameworks:rest-assured-5.3", 8..17)
+    includeIfSupport("tests:test-frameworks:rest-assured-5.3", 8..maxJavaVersion)
 }
 
 if ("web-sockets" !in skipTests) {
