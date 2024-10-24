@@ -46,6 +46,8 @@ subprojects {
                 events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
                 exceptionFormat = TestExceptionFormat.SHORT
             }
+
+            jvmArgs = listOf("--add-opens=java.base/java.util=ALL-UNNAMED")
         }
     }
 
