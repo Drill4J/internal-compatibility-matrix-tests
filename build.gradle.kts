@@ -45,17 +45,6 @@ subprojects {
                 events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
                 exceptionFormat = TestExceptionFormat.SHORT
             }
-
-            val currentJavaVersion = System.getProperty("java.version")
-                .split(".")
-                .let {
-                    if (it[0] == "1") it[1].toInt() else it[0].toInt()
-                }
-            if (currentJavaVersion >= 21) {
-                jvmArgs = listOf(
-                    "--add-opens=java.base/java.util=ALL-UNNAMED",
-                    "--add-opens=java.base/java.lang=ALL-UNNAMED")
-            }
         }
     }
 
