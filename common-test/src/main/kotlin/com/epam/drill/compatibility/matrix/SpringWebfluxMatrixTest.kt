@@ -15,7 +15,7 @@
  */
 package com.epam.drill.compatibility.matrix
 
-import com.epam.drill.agent.instrument.TestRequestHolder
+import com.epam.drill.compatibility.context.TestRequestHolder
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration

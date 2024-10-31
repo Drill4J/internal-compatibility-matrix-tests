@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.epam.drill.agent.instrument
-
-import com.epam.drill.compatibility.context.DrillRequest
-import com.epam.test.drill.DrillTestContext
+package com.epam.drill.compatibility.context
 
 @Deprecated("Use DrillTestContext instead")
 object TestRequestHolder {

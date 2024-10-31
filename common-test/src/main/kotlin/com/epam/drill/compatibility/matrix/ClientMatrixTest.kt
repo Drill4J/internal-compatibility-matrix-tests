@@ -25,7 +25,7 @@ import org.simpleframework.http.Status
 import org.simpleframework.http.core.Container
 import org.simpleframework.http.core.ContainerSocketProcessor
 import org.simpleframework.transport.connect.SocketConnection
-import com.epam.drill.agent.instrument.TestRequestHolder
+import com.epam.drill.compatibility.context.TestRequestHolder
 import com.epam.drill.compatibility.context.DrillRequest
 import com.epam.drill.compatibility.testframeworks.DRILL_SESSION_ID
 import com.epam.drill.compatibility.testframeworks.DRILL_TEST_ID

@@ -19,7 +19,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import java.io.Closeable
-import com.epam.drill.agent.instrument.TestRequestHolder
+import com.epam.drill.compatibility.context.TestRequestHolder
 import com.epam.drill.compatibility.context.DrillRequest
 
 @Suppress("FunctionName")

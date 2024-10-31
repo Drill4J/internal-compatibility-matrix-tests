@@ -16,7 +16,7 @@
 package com.epam.drill.compatibility.webframeworks
 
 import com.epam.drill.compatibility.matrix.CleanServerMatrixTest
-import com.epam.test.drill.compatibility.SimpleJaxRs2Service
+import com.epam.drill.compatibility.SimpleJaxRs2Service
 import mu.KotlinLogging
 import org.eclipse.jetty.server.Server
 import org.glassfish.jersey.jetty.JettyHttpContainerFactory

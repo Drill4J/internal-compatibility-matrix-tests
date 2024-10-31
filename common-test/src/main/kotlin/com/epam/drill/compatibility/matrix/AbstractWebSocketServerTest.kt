@@ -25,7 +25,7 @@ import javax.websocket.Endpoint
 import javax.websocket.EndpointConfig
 import javax.websocket.Session
 import org.glassfish.tyrus.client.ClientManager
-import com.epam.drill.agent.instrument.TestRequestHolder
+import com.epam.drill.compatibility.context.TestRequestHolder
 
 abstract class AbstractWebSocketServerTest {
 
