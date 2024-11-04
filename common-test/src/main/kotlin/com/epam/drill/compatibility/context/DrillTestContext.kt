@@ -1,4 +1,4 @@
-package com.epam.test.drill
+package com.epam.drill.compatibility.context
 
 /**
  * This class will be instrumented by Drill4J Agents.

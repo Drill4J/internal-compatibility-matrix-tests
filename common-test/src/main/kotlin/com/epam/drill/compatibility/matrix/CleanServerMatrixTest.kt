@@ -15,7 +15,7 @@
  */
 package com.epam.drill.compatibility.matrix
 
-import com.epam.drill.agent.instrument.TestRequestHolder
+import com.epam.drill.compatibility.context.TestRequestHolder
 import com.epam.drill.compatibility.testframeworks.DRILL_SESSION_ID
 import com.epam.drill.compatibility.testframeworks.DRILL_TEST_ID
 import com.epam.drill.compatibility.testframeworks.TEST_CONTEXT_NONE

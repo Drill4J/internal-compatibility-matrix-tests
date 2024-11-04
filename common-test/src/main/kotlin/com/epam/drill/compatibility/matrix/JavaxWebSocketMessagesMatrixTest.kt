@@ -24,7 +24,7 @@ import javax.websocket.MessageHandler
 import javax.websocket.OnMessage
 import javax.websocket.Session
 import javax.websocket.server.ServerEndpoint
-import com.epam.drill.agent.instrument.TestRequestHolder
+import com.epam.drill.compatibility.context.TestRequestHolder
 import com.epam.drill.compatibility.context.DrillRequest
 
 abstract class JavaxWebSocketMessagesMatrixTest : AbstractWebSocketMessagesTest() {

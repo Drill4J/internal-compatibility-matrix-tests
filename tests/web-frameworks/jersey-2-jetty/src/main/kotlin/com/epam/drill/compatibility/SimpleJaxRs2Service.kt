@@ -13,20 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.epam.test.drill.compatibility
+package com.epam.drill.compatibility
 
-import javax.servlet.annotation.WebServlet
-import javax.servlet.http.HttpServlet
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
+import javax.ws.rs.Consumes
+import javax.ws.rs.POST
+import javax.ws.rs.Path
+import javax.ws.rs.Produces
+import javax.ws.rs.core.MediaType
 
-@WebServlet("/")
-class SimpleHttpServlet4 : HttpServlet() {
-    override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
-        val requestBody = request.inputStream.readBytes()
-        response.status = 200
-        response.setContentLength(requestBody.size)
-        response.outputStream.write(requestBody)
-        response.outputStream.close()
-    }
+@Path("/")
+class SimpleJaxRs2Service {
+    @POST
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
+    fun echo(input: String): String = input
 }
