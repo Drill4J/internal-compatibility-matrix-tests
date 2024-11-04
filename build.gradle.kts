@@ -55,7 +55,7 @@ subprojects {
             groupId = "drill-compatibility-tests"
             appId = project.name.replace(".", "_")
             buildVersion = project.version.toString()
-            packagePrefixes = arrayOf("com/epam/test/drill/compatibility")
+            packagePrefixes = arrayOf("com/epam/drill/compatibility")
             enableAppAgent {
                 version = drillAppAgentVersion
             }

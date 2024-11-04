@@ -16,7 +16,7 @@
 package com.epam.drill.compatibility.webframeworks
 
 import com.epam.drill.compatibility.matrix.CleanServerMatrixTest
-import com.epam.test.drill.compatibility.SimpleHttpServlet4
+import com.epam.drill.compatibility.SimpleHttpServlet4
 import mu.KotlinLogging
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
