@@ -71,7 +71,6 @@ class StubAdminServer(
         }
         httpServer.createContext("/api/data-ingest/sessions") { httpExchange ->
             httpExchange.put {
-                println("!!! sessions")
                 val request = httpExchange.requestBody.reader().readText()
                 val sessionPayload = json.decodeFromString(SessionPayload.serializer(), request)
                 logger.info { "Received session from `${sessionPayload.id}`" }
@@ -81,7 +80,6 @@ class StubAdminServer(
         }
         httpServer.createContext("/api/data-ingest/instances") { httpExchange ->
             httpExchange.put {
-                println("!!! instance")
                 val request = httpExchange.requestBody.reader().readText()
                 val instancePayload = json.decodeFromString(InstancePayload.serializer(), request)
                 logger.info { "Received instance from `${instancePayload.instanceId}`" }
