@@ -16,14 +16,17 @@
 import com.epam.drill.compatibility.stubs.*
 import com.sun.net.httpserver.*
 import kotlinx.serialization.json.Json
+import mu.KotlinLogging
 import java.net.*
 
 class StubAdminServer(
     private val host: String,
     private val port: String
 ) {
+    private val logger = KotlinLogging.logger {}
     private val json = Json {
         encodeDefaults = true
+        ignoreUnknownKeys = true
     }
 
     init {
@@ -60,21 +63,29 @@ class StubAdminServer(
         httpServer.createContext("/api/data-ingest/tests-metadata") { httpExchange ->
             httpExchange.post {
                 val request = httpExchange.requestBody.reader().readText()
-                storage.addTestsMetadata(json.decodeFromString(AddTestsPayload.serializer(), request))
+                val testsMetadata = json.decodeFromString(AddTestsPayload.serializer(), request)
+                logger.info { "Received ${testsMetadata.tests.size} tests metadata from `${testsMetadata.sessionId}`" }
+                storage.addTestsMetadata(testsMetadata)
                 sendOk()
             }
         }
         httpServer.createContext("/api/data-ingest/sessions") { httpExchange ->
             httpExchange.put {
+                println("!!! sessions")
                 val request = httpExchange.requestBody.reader().readText()
-                storage.addSession(json.decodeFromString(SessionPayload.serializer(), request))
+                val sessionPayload = json.decodeFromString(SessionPayload.serializer(), request)
+                logger.info { "Received session from `${sessionPayload.id}`" }
+                storage.addSession(sessionPayload)
                 sendOk()
             }
         }
         httpServer.createContext("/api/data-ingest/instances") { httpExchange ->
             httpExchange.put {
+                println("!!! instance")
                 val request = httpExchange.requestBody.reader().readText()
-                storage.addInstance(json.decodeFromString(InstancePayload.serializer(), request))
+                val instancePayload = json.decodeFromString(InstancePayload.serializer(), request)
+                logger.info { "Received instance from `${instancePayload.instanceId}`" }
+                storage.addInstance(instancePayload)
                 sendOk()
             }
         }
@@ -86,7 +97,9 @@ class StubAdminServer(
         httpServer.createContext("/api/data-ingest/coverage") { httpExchange ->
             httpExchange.post {
                 val request = httpExchange.requestBody.reader().readText()
-                storage.addCoverage(json.decodeFromString(CoveragePayload.serializer(), request))
+                val coveragePayload = json.decodeFromString(CoveragePayload.serializer(), request)
+                logger.info { "Received ${coveragePayload.coverage.size} coverage from `${coveragePayload.instanceId}`" }
+                storage.addCoverage(coveragePayload)
                 sendOk()
             }
         }

@@ -13,6 +13,9 @@ plugins {
 group = rootProject.group
 version = rootProject.version
 
+val microutilsLoggingVersion: String by rootProject.extra
+val logbackVersion: String by parent!!.extra
+
 repositories {
     mavenLocal()
     mavenCentral()
@@ -21,6 +24,8 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(project(":common-test"))
+    implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")
+    implementation("ch.qos.logback:logback-classic:$logbackVersion")
 }
 
 @Suppress("UNUSED_VARIABLE")
