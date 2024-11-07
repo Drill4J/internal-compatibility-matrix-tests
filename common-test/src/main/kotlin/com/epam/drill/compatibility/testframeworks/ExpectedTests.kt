@@ -20,38 +20,70 @@ import com.epam.drill.compatibility.stubs.TestData
 import com.epam.drill.compatibility.stubs.TestResult
 
 class ExpectedTests(private val sessionId: String = System.getenv("DRILL_SESSION_ID")) {
-    private val expectedTests = mutableListOf<TestData>()
+    private val expectedTests = mutableMapOf<TestData, Int>()
 
     fun initializeTestData() {
         expectedTests.clear()
         StubAdminClient.clearTestSession(sessionId)
     }
 
-    fun getTestResults(): TestVerificationResults {
+    fun getTestResults(withLaunchCount: Boolean = true): TestVerificationResults {
         val actualTests = StubAdminClient.pollTests(sessionId, expectedTests.size)
-        val isSuccess = actualTests shouldContainsAllTests expectedTests
+        val isSuccess = actualTests shouldContainAllTests expectedTests.keys
+                && (!withLaunchCount || actualTests.size == expectedTests.values.sum())
+
         return if (!isSuccess) {
-            val actualTestData = actualTests.map { it.toTestData() }
-            val missingTests = expectedTests
-                .filter { it !in actualTestData}
-            val extraTests = actualTestData
-                .filter { it !in expectedTests }
-            TestVerificationResults(false, missingTests, extraTests)
+            val actualTestData = actualTests.toTestData()
+            val missingTestLaunches = expectedTests
+                .filter { it.value > (actualTestData[it.key] ?: 0) }
+            val extraTestLaunches = actualTestData
+                .filter { it.value > (expectedTests[it.key] ?: 0) }
+            TestVerificationResults(false, missingTestLaunches, extraTestLaunches, expectedTests)
         } else
             TestVerificationResults(true)
     }
 
-    fun add(testClass: Class<*>, name: String, testResult: TestResult, testParams: List<Any?> = emptyList()) {
-        expectedTests.add(TestData(testClass.name, name, testResult, testParams.toParams()))
+    fun add(
+        testClass: Class<*>,
+        name: String,
+        testResult: TestResult,
+        testParams: List<Any?> = emptyList(),
+        launches: Int = 1
+    ) {
+        expectedTests[TestData(testClass.name, name, testResult, testParams.toParams())] = launches
+    }
+
+    fun add(
+        testPath: String,
+        name: String,
+        testResult: TestResult,
+        testParams: List<Any?> = emptyList(),
+        launches: Int = 1
+    ) {
+        expectedTests[TestData(testPath, name, testResult, testParams.toParams())] = launches
     }
 }
 
-class TestVerificationResults(
+data class TestVerificationResults(
     val isSuccess: Boolean,
-    val missingTests: List<TestData> = emptyList(),
-    val extraTests: List<TestData> = emptyList(),
+    private val missingTestLaunches: Map<TestData, Int> = emptyMap(),
+    private val extraTestLaunches: Map<TestData, Int> = emptyMap(),
+    private val expectedTest: Map<TestData, Int> = emptyMap(),
 ) {
     fun getErrorMessage(): String {
-        return "Missing tests: $missingTests\nExtra tests: $extraTests"
+        val message = StringBuilder()
+        if (missingTestLaunches.isNotEmpty()) {
+            message.append("Missing test launches:\n")
+            missingTestLaunches.forEach { (test, launches) ->
+                message.append("Test: $test, expected launches: ${expectedTest[test] ?: 0}, actual launches: $launches\n")
+            }
+        }
+        if (extraTestLaunches.isNotEmpty()) {
+            message.append("Extra test launches:\n")
+            extraTestLaunches.forEach { (test, launches) ->
+                message.append("Test: $test, expected launches: ${expectedTest[test] ?: 0}, actual launches: $launches\n")
+            }
+        }
+        return message.toString()
     }
 }

@@ -28,8 +28,12 @@ fun TestInfo.toTestData(): TestData = TestData(
     testClass = this.details.path,
     testName = this.details.testName,
     testResult = this.result,
-    testParams = this.details.params["methodParams"]?.toParams() ?: emptyList()
+    testParams = this.details.params["methodParams"]?.toParams() ?: emptyList(),
 )
+
+fun Collection<TestInfo>.toTestData(): Map<TestData, Int> = this
+    .groupingBy { it.toTestData() }
+    .eachCount()
 
 fun List<Any?>.toParams(): List<String> = this.map { obj ->
     when (obj) {
@@ -51,9 +55,8 @@ fun String.toParams(): List<String> {
     }
 }
 
-infix fun List<TestInfo>.shouldContainsAllTests(expected: Collection<TestData>): Boolean {
-    return expected.size == this.size
-            && expected.containsAll(this.map { it.toTestData() })
+infix fun Collection<TestInfo>.shouldContainAllTests(expected: Set<TestData>): Boolean {
+    return expected.containsAll(this.toTestData().keys)
 }
 
 /**
