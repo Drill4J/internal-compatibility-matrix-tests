@@ -144,6 +144,8 @@ if ("test-frameworks" !in skipTests) {
     includeIfSupport("tests:test-frameworks:selenium-4", 11..maxJavaVersion, listOf(linux))
     //Rest Assured
     includeIfSupport("tests:test-frameworks:rest-assured-5.3", 8..maxJavaVersion)
+    //Cucumber
+    includeIfSupport("tests:test-frameworks:cucumber-5", 8..maxJavaVersion)
 }
 
 if ("web-sockets" !in skipTests) {
