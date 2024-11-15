@@ -29,8 +29,7 @@ class TestNG6Test {
     @BeforeClass
     fun initializeTestData() {
         expectedTests.initializeTestData()
-//      TODO Skipped tests are unstable in TestNG6
-//        expectedTests.add(this::class.java, ::testShouldSkip.name, TestResult.SKIPPED)
+        expectedTests.add(this::class.java, ::testShouldSkip.name, TestResult.SKIPPED)
     }
 
     @AfterClass
@@ -55,13 +54,14 @@ class TestNG6Test {
 
     @Test(dataProvider = "dataProvider")
     fun parametrizedTest(int: Int?, string: String?) {
-        expectedTests.add(this::class.java,::parametrizedTest.name, TestResult.PASSED, listOf(int, string))
+        expectedTests.add(this::class.java,::parametrizedTest.name, TestResult.PASSED, listOf(int, string), 2)
+        expectedTests.add(this::class.java,::parametrizedTest.name, TestResult.PASSED, listOf(null, null), 1)
         assertTrue(isThereDrillContext())
     }
 
-//    @Test(enabled = false)
-//    fun testShouldSkip() {
-//    }
+    @Test(enabled = false)
+    fun testShouldSkip() {
+    }
 
     //    TODO Figure out how to test the case when the test fails
 //    @Test
