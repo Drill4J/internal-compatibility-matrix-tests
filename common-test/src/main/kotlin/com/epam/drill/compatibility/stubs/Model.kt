@@ -34,18 +34,19 @@ data class TestData(
     val testName: String,
     val testResult: TestResult,
     val testParams: List<String> = emptyList(),
+    var tags: Set<String> = emptySet(),
 )
 
 @Serializable
 class AddTestsPayload(
+    val groupId: String,
     val sessionId: String,
     val tests: List<TestInfo> = emptyList(),
 )
 
 @Serializable
 data class TestInfo(
-    val groupId: String,
-    val id: String,
+    val testLaunchId: String,
     val testDefinitionId: String,
     val result: TestResult,
     val startedAt: Long,
@@ -54,19 +55,13 @@ data class TestInfo(
 )
 
 @Serializable
-data class Label(
-    val name: String,
-    val value: String,
-)
-
-@Serializable
 data class TestDetails @JvmOverloads constructor(
-    val engine: String = "",
+    val runner: String = "",
     val path: String = "",
     val testName: String = "",
-    val params: Map<String, String> = emptyMap(),
+    val testParams: List<String> = emptyList(),
     val metadata: Map<String, String> = emptyMap(),
-    val labels: Set<Label> = emptySet(),
+    val tags: List<String> = emptyList(),
 ) : Comparable<TestDetails> {
 
     override fun compareTo(other: TestDetails): Int {
@@ -74,7 +69,7 @@ data class TestDetails @JvmOverloads constructor(
     }
 
     override fun toString(): String {
-        return "engine='$engine', path='$path', testName='$testName', params=$params"
+        return "runner='$runner', path='$path', testName='$testName', params=$testParams"
     }
 }
 

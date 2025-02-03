@@ -16,9 +16,7 @@ package com.epam.drill.compatibility.testframeworks
  * limitations under the License.
  */
 
-import com.epam.drill.compatibility.testframeworks.ExpectedTests
 import com.epam.drill.compatibility.stubs.TestResult
-import com.epam.drill.compatibility.testframeworks.isThereDrillContext
 import org.testng.Assert.*
 import org.testng.annotations.*
 
@@ -60,6 +58,13 @@ class TestNG7Test {
         assertTrue(isThereDrillContext())
     }
 
+    @Test(groups = ["tag-1", "tag-2"])
+    fun simpleTestWithTags() {
+        expectedTests.add(this::class.java, ::simpleTestWithTags.name, TestResult.PASSED) {
+            tags = setOf("tag-1", "tag-2")
+        }
+        assertTrue(isThereDrillContext())
+    }
 
 //    @Test(enabled = false)
 //    fun testShouldSkip() {

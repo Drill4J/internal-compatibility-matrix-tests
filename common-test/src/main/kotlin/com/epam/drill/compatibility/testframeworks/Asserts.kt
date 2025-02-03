@@ -28,7 +28,8 @@ fun TestInfo.toTestData(): TestData = TestData(
     testClass = this.details.path,
     testName = this.details.testName,
     testResult = this.result,
-    testParams = this.details.params["methodParams"]?.toParams() ?: emptyList(),
+    testParams = this.details.testParams,
+    tags = this.details.tags.toSet()
 )
 
 fun Collection<TestInfo>.toTestData(): Map<TestData, Int> = this
@@ -40,18 +41,6 @@ fun List<Any?>.toParams(): List<String> = this.map { obj ->
         null -> "null"
         is Field -> obj.type.simpleName
         else -> obj.javaClass.simpleName.substringBeforeLast("\$")
-    }
-}
-
-fun String.toParams(): List<String> {
-    val withoutSquareBrackets = this.replace(Regex("\\[.*?\\]"), "")
-    val withoutParentheses = withoutSquareBrackets.trim('(', ')')
-    val withoutEndCommas = withoutParentheses.trimEnd(',')
-
-    return if (withoutEndCommas.isEmpty()) {
-        emptyList()
-    } else {
-        withoutEndCommas.split(",").map { it.trim() }
     }
 }
 
