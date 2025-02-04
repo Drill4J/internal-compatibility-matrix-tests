@@ -45,7 +45,7 @@ fun List<Any?>.toParams(): List<String> = this.map { obj ->
 }
 
 infix fun Collection<TestInfo>.shouldContainAllTests(expected: Set<TestData>): Boolean {
-    return expected.containsAll(this.toTestData().keys)
+    return expected == this.toTestData().keys
 }
 
 /**

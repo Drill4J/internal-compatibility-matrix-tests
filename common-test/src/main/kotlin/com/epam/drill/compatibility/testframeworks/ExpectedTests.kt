@@ -24,7 +24,6 @@ class ExpectedTests(private val sessionId: String = System.getenv("DRILL_SESSION
 
     fun initializeTestData() {
         expectedTests.clear()
-        StubAdminClient.clearTestSession(sessionId)
     }
 
     fun getTestResults(withLaunchCount: Boolean = true): TestVerificationResults {
@@ -32,7 +31,7 @@ class ExpectedTests(private val sessionId: String = System.getenv("DRILL_SESSION
         val isSuccess = actualTests shouldContainAllTests expectedTests.keys
                 && (!withLaunchCount || actualTests.size == expectedTests.values.sum())
 
-        return if (!isSuccess) {
+         return if (!isSuccess) {
             val actualTestData = actualTests.toTestData()
             val missingTestLaunches = expectedTests
                 .filter { it.value > (actualTestData[it.key] ?: 0) }
@@ -74,7 +73,7 @@ data class TestVerificationResults(
     private val expectedTest: Map<TestData, Int> = emptyMap(),
 ) {
     fun getErrorMessage(): String {
-        val message = StringBuilder()
+        val message = StringBuilder("Test verification failed.\n")
         if (missingTestLaunches.isNotEmpty()) {
             message.append("Missing test launches:\n")
             missingTestLaunches.forEach { (test, launches) ->
