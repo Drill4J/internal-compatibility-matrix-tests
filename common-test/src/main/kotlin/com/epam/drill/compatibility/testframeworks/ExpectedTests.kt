@@ -35,6 +35,7 @@ class ExpectedTests(private val sessionId: String = System.getenv("DRILL_SESSION
             val actualTestData = actualTests.toTestData()
             val missingTestLaunches = expectedTests
                 .filter { it.value > (actualTestData[it.key] ?: 0) }
+                .mapValues { actualTestData[it.key] ?: 0 }
             val extraTestLaunches = actualTestData
                 .filter { it.value > (expectedTests[it.key] ?: 0) }
             TestVerificationResults(false, missingTestLaunches, extraTestLaunches, expectedTests)
@@ -47,9 +48,10 @@ class ExpectedTests(private val sessionId: String = System.getenv("DRILL_SESSION
         name: String,
         testResult: TestResult,
         testParams: List<Any?> = emptyList(),
-        launches: Int = 1
+        launches: Int = 1,
+        additional: TestData.() -> Unit = {}
     ) {
-        expectedTests[TestData(testClass.name, name, testResult, testParams.toParams())] = launches
+        expectedTests[TestData(testClass.name, name, testResult, testParams.toParams()).apply(additional)] = launches
     }
 
     fun add(
@@ -57,9 +59,10 @@ class ExpectedTests(private val sessionId: String = System.getenv("DRILL_SESSION
         name: String,
         testResult: TestResult,
         testParams: List<Any?> = emptyList(),
+        tags: Set<String> = emptySet(),
         launches: Int = 1
     ) {
-        expectedTests[TestData(testPath, name, testResult, testParams.toParams())] = launches
+        expectedTests[TestData(testPath, name, testResult, testParams.toParams(), tags)] = launches
     }
 }
 

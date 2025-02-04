@@ -15,14 +15,9 @@ package com.epam.drill.compatibility.testframeworks
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.epam.drill.compatibility.testframeworks.ExpectedTests
-import com.epam.drill.compatibility.testframeworks.isThereDrillContext
 import com.epam.drill.compatibility.stubs.TestResult
-import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Disabled
-import org.junit.jupiter.api.Test
 
 class JUnit5Test {
 
@@ -47,6 +42,15 @@ class JUnit5Test {
     @Test
     fun simpleTestMethodName() {
         expectedTests.add(this::class.java, ::simpleTestMethodName.name, TestResult.PASSED)
+        assertTrue(isThereDrillContext())
+    }
+
+    @Test
+    @Tags(Tag("tag1"), Tag("tag2"))
+    fun simpleTestWithTags() {
+        expectedTests.add(this::class.java, ::simpleTestWithTags.name, TestResult.PASSED) {
+            tags = setOf("tag1", "tag2")
+        }
         assertTrue(isThereDrillContext())
     }
 

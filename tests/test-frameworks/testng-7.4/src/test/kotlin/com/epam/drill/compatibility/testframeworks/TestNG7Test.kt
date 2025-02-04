@@ -57,6 +57,13 @@ class TestNG7Test {
         assertTrue(isThereDrillContext())
     }
 
+    @Test(groups = ["tag-1", "tag-2"])
+    fun simpleTestWithTags() {
+        expectedTests.add(this::class.java, ::simpleTestWithTags.name, TestResult.PASSED) {
+            tags = setOf("tag-1", "tag-2")
+        }
+        assertTrue(isThereDrillContext())
+    }
 
     @Test(enabled = false)
     fun testShouldSkip() {

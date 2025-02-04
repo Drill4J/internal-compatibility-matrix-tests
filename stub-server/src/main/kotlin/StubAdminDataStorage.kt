@@ -23,7 +23,7 @@ class StubAdminDataStorage {
     fun addTestsMetadata(testsMetadata: AddTestsPayload) {
         val sessionTests = data.tests.computeIfAbsent(testsMetadata.sessionId) { ConcurrentHashMap() }
         testsMetadata.tests.forEach { testInfo ->
-            sessionTests[testInfo.id] = testInfo
+            sessionTests[testInfo.testLaunchId] = testInfo
         }
     }
 
