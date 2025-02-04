@@ -42,7 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-12, macos-14]
+        os: [ubuntu-latest, windows-latest, macos-14]
         java-version: [8, 11, 17, 21]
     steps:
       - name: Download .drill folder
