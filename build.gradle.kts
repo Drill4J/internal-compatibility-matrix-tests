@@ -67,9 +67,7 @@ subprojects {
         drill {
             groupId = "drill-compatibility-tests"
             enableTestAgent {
-                zipPath = "C:\\projects\\epam\\drill4j\\autotest-agent\\build\\distributions\\mingwX64-0.23.4.zip"
-//                version = drillTestAgentVersion
-                logLevel = "DEBUG;com.epam.drill.agent.test.shadow=ERROR"
+                version = drillTestAgentVersion
             }
         }
     }
