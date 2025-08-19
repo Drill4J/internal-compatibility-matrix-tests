@@ -27,7 +27,7 @@ pluginManagement {
 
 fun includeIfSupport(projectPath: String, javaVersions: IntRange, os: List<String> = emptyList()) {
     val currentOS = System.getProperty("os.name")
-    if (os.isNotEmpty() && !os.any { currentOS.toLowerCase().contains(it.toLowerCase()) }) {
+    if (os.isNotEmpty() && !os.any { currentOS.toLowerCase(java.util.Locale.ROOT).contains(it.toLowerCase(java.util.Locale.ROOT)) }) {
         logger.lifecycle("Project :$projectPath is not included as OS \"$currentOS\" is not $os")
         return
     }
