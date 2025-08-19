@@ -17,14 +17,14 @@ package com.epam.drill.compatibility.testframeworks
 
 import com.epam.drill.compatibility.stubs.StubAdminClient
 import com.epam.drill.compatibility.stubs.TestData
-import com.epam.drill.compatibility.stubs.TestInfo
+import com.epam.drill.compatibility.stubs.TestLaunchInfo
 import java.lang.reflect.Field
 
 const val DRILL_TEST_ID = "drill-test-id"
 const val DRILL_SESSION_ID = "drill-session-id"
 const val TEST_CONTEXT_NONE = "TEST_CONTEXT_NONE"
 
-fun TestInfo.toTestData(): TestData = TestData(
+fun TestLaunchInfo.toTestData(): TestData = TestData(
     testClass = this.details.path,
     testName = this.details.testName,
     testResult = this.result,
@@ -32,7 +32,7 @@ fun TestInfo.toTestData(): TestData = TestData(
     tags = this.details.tags.toSet()
 )
 
-fun Collection<TestInfo>.toTestData(): Map<TestData, Int> = this
+fun Collection<TestLaunchInfo>.toTestData(): Map<TestData, Int> = this
     .groupingBy { it.toTestData() }
     .eachCount()
 
@@ -44,7 +44,7 @@ fun List<Any?>.toParams(): List<String> = this.map { obj ->
     }
 }
 
-infix fun Collection<TestInfo>.shouldContainAllTests(expected: Set<TestData>): Boolean {
+infix fun Collection<TestLaunchInfo>.shouldContainAllTests(expected: Set<TestData>): Boolean {
     return expected == this.toTestData().keys
 }
 

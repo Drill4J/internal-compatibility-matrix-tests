@@ -41,7 +41,7 @@ object StubAdminClient {
         HttpClients.createDefault().execute(request)
     }
 
-    fun pollTests(sessionId: String, expectedTests: Int): List<TestInfo> {
+    fun pollTests(sessionId: String, expectedTests: Int): List<TestLaunchInfo> {
         val data = pollData { (it.tests[sessionId]?.size ?: 0) >= expectedTests }
         return data.tests[sessionId]?.values?.toList() ?: emptyList()
     }

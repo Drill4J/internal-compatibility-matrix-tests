@@ -19,7 +19,7 @@ import kotlinx.serialization.Serializable
 
 typealias ClassProbes = MutableMap<String, BooleanArray>
 typealias TestCoverageMap = MutableMap<String, ClassProbes>
-typealias TestMap = MutableMap<String, TestInfo>
+typealias TestMap = MutableMap<String, TestLaunchInfo>
 
 @Serializable
 data class ServerData(
@@ -41,16 +41,15 @@ data class TestData(
 class AddTestsPayload(
     val groupId: String,
     val sessionId: String,
-    val tests: List<TestInfo> = emptyList(),
+    val tests: List<TestLaunchInfo> = emptyList(),
 )
 
 @Serializable
-data class TestInfo(
+data class TestLaunchInfo(
     val testLaunchId: String,
     val testDefinitionId: String,
     val result: TestResult,
-    val startedAt: Long,
-    val finishedAt: Long,
+    val duration: Int? = null,
     val details: TestDetails,
 )
 
@@ -78,6 +77,7 @@ enum class TestResult {
     FAILED,
     ERROR,
     SKIPPED,
+    SMART_SKIPPED,
     UNKNOWN
 }
 
@@ -96,6 +96,8 @@ data class SessionIdPayload(
 
 @Serializable
 class CoveragePayload(
+    val groupId: String,
+    val appId: String,
     val instanceId: String,
     val coverage: Array<SingleClassCoveragePayload>,
 )
@@ -103,7 +105,8 @@ class CoveragePayload(
 @Serializable
 class SingleClassCoveragePayload(
     val classname: String,
-    val testId: String,
+    val testId: String?,
+    val testSessionId: String?,
     val probes: BooleanArray
 )
 
@@ -112,7 +115,7 @@ class InstancePayload(
     val groupId: String,
     val appId: String,
     val instanceId: String,
-    val commitSha: String?,
-    val buildVersion: String?,
-    val envId: String?,
+    val commitSha: String? = null,
+    val buildVersion: String? = null,
+    val envId: String? = null,
 )

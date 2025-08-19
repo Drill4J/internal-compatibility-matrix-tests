@@ -38,7 +38,7 @@ class StubAdminDataStorage {
     fun addCoverage(coveragePayload: CoveragePayload) {
         val instanceData = data.coverage.computeIfAbsent(coveragePayload.instanceId) { ConcurrentHashMap() }
         coveragePayload.coverage.forEach { coverage ->
-            val testData = instanceData.computeIfAbsent(coverage.testId) { ConcurrentHashMap() }
+            val testData = coverage.testId?.let { instanceData.computeIfAbsent(it) { ConcurrentHashMap() } } ?: ConcurrentHashMap()
             val classProbes = testData.computeIfAbsent(coverage.classname) { BooleanArray(coverage.probes.size) }
             classProbes.forEachIndexed { index, probe ->
                 classProbes[index] = probe || coverage.probes[index]
