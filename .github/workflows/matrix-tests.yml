@@ -27,7 +27,8 @@ jobs:
           gradle-version: 7.4.2
           add-job-summary: 'on-failure'
       - name: Download Drill4J Agents
-        run: gradle drillDownloadAgents --info
+        # This step loads Drill4J agents for one task; results for other tasks are cached
+        run: gradle :tests:async:executor-service:drillDownloadAgents --info
       - name: List .drill files
         run: ls ~/.drill/agents
       - name: Upload .drill folder as artifact
