@@ -22,9 +22,14 @@ import java.util.concurrent.Future
 
 
 class ExecutorServiceTest : AsyncMatrixTest() {
+    private val executor = Executors.newFixedThreadPool(1)
+    init {
+        executor.submit(Callable {
+            // Initialize a thread of the executor service
+        })
+    }
 
     override fun callAsyncCommunication(task: () -> String): Future<String> {
-        val executor = Executors.newSingleThreadExecutor()
         return executor.submit(Callable {
             task()
         })

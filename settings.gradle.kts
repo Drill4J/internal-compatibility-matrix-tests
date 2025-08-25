@@ -25,10 +25,17 @@ pluginManagement {
     }
 }
 
-fun includeIfSupport(projectPath: String, javaVersions: IntRange, os: List<String> = emptyList()) {
-    val currentOS = System.getProperty("os.name")
-    if (os.isNotEmpty() && !os.any { currentOS.toLowerCase(java.util.Locale.ROOT).contains(it.toLowerCase(java.util.Locale.ROOT)) }) {
-        logger.lifecycle("Project :$projectPath is not included as OS \"$currentOS\" is not $os")
+val isDockerAvailable: Boolean by lazy {
+    try {
+        ProcessBuilder("docker", "--version").start().waitFor() == 0
+    } catch (e: Exception) {
+        false
+    }
+}
+
+fun includeIfSupport(projectPath: String, javaVersions: IntRange, isDockerRequired: Boolean = false) {
+    if (isDockerRequired && !isDockerAvailable)  {
+        logger.lifecycle("Project :$projectPath is not included because docker is not available")
         return
     }
     val currentJavaVersion = System.getProperty("java.version")
@@ -37,7 +44,7 @@ fun includeIfSupport(projectPath: String, javaVersions: IntRange, os: List<Strin
             if (it[0] == "1") it[1].toInt() else it[0].toInt()
         }
     if (currentJavaVersion !in javaVersions) {
-        logger.lifecycle("Project :$projectPath is not included as Java $currentJavaVersion is not $javaVersions")
+        logger.lifecycle("Project :$projectPath is not included as current Java version $currentJavaVersion is not supported (required: $javaVersions)")
         return
     }
 
@@ -141,7 +148,7 @@ if ("test-frameworks" !in skipTests) {
     includeIfSupport("tests:test-frameworks:testng-6.1", 8..maxJavaVersion)
     includeIfSupport("tests:test-frameworks:testng-7.4", 8..maxJavaVersion)
     //Selenium
-    includeIfSupport("tests:test-frameworks:selenium-4", 11..maxJavaVersion, listOf(linux))
+    includeIfSupport("tests:test-frameworks:selenium-4", 11..maxJavaVersion, true)
     //Rest Assured
     includeIfSupport("tests:test-frameworks:rest-assured-5.3", 8..maxJavaVersion)
     //Cucumber

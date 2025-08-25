@@ -27,19 +27,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Determine Gradle Version for Java 21 and greater
-        if: matrix.java-version >= 21
-        run: echo "gradle-version=8.5" >> $GITHUB_ENV
-
-      - name: Determine Gradle Version for Java 20 and lower
+      - name: Set-up Gradle for Java 20 and lower
         if: matrix.java-version < 21
-        run: echo "gradle-version=7.4.2" >> $GITHUB_ENV
-
-      - name: Set-up Gradle ${{ env.gradle-version }}
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: ${{ env.gradle-version }}
-          add-job-summary: 'on-failure'
+          gradle-version: wrapper
+
+      - name: Set-up Gradle for Java 21 and greater
+        if: matrix.java-version >= 21
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.5
 
       - name: Run tests
         env:
