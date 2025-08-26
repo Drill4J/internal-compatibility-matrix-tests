@@ -64,23 +64,27 @@ jobs:
         if: matrix.java-version >= 21
         run: echo "kotlin-version=1.9.20" >> $GITHUB_ENV
 
-      - name: Set-up Gradle for Java 20 and lower
+      - name: Set-up Gradle Wrapper for Java 20 and lower
         if: matrix.java-version < 21
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
 
-      - name: Set-up Gradle for Java 21 and greater
+      - name: Set-up Gradle 8.5 for Java 21 and greater
         if: matrix.java-version >= 21
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 8.5
 
       - name: Change wrapper permissions
+        if: matrix.java-version < 21
         run: chmod +x ./gradlew
-      - name: Run tests
-        if: matrix.os != 'macos-14' || matrix.java-version != '8' #TODO Known issue with MacOS 14+ and Java 8
+      - name: Run tests using Gradle Wrapper
+        if: matrix.java-version < 21 && (matrix.os != 'macos-14' || matrix.java-version != '8') #TODO Known issue with MacOS 14+ and Java 8
         run: ./gradlew test
+      - name: Run tests using Gradle 8.5
+        if: matrix.java-version >= 21
+        run: gradlew test
 
       - name: Test Report (Linux)
         uses: EnricoMi/publish-unit-test-result-action@v2
