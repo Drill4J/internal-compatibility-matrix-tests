@@ -39,6 +39,8 @@ jobs:
         with:
           gradle-version: 8.5
 
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
       - name: Run tests
         env:
           GH_USER_TOKEN: ${{ secrets.GH_USER_TOKEN }}
