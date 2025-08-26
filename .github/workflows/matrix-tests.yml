@@ -78,7 +78,7 @@ jobs:
 
       - name: Run tests
         if: matrix.os != 'macos-14' || matrix.java-version != '8' #TODO Known issue with MacOS 14+ and Java 8
-        run: gradle test
+        run: ./gradlew test
 
       - name: Test Report (Linux)
         uses: EnricoMi/publish-unit-test-result-action@v2

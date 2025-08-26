@@ -43,7 +43,7 @@ jobs:
         env:
           GH_USER_TOKEN: ${{ secrets.GH_USER_TOKEN }}
           skipTests: ${{ github.event.inputs.skipTests }}
-        run: gradle test
+        run: ./gradlew test
 
       - name: Test Report (Linux)
         uses: EnricoMi/publish-unit-test-result-action@v2
