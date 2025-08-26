@@ -32,6 +32,7 @@ subprojects {
             environment("port" to port)
             environment("DRILL_API_URL" to "http://$host:$port/api")
             environment("DRILL_IS_COMPATIBILITY_TESTS" to true)
+            environment("DRILL_IS_ASYNC_APP" to true)
             environment("DRILL_USE_PROTOBUF_SERIALIZER" to false)
             environment("DRILL_USE_GZIP_COMPRESSION" to false)
             environment("DRILL_IS_WS_MESSAGE" to true)
