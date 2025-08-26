@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       os:
-        description: 'Operating System (linux-latest, windows-latest, macos-latest)'
+        description: 'Operating System (ubuntu-latest, windows-latest, macos-latest)'
         required: true
-        default: 'linux-latest'
+        default: 'ubuntu-latest'
       java:
         description: 'Java version (8, 11, 17, 21)'
         required: true
