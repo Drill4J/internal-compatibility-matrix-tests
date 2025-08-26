@@ -84,7 +84,7 @@ jobs:
         run: ./gradlew test
       - name: Run tests using Gradle 8.5
         if: matrix.java-version >= 21
-        run: gradlew test
+        run: gradle test
 
       - name: Test Report (Linux)
         uses: EnricoMi/publish-unit-test-result-action@v2
