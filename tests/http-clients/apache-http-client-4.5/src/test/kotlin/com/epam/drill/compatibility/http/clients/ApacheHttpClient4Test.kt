@@ -15,13 +15,13 @@
  */
 package com.epam.drill.compatibility.http.clients
 
-import com.epam.drill.compatibility.matrix.ClientMatrixTest
+import com.epam.drill.compatibility.matrix.HttpClientMatrixTest
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.HttpClientBuilder
 
 
-class ApacheHttpClient4Test: ClientMatrixTest() {
+class ApacheHttpClient4Test: HttpClientMatrixTest() {
 
     override fun callHttpEndpoint(
         endpoint: String,

@@ -15,8 +15,8 @@
  */
 package com.epam.drill.compatibility.webframeworks
 
-import com.epam.drill.compatibility.matrix.CleanServerMatrixTest
-import com.epam.test.drill.compatibility.SimpleHttpServlet5
+import com.epam.drill.compatibility.matrix.WebServerMatrixTest
+import com.epam.drill.compatibility.apps.SimpleHttpServlet5
 import mu.KotlinLogging
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
@@ -26,12 +26,14 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 
 
-class Servlet5Jetty11Test: CleanServerMatrixTest() {
+class Servlet5Jetty11Test: WebServerMatrixTest() {
     override val logger = KotlinLogging.logger {}
 
     override fun withHttpServer(block: (String) -> Unit) {
         block("http://localhost:${server.port}/")
     }
+
+    override fun getClassUnderTest() = SimpleHttpServlet5::class.java
 
     companion object {
         private lateinit var server: Server

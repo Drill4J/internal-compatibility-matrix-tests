@@ -15,49 +15,20 @@
  */
 package com.epam.drill.compatibility.matrix
 
-import com.epam.drill.compatibility.context.TestRequestHolder
+import com.epam.drill.compatibility.apps.SpringApplication
+import com.epam.drill.compatibility.apps.SpringMvcController
+import mu.KotlinLogging
 import org.junit.runner.RunWith
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.context.annotation.Configuration
-import org.springframework.http.*
 import org.springframework.test.context.junit4.SpringRunner
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RestController
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-    classes = [SpringMVCMatrixTest.SimpleController::class]
+    classes = [SpringApplication::class, SpringMvcController::class]
 )
-open class SpringMVCMatrixTest {
+abstract class SpringMVCMatrixTest: WebServerMatrixTest() {
+    override val logger = KotlinLogging.logger { }
 
-    @Autowired
-    lateinit var restTemplate: TestRestTemplate
-
-    @Test
-    fun `given get controller, server must propagate drill context`() {
-        val headers = HttpHeaders()
-        headers.set("drill-session-id", "session-1")
-        val entity: HttpEntity<String> = HttpEntity(headers)
-        val response: ResponseEntity<String> =
-            restTemplate.exchange("/", HttpMethod.GET, entity, String::class.java)
-        assertEquals(response.statusCodeValue, HttpStatus.OK.value())
-        assertEquals(response.body, "get-controller-session-1")
-    }
-
-    @RestController
-    @EnableAutoConfiguration
-    @Configuration
-    open class SimpleController {
-        @GetMapping("/")
-        fun simpleController(): String {
-            return "get-controller-${TestRequestHolder.retrieve()?.drillSessionId}"
-        }
-    }
+    override fun getClassUnderTest() = SpringMvcController::class.java
 }

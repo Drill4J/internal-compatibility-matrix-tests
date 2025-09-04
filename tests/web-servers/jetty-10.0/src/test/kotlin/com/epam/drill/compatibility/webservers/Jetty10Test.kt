@@ -15,7 +15,8 @@
  */
 package com.epam.drill.compatibility.webservers
 
-import com.epam.drill.compatibility.matrix.CleanServerMatrixTest
+import com.epam.drill.compatibility.apps.SimpleAppClass
+import com.epam.drill.compatibility.matrix.WebServerMatrixTest
 import mu.KotlinLogging
 import org.eclipse.jetty.server.Request
 import org.eclipse.jetty.server.Server
@@ -24,8 +25,10 @@ import org.eclipse.jetty.server.handler.AbstractHandler
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-class Jetty10Test : CleanServerMatrixTest() {
+class Jetty10Test : WebServerMatrixTest() {
     override val logger = KotlinLogging.logger {}
+
+    override fun getClassUnderTest() = SimpleAppClass::class.java
 
     override fun withHttpServer(block: (String) -> Unit) = Server().run {
         try {
@@ -48,9 +51,10 @@ class Jetty10Test : CleanServerMatrixTest() {
             response: HttpServletResponse
         ) {
             val requestBody = request.inputStream.readBytes()
+            val responseBody = SimpleAppClass().echo(String(requestBody)).toByteArray()
             response.status = 200
-            response.setContentLength(requestBody.size)
-            response.outputStream.write(requestBody)
+            response.setContentLength(responseBody.size)
+            response.outputStream.write(responseBody)
             response.outputStream.close()
         }
     }

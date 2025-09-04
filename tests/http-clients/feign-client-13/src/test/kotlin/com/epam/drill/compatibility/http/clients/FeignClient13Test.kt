@@ -15,7 +15,7 @@
  */
 package com.epam.drill.compatibility.http.clients
 
-import com.epam.drill.compatibility.matrix.ClientMatrixTest
+import com.epam.drill.compatibility.matrix.HttpClientMatrixTest
 import feign.*
 import java.io.BufferedReader
 import java.io.InputStream
@@ -27,7 +27,7 @@ interface MyApiClient {
     fun postRequest(@HeaderMap headers: Map<String, String>, body: String): Response
 }
 
-class FeignClient13Test : ClientMatrixTest() {
+class FeignClient13Test : HttpClientMatrixTest() {
     override fun callHttpEndpoint(
         endpoint: String,
         headers: Map<String, String>,

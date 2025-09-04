@@ -20,10 +20,6 @@ import com.epam.drill.compatibility.stubs.TestData
 import com.epam.drill.compatibility.stubs.TestLaunchInfo
 import java.lang.reflect.Field
 
-const val DRILL_TEST_ID = "drill-test-id"
-const val DRILL_SESSION_ID = "drill-session-id"
-const val TEST_CONTEXT_NONE = "TEST_CONTEXT_NONE"
-
 fun TestLaunchInfo.toTestData(): TestData = TestData(
     testClass = this.details.path,
     testName = this.details.testName,

@@ -16,5 +16,13 @@
 package com.epam.drill.compatibility.webframeworks
 
 import com.epam.drill.compatibility.matrix.SpringMVCMatrixTest
+import org.springframework.boot.context.embedded.LocalServerPort
 
-class SpringMvc1JettyTest : SpringMVCMatrixTest()
+class SpringMvc1JettyTest : SpringMVCMatrixTest() {
+    @LocalServerPort
+    var port: Int = 0
+
+    override fun withHttpServer(block: (String) -> Unit) {
+        block("http://localhost:$port/")
+    }
+}

@@ -16,15 +16,14 @@
 package com.epam.drill.compatibility.webframeworks
 
 import com.epam.drill.compatibility.matrix.SpringWebfluxMatrixTest
+import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.test.web.reactive.server.expectBody
 
 class SpringWebflux3UndertowTest : SpringWebfluxMatrixTest() {
-    override fun `given Mono class, MonoTransformerObject must propagate drill context`() {
-        webTestClient.get().uri("/mono")
-            .header("drill-session-id", "session-1")
-            .exchange()
-            .expectStatus().isOk
-            .expectBody<String>()
-            .isEqualTo("mono-session-1")
+    @LocalServerPort
+    var port: Int = 0
+
+    override fun withHttpServer(block: (String) -> Unit) {
+        block("http://localhost:$port/")
     }
 }

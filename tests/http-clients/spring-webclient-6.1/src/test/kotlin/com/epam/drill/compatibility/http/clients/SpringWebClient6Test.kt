@@ -15,10 +15,10 @@
  */
 package com.epam.drill.compatibility.http.clients
 
-import com.epam.drill.compatibility.matrix.ClientMatrixTest
+import com.epam.drill.compatibility.matrix.HttpClientMatrixTest
 import org.springframework.web.reactive.function.client.WebClient
 
-class SpringWebClient6Test : ClientMatrixTest() {
+class SpringWebClient6Test : HttpClientMatrixTest() {
     override fun callHttpEndpoint(
         endpoint: String,
         headers: Map<String, String>,

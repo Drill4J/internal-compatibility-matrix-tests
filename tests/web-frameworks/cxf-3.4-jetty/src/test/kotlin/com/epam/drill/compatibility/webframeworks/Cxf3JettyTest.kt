@@ -15,8 +15,8 @@
  */
 package com.epam.drill.compatibility.webframeworks
 
-import com.epam.drill.compatibility.matrix.CleanServerMatrixTest
-import com.epam.test.drill.compatibility.SimpleJaxRs2Service
+import com.epam.drill.compatibility.matrix.WebServerMatrixTest
+import com.epam.drill.compatibility.apps.SimpleJaxRs2Service
 import mu.KotlinLogging
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean
 import org.junit.AfterClass
@@ -24,12 +24,14 @@ import org.junit.BeforeClass
 import java.net.ServerSocket
 
 
-class Cxf3JettyTest: CleanServerMatrixTest() {
+class Cxf3JettyTest: WebServerMatrixTest() {
     override val logger = KotlinLogging.logger {}
 
     override fun withHttpServer(block: (String) -> Unit) {
         block(server.address)
     }
+
+    override fun getClassUnderTest() = SimpleJaxRs2Service::class.java
 
     companion object {
         private val port = ServerSocket(0).use { it.localPort }

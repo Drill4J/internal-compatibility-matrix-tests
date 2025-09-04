@@ -16,5 +16,13 @@
 package com.epam.drill.compatibility.webframeworks
 
 import com.epam.drill.compatibility.matrix.SpringMVCMatrixTest
+import org.springframework.boot.test.web.server.LocalServerPort
 
-class SpringMvc2UndertowTest : SpringMVCMatrixTest()
+class SpringMvc2UndertowTest : SpringMVCMatrixTest() {
+    @LocalServerPort
+    var port: Int = 0
+
+    override fun withHttpServer(block: (String) -> Unit) {
+        block("http://localhost:$port/")
+    }
+}

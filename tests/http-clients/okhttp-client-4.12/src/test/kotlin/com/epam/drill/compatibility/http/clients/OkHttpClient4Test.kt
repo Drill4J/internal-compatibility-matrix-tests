@@ -15,12 +15,12 @@
  */
 package com.epam.drill.compatibility.http.clients
 
-import com.epam.drill.compatibility.matrix.ClientMatrixTest
+import com.epam.drill.compatibility.matrix.HttpClientMatrixTest
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 
-class OkHttpClient4Test : ClientMatrixTest() {
+class OkHttpClient4Test : HttpClientMatrixTest() {
     override fun callHttpEndpoint(
         endpoint: String,
         headers: Map<String, String>,
