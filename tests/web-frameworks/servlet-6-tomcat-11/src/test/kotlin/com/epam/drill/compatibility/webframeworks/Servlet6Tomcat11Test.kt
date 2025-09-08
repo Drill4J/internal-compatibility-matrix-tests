@@ -15,7 +15,8 @@
  */
 package com.epam.drill.compatibility.webframeworks
 
-import com.epam.drill.compatibility.matrix.CleanServerMatrixTest
+import com.epam.drill.compatibility.apps.SimpleHttpServlet6
+import com.epam.drill.compatibility.matrix.WebServerMatrixTest
 import mu.KotlinLogging
 import org.apache.catalina.WebResourceRoot
 import org.apache.catalina.startup.Tomcat
@@ -26,12 +27,14 @@ import org.junit.BeforeClass
 import java.io.File
 
 
-class Servlet6Tomcat11Test: CleanServerMatrixTest() {
+class Servlet6Tomcat11Test: WebServerMatrixTest() {
     override val logger = KotlinLogging.logger {}
 
     override fun withHttpServer(block: (String) -> Unit) {
         block("http://localhost:${tomcat.connector.localPort}/")
     }
+
+    override fun getClassUnderTest() = SimpleHttpServlet6::class.java
 
     companion object {
         private lateinit var tomcat: Tomcat

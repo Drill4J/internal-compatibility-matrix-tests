@@ -95,7 +95,7 @@ data class SessionIdPayload(
 )
 
 @Serializable
-class CoveragePayload(
+data class CoveragePayload(
     val groupId: String,
     val appId: String,
     val instanceId: String,
@@ -103,7 +103,7 @@ class CoveragePayload(
 )
 
 @Serializable
-class SingleClassCoveragePayload(
+data class SingleClassCoveragePayload(
     val classname: String,
     val testId: String?,
     val testSessionId: String?,
@@ -111,7 +111,7 @@ class SingleClassCoveragePayload(
 )
 
 @Serializable
-class InstancePayload(
+data class InstancePayload(
     val groupId: String,
     val appId: String,
     val instanceId: String,

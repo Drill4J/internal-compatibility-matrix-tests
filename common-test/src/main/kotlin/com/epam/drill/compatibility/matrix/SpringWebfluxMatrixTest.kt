@@ -15,43 +15,20 @@
  */
 package com.epam.drill.compatibility.matrix
 
-import com.epam.drill.compatibility.context.TestRequestHolder
+import com.epam.drill.compatibility.apps.SpringApplication
+import com.epam.drill.compatibility.apps.SpringWebfluxController
+import mu.KotlinLogging
 import org.junit.runner.RunWith
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.Configuration
 import org.springframework.test.context.junit4.SpringRunner
-import org.springframework.test.web.reactive.server.WebTestClient
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RestController
-import reactor.core.publisher.Mono
-import reactor.core.scheduler.Schedulers
-import kotlin.test.Test
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-    classes = [SpringWebfluxMatrixTest.SimpleController::class]
+    classes = [SpringApplication::class, SpringWebfluxController::class],
 )
-open abstract class SpringWebfluxMatrixTest {
+abstract class SpringWebfluxMatrixTest: WebServerMatrixTest() {
+    override val logger = KotlinLogging.logger {}
 
-    @Autowired
-    lateinit var webTestClient: WebTestClient
-
-    @Test
-    abstract fun `given Mono class, MonoTransformerObject must propagate drill context`()
-
-    @RestController
-    @EnableAutoConfiguration
-    @Configuration
-    open class SimpleController {
-        @GetMapping("/mono")
-        fun getMono(): Mono<String> {
-            return Mono.just("mono")
-                .subscribeOn(Schedulers.single())
-                .map { "$it-${TestRequestHolder.retrieve()?.drillSessionId}" }
-        }
-
-    }
+    override fun getClassUnderTest() = SpringWebfluxController::class.java
 }

@@ -15,7 +15,8 @@
  */
 package com.epam.drill.compatibility.webservers
 
-import com.epam.drill.compatibility.matrix.CleanServerMatrixTest
+import com.epam.drill.compatibility.apps.SimpleAppClass
+import com.epam.drill.compatibility.matrix.WebServerMatrixTest
 import java.util.logging.LogManager
 import org.apache.catalina.startup.Tomcat
 import jakarta.servlet.http.HttpServlet
@@ -23,8 +24,10 @@ import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import mu.KotlinLogging
 
-class Tomcat10Test : CleanServerMatrixTest(){
+class Tomcat10Test : WebServerMatrixTest(){
     override val logger = KotlinLogging.logger {}
+
+    override fun getClassUnderTest() = SimpleAppClass::class.java
 
     override fun withHttpServer(block: (String) -> Unit) = Tomcat().run {
         try {
@@ -44,9 +47,10 @@ class Tomcat10Test : CleanServerMatrixTest(){
     private class TestRequestServlet : HttpServlet() {
         override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
             val requestBody = request.inputStream.readBytes()
+            val responseBody = SimpleAppClass().echo(String(requestBody)).toByteArray()
             response.status = 200
-            response.setContentLength(requestBody.size)
-            response.outputStream.write(requestBody)
+            response.setContentLength(responseBody.size)
+            response.outputStream.write(responseBody)
             response.outputStream.close()
         }
     }

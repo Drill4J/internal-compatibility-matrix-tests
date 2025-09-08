@@ -15,7 +15,7 @@
  */
 package com.epam.drill.compatibility.testframeworks.steps
 
-import com.epam.drill.compatibility.SimpleAdditionService
+import com.epam.drill.compatibility.apps.SimpleAdditionService
 import com.epam.drill.compatibility.stubs.TestResult
 import com.epam.drill.compatibility.testframeworks.ExpectedTests
 import io.cucumber.java.After

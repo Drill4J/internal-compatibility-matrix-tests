@@ -31,11 +31,11 @@ subprojects {
             environment("host" to host)
             environment("port" to port)
             environment("DRILL_API_URL" to "http://$host:$port/api")
-            environment("DRILL_IS_COMPATIBILITY_TESTS" to true)
-            environment("DRILL_IS_ASYNC_APP" to true)
+            environment("DRILL_INSTRUMENTATION_COMPATIBILITY_TESTS_ENABLED" to true)
             environment("DRILL_USE_PROTOBUF_SERIALIZER" to false)
             environment("DRILL_USE_GZIP_COMPRESSION" to false)
-            environment("DRILL_IS_WS_MESSAGE" to true)
+            environment("DRILL_INSTRUMENTATION_WS_ENABLED" to true)
+            environment("DRILL_INSTRUMENTATION_TTL_ENABLED" to true)
             environment("DRILL_SCAN_CLASS_DELAY" to "1000")
             environment("DRILL_INSTANCE_ID" to projectName)
             environment("DRILL_SESSION_ID" to projectName)
@@ -56,7 +56,7 @@ subprojects {
             groupId = "drill-compatibility-tests"
             appId = project.name.replace(".", "_")
             buildVersion = project.version.toString()
-            packagePrefixes = arrayOf("com/epam/drill/compatibility")
+            packagePrefixes = arrayOf("com/epam/drill/compatibility/apps")
             enableAppAgent {
                 version = drillAppAgentVersion
             }
