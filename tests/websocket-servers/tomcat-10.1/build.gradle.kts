@@ -13,7 +13,7 @@ repositories {
 }
 
 val microutilsLoggingVersion: String by parent!!.extra
-val serverVersion = "10.1.19"
+val serverVersion = "10.1.42"
 
 dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$microutilsLoggingVersion")

@@ -23,7 +23,7 @@ subprojects {
 
     tasks {
         withType<KotlinCompile> {
-            kotlinOptions.jvmTarget = JavaVersion.current().toString()
+            kotlinOptions.jvmTarget = JavaVersion.current ().toString()
         }
         withType<Test> {
             val host = rootProject.extra["testsAdminStubServerHost"] as String
@@ -35,7 +35,8 @@ subprojects {
             environment("DRILL_USE_PROTOBUF_SERIALIZER" to false)
             environment("DRILL_USE_GZIP_COMPRESSION" to false)
             environment("DRILL_INSTRUMENTATION_WS_ENABLED" to true)
-            environment("DRILL_INSTRUMENTATION_TTL_ENABLED" to true)
+            environment("DRILL_INSTRUMENTATION_TTL_ENABLED" to false)
+            environment("DRILL_INSTRUMENTATION_JAVA_HTTP_CLIENT_ENABLED" to false)
             environment("DRILL_SCAN_CLASS_DELAY" to "1000")
             environment("DRILL_INSTANCE_ID" to projectName)
             environment("DRILL_SESSION_ID" to projectName)
