@@ -24,7 +24,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: 7.4.2
+          gradle-version: 8.14.4
       - name: Download Drill4J Agents
         # This step loads Drill4J agents for one task; results for other tasks are cached
         run: gradle :tests:async:executor-service:drillDownloadAgents --info
@@ -43,7 +43,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-14]
-        java-version: [8, 11, 17, 21]
+        java-version: [8, 11, 17, 21, 25]
     steps:
       - name: Download .drill folder
         uses: actions/download-artifact@v4
@@ -51,40 +51,25 @@ jobs:
           name: drill-agents-${{ matrix.os }}
           path: ~/.drill/agents
 
-      - name: Set up Java ${{ matrix.java-version }}
+      - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'corretto'
-          java-version: ${{ matrix.java-version }}
+          java-version: 17.0
+          distribution: corretto
 
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Determine Kotlin version for Java 21 and greater
-        if: matrix.java-version >= 21
-        run: echo "kotlin-version=1.9.20" >> $GITHUB_ENV
-
-      - name: Set-up Gradle Wrapper for Java 20 and lower
-        if: matrix.java-version < 21
+      - name: Set-up Gradle Wrapper
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
 
-      - name: Set-up Gradle 8.5 for Java 21 and greater
-        if: matrix.java-version >= 21
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: 8.5
-
       - name: Change wrapper permissions
-        if: matrix.java-version < 21
         run: chmod +x ./gradlew
+
       - name: Run tests using Gradle Wrapper
-        if: matrix.java-version < 21 && (matrix.os != 'macos-14' || matrix.java-version != '8') #TODO Known issue with MacOS 14+ and Java 8
-        run: ./gradlew test
-      - name: Run tests using Gradle 8.5
-        if: matrix.java-version >= 21
-        run: gradle test
+        run: ./gradlew test -PjavaVersion=${{ matrix.java-version }} --info
 
       - name: Test Report (Linux)
         uses: EnricoMi/publish-unit-test-result-action@v2
