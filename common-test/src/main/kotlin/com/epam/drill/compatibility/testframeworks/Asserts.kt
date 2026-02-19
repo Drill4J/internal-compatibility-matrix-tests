@@ -59,8 +59,9 @@ fun isThereDrillContext(clientCall: () -> Map<String, String>): Boolean {
         .containsKey("drill-test-id")
 }
 
-fun isTestCoveredCode(instanceId: String?, testId: String, classUnderTest: Class<*>): Boolean {
-    val className = classUnderTest.name.replace(".", "/")
-    return StubAdminClient.pollCoverage(instanceId, testId, className).isNotEmpty()
+fun isTestCoveredCode(
+    instanceId: String?, testId: String, signaturePattern: String
+): Boolean {
+    return StubAdminClient.pollCoverage(instanceId, testId, signaturePattern).isNotEmpty()
 }
 

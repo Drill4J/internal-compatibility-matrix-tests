@@ -46,31 +46,31 @@ object StubAdminClient {
         return data.tests[sessionId]?.values?.toList() ?: emptyList()
     }
 
-    fun pollCoverage(instanceId: String?, testId: String, classId: String): BooleanArray {
+    fun pollCoverage(instanceId: String?, testId: String, signaturePattern: String): BooleanArray {
         return if (instanceId != null) {
-            pollCoverageByInstance(instanceId, testId, classId)
+            pollCoverageByInstance(instanceId, testId, signaturePattern)
         } else {
-            pollCoverageByTest(testId, classId)
+            pollCoverageByTest(testId, signaturePattern)
         }
     }
 
-    fun pollCoverageByInstance(instanceId: String, testId: String, classId: String): BooleanArray {
+    fun pollCoverageByInstance(instanceId: String, testId: String, signaturePattern: String): BooleanArray {
         val hasProbesByInstanceAndTestAndClass: (ServerData) -> Boolean = { data ->
-            data.coverage[instanceId]?.get(testId)?.get(classId)?.isNotEmpty() ?: false
+            data.coverage[instanceId]?.get(testId)?.any { it.key.startsWith(signaturePattern) } ?: false
         }
         val data = pollData { hasProbesByInstanceAndTestAndClass(it) }
-        return data.coverage[instanceId]?.get(testId)?.get(classId) ?: BooleanArray(0)
+        return data.coverage[instanceId]?.get(testId)?.filter { it.key.startsWith(signaturePattern) }?.values?.firstOrNull()  ?: BooleanArray(0)
     }
 
-    fun pollCoverageByTest(testId: String, classId: String): BooleanArray {
+    fun pollCoverageByTest(testId: String, signaturePattern: String): BooleanArray {
         val hasProbesByTestAndClass: (TestCoverageMap) -> Boolean = { testMap ->
-            testMap[testId]?.get(classId)?.isNotEmpty() ?: false
+            testMap[testId]?.any { it.key.startsWith(signaturePattern) } ?: false
         }
         val hasProbesByInstanceAndTestAndClass: (ServerData) -> Boolean = { data ->
             data.coverage.values.any { hasProbesByTestAndClass(it) }
         }
         val data = pollData { hasProbesByInstanceAndTestAndClass(it) }
-        return data.coverage.values.find { hasProbesByTestAndClass(it) }?.get(testId)?.get(classId) ?: BooleanArray(0)
+        return data.coverage.values.find { hasProbesByTestAndClass(it) }?.get(testId)?.filter { it.key.startsWith(signaturePattern) }?.values?.firstOrNull() ?: BooleanArray(0)
     }
 
     private fun pollData(expectedDataHasArrived:  (ServerData) -> Boolean): ServerData {

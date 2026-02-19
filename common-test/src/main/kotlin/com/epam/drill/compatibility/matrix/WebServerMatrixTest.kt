@@ -32,13 +32,13 @@ abstract class WebServerMatrixTest {
     private val agentInstanceId: String? = System.getenv("DRILL_INSTANCE_ID")
 
     @Test
-    fun `test with empty headers request`() = withHttpServer {
+    fun `test with empty headers request`() = withHttpServer { it ->
         TestRequestHolder.remove() // necessary while HttpURLConnection is being instrumented by Drill4J
         val response = callHttpEndpoint(it)
         assertNull(response.headers[DRILL_SESSION_ID])
         assertNull(response.headers[DRILL_TEST_ID])
         assertEquals("test-request", response.body)
-        assertTrue(isTestCoveredCode(agentInstanceId, TEST_CONTEXT_NONE, getClassUnderTest()))
+        assertTrue(isTestCoveredCode(agentInstanceId, TEST_CONTEXT_NONE, getSignatureUnderTest()))
     }
 
     @Test
@@ -52,12 +52,20 @@ abstract class WebServerMatrixTest {
         assertEquals("session-123", response.headers[DRILL_SESSION_ID])
         assertEquals(testId, response.headers[DRILL_TEST_ID])
         assertEquals("test-request", response.body)
-        assertTrue(isTestCoveredCode(agentInstanceId, testId, getClassUnderTest()))
+        assertTrue(isTestCoveredCode(agentInstanceId, testId, getSignatureUnderTest()))
     }
 
     protected abstract fun withHttpServer(block: (String) -> Unit)
 
-    protected abstract fun getClassUnderTest(): Class<*>
+    abstract fun getClassUnderTest(): Class<*>
+    open fun getMethodUnderTest(): String = ""
+    @Suppress("NO_REFLECTION_IN_CLASS_PATH")
+    @OptIn(ExperimentalStdlibApi::class)
+    fun getSignatureUnderTest(): String {
+        val className = getClassUnderTest().name.replace(".", "/")
+        val methodName = getMethodUnderTest()
+        return "$className:$methodName"
+    }
 
     private fun callHttpEndpoint(
         endpoint: String,
