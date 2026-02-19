@@ -1,10 +1,15 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
 
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
     id("com.github.hierynomus.license")
+}
+
+val javaVersion = (rootProject.findProperty("javaVersion") as String?)?.toInt() ?: 17
+
+kotlin {
+    jvmToolchain(javaVersion)
 }
 
 group = rootProject.group
@@ -42,10 +47,6 @@ dependencies {
     api("org.jetbrains.kotlinx:kotlinx-serialization-core:$kotlinxSerializationVersion")
     api("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
     implementation("org.apache.httpcomponents:httpclient:4.5.14")
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = JavaVersion.current().toString()
 }
 
 license {

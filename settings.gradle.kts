@@ -33,25 +33,27 @@ val isDockerAvailable: Boolean by lazy {
     }
 }
 
+val targetJavaVersion: Int by lazy {
+    (settings.extra.properties["javaVersion"] as String?)?.toIntOrNull()
+        ?: System.getProperty("java.version")
+            .split(".")
+            .let { if (it[0] == "1") it[1].toInt() else it[0].toInt() }
+}
+
 fun includeIfSupport(projectPath: String, javaVersions: IntRange, isDockerRequired: Boolean = false) {
     if (isDockerRequired && !isDockerAvailable)  {
         logger.lifecycle("Project :$projectPath is not included because docker is not available")
         return
     }
-    val currentJavaVersion = System.getProperty("java.version")
-        .split(".")
-        .let {
-            if (it[0] == "1") it[1].toInt() else it[0].toInt()
-        }
-    if (currentJavaVersion !in javaVersions) {
-        logger.lifecycle("Project :$projectPath is not included as current Java version $currentJavaVersion is not supported (required: $javaVersions)")
+    if (targetJavaVersion !in javaVersions) {
+        logger.lifecycle("Project :$projectPath is not included as target Java version $targetJavaVersion is not supported (required: $javaVersions)")
         return
     }
 
     include(projectPath)
 }
 
-val maxJavaVersion = 21
+val maxJavaVersion = 25
 val windows = "Windows"
 val linux = "Linux"
 val macos = "Mac OS"
@@ -86,21 +88,21 @@ if ("web-frameworks" !in skipTests) {
     includeIfSupport("tests:web-frameworks:spring-mvc-1.5-jetty", 8..17)
     includeIfSupport("tests:web-frameworks:spring-mvc-1.5-tomcat", 8..17)
     includeIfSupport("tests:web-frameworks:spring-mvc-1.5-undertow", 8..17)
-    includeIfSupport("tests:web-frameworks:spring-mvc-2.7-jetty", 8..maxJavaVersion)
-    includeIfSupport("tests:web-frameworks:spring-mvc-2.7-tomcat", 8..maxJavaVersion)
-    includeIfSupport("tests:web-frameworks:spring-mvc-2.7-undertow", 8..maxJavaVersion)
-    includeIfSupport("tests:web-frameworks:spring-mvc-3.1-jetty", 17..maxJavaVersion)
-    includeIfSupport("tests:web-frameworks:spring-mvc-3.1-tomcat", 17..maxJavaVersion)
-    includeIfSupport("tests:web-frameworks:spring-mvc-3.1-undertow", 17..maxJavaVersion)
+    includeIfSupport("tests:web-frameworks:spring-mvc-2.7-jetty", 8..21)
+    includeIfSupport("tests:web-frameworks:spring-mvc-2.7-tomcat", 8..21)
+    includeIfSupport("tests:web-frameworks:spring-mvc-2.7-undertow", 8..21)
+    includeIfSupport("tests:web-frameworks:spring-mvc-3.1-jetty", 17..21)
+    includeIfSupport("tests:web-frameworks:spring-mvc-3.1-tomcat", 17..21)
+    includeIfSupport("tests:web-frameworks:spring-mvc-3.1-undertow", 17..21)
     //Spring WebFlux
-    includeIfSupport("tests:web-frameworks:spring-webflux-2.7-jetty", 8..maxJavaVersion)
-    includeIfSupport("tests:web-frameworks:spring-webflux-2.7-netty", 8..maxJavaVersion)
-    includeIfSupport("tests:web-frameworks:spring-webflux-2.7-tomcat", 8..maxJavaVersion)
-    includeIfSupport("tests:web-frameworks:spring-webflux-2.7-undertow", 8..maxJavaVersion)
-    includeIfSupport("tests:web-frameworks:spring-webflux-3.1-jetty", 17..maxJavaVersion)
-    includeIfSupport("tests:web-frameworks:spring-webflux-3.1-netty", 17..maxJavaVersion)
-    includeIfSupport("tests:web-frameworks:spring-webflux-3.1-tomcat", 17..maxJavaVersion)
-    includeIfSupport("tests:web-frameworks:spring-webflux-3.1-undertow", 17..maxJavaVersion)
+    includeIfSupport("tests:web-frameworks:spring-webflux-2.7-jetty", 8..21)
+    includeIfSupport("tests:web-frameworks:spring-webflux-2.7-netty", 8..21)
+    includeIfSupport("tests:web-frameworks:spring-webflux-2.7-tomcat", 8..21)
+    includeIfSupport("tests:web-frameworks:spring-webflux-2.7-undertow", 8..21)
+    includeIfSupport("tests:web-frameworks:spring-webflux-3.1-jetty", 17..21)
+    includeIfSupport("tests:web-frameworks:spring-webflux-3.1-netty", 17..21)
+    includeIfSupport("tests:web-frameworks:spring-webflux-3.1-tomcat", 17..21)
+    includeIfSupport("tests:web-frameworks:spring-webflux-3.1-undertow", 17..21)
     //Apache CXF
     includeIfSupport("tests:web-frameworks:cxf-3.4-jetty", 8..maxJavaVersion)
     //Jersey
