@@ -69,7 +69,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Run tests using Gradle Wrapper
-        run: ./gradlew test -PjavaVersion=${{ matrix.java-version }} --info
+        run: ./gradlew test -PjavaVersion=${{ matrix.java-version }} --info  --no-daemon --refresh-dependencies
 
       - name: Test Report (Linux)
         uses: EnricoMi/publish-unit-test-result-action@v2
