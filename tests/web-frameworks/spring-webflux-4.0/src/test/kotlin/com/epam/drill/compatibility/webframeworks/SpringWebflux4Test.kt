@@ -13,8 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.epam.drill.compatibility.apps
+package com.epam.drill.compatibility.webframeworks
 
-class SimpleAppClass {
-    fun echo(text: String): String = text
+import com.epam.drill.compatibility.matrix.SpringWebfluxMatrixTest
+import org.springframework.boot.test.web.server.LocalServerPort
+
+class SpringWebflux4Test : SpringWebfluxMatrixTest() {
+    @LocalServerPort
+    var port: Int = 0
+
+    override fun withHttpServer(block: (String) -> Unit) {
+        block("http://localhost:$port/")
+    }
 }

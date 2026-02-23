@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.epam.drill.compatibility.apps
+package com.epam.drill.compatibility.websocket.servers
 
-class SimpleAppClass {
-    fun echo(text: String): String = text
-}
+import com.epam.drill.compatibility.matrix.SpringWebfluxWebSocketServerMatrixTest
+
+class SpringWebflux3NettyWsServerTest : SpringWebfluxWebSocketServerMatrixTest()

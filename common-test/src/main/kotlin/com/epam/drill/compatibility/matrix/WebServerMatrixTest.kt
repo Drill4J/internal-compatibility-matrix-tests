@@ -43,13 +43,14 @@ abstract class WebServerMatrixTest {
 
     @Test
     fun `test with session headers request`() = withHttpServer { endpoint ->
+        val sessionId = "session-123"
         val testId = "test-data"
         val requestHeaders = mapOf(
-            DRILL_SESSION_ID to "session-123",
+            DRILL_SESSION_ID to sessionId,
             DRILL_TEST_ID to testId
         )
         val response = callHttpEndpoint(endpoint, requestHeaders)
-        assertEquals("session-123", response.headers[DRILL_SESSION_ID])
+        assertEquals(sessionId, response.headers[DRILL_SESSION_ID])
         assertEquals(testId, response.headers[DRILL_TEST_ID])
         assertEquals("test-request", response.body)
         assertTrue(isTestCoveredCode(agentInstanceId, testId, getSignatureUnderTest()))

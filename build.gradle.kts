@@ -78,6 +78,7 @@ subprojects {
             enableAppAgent {
                 version = drillAppAgentVersion
                 agentMode = drillAppAgentMode
+                logLevel = "DEBUG;com.epam.drill.agent.shadow=INFO;com.epam.drill.agent.test2code.classloading=INFO"
             }
         }
     }

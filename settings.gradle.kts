@@ -67,7 +67,8 @@ val skipTests = (System.getenv("skipTests") ?: "").split(",").map { it.trim() }.
 //Tests
 if ("web-servers" !in skipTests) {
     //Web Servers
-    //includeIfSupport("tests:web-servers:netty-4.1", 8..maxJavaVersion) TODO Fails with java.lang.AssertionError: actual value is not null expected null, but was:<session-123>
+//    includeIfSupport("tests:web-servers:netty-4.1", 8..21) TODO Fails with java.lang.AssertionError: actual value is not null expected null, but was:<session-123>
+//    includeIfSupport("tests:web-servers:netty-4.2", 8..maxJavaVersion) TODO Fails with java.lang.AssertionError: actual value is not null expected null, but was:<session-123>
     includeIfSupport("tests:web-servers:jetty-10.0", 11..maxJavaVersion)
     includeIfSupport("tests:web-servers:tomcat-10.1", 11..maxJavaVersion)
     includeIfSupport("tests:web-servers:tomcat-11.0", 17..maxJavaVersion)
@@ -94,6 +95,7 @@ if ("web-frameworks" !in skipTests) {
     includeIfSupport("tests:web-frameworks:spring-mvc-3.1-jetty", 17..21)
     includeIfSupport("tests:web-frameworks:spring-mvc-3.1-tomcat", 17..21)
     includeIfSupport("tests:web-frameworks:spring-mvc-3.1-undertow", 17..21)
+    includeIfSupport("tests:web-frameworks:spring-mvc-4.0", 17..maxJavaVersion)
     //Spring WebFlux
     includeIfSupport("tests:web-frameworks:spring-webflux-2.7-jetty", 8..21)
     includeIfSupport("tests:web-frameworks:spring-webflux-2.7-netty", 8..21)
@@ -103,6 +105,7 @@ if ("web-frameworks" !in skipTests) {
     includeIfSupport("tests:web-frameworks:spring-webflux-3.1-netty", 17..21)
     includeIfSupport("tests:web-frameworks:spring-webflux-3.1-tomcat", 17..21)
     includeIfSupport("tests:web-frameworks:spring-webflux-3.1-undertow", 17..21)
+    includeIfSupport("tests:web-frameworks:spring-webflux-4.0", 17..maxJavaVersion)
     //Apache CXF
     includeIfSupport("tests:web-frameworks:cxf-3.4-jetty", 8..maxJavaVersion)
     //Jersey
@@ -184,21 +187,22 @@ if ("web-sockets" !in skipTests) {
     includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-1.5-jetty", 8..17)
     includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-1.5-tomcat", 8..17)
 //    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-1.5-undertow", 8..17) //TODO Fluky test: java.lang.AssertionError: expected:<10> but was:<0>
-    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-2.7-jetty", 8..maxJavaVersion)
-    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-2.7-tomcat", 8..maxJavaVersion)
+    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-2.7-jetty", 8..21)
+    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-2.7-tomcat", 8..21)
 //    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-2.7-undertow", 8..maxJavaVersion) //TODO Fluky test java.lang.AssertionError: expected:<10> but was:<0>
-    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-3.1-jetty", 17..maxJavaVersion)
-    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-3.1-tomcat", 17..maxJavaVersion)
+    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-3.1-jetty", 17..21)
+    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-3.1-tomcat", 17..21)
 //    includeIfSupport("tests:websocket-servers-frameworks:spring-mvc-3.1-undertow", 17..maxJavaVersion) //TODO Fluky test java.lang.AssertionError: expected:<10> but was:<0>
     //Spring WebFlux
-    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-2.7-jetty", 8..maxJavaVersion)
-    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-2.7-netty", 8..maxJavaVersion)
-    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-2.7-tomcat", 8..maxJavaVersion)
+    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-2.7-jetty", 8..21)
+    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-2.7-netty", 8..21)
+    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-2.7-tomcat", 8..21)
 //    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-2.7-undertow", 8..maxJavaVersion) //TODO Fluky test: java.lang.AssertionError: expected:<10> but was:<0>
 //    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-3.1-jetty", 17..maxJavaVersion) //TODO java.lang.AssertionError: actual value is not null expected null, but was:<session-123>
-    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-3.1-netty", 17..maxJavaVersion)
-    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-3.1-tomcat", 17..maxJavaVersion)
-    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-3.1-undertow", 17..maxJavaVersion)
+    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-3.1-netty", 17..21)
+    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-3.1-tomcat", 17..21)
+    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-3.1-undertow", 17..21)
+    includeIfSupport("tests:websocket-servers-frameworks:spring-webflux-4.0", 17..maxJavaVersion)
 
     //Web-Socket Client Frameworks
     //Spring WebSocket
@@ -226,19 +230,19 @@ if ("web-sockets" !in skipTests) {
     includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-1.5-jetty", 8..17)
     includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-1.5-tomcat", 8..17)
     includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-1.5-undertow", 8..17)
-    includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-2.7-jetty", 8..maxJavaVersion)
-    includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-2.7-tomcat", 8..maxJavaVersion)
-    includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-2.7-undertow", 8..maxJavaVersion)
-    includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-3.1-jetty", 17..maxJavaVersion)
-    includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-3.1-tomcat", 17..maxJavaVersion)
-    includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-3.1-undertow", 17..maxJavaVersion)
+    includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-2.7-jetty", 8..21)
+    includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-2.7-tomcat", 8..21)
+    includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-2.7-undertow", 8..21)
+    includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-3.1-jetty", 17..21)
+    includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-3.1-tomcat", 17..21)
+    includeIfSupport("tests:websocket-messages-frameworks:spring-mvc-3.1-undertow", 17..21)
     //Spring WebFlux
-    includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-2.7-jetty", 8..maxJavaVersion)
+    includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-2.7-jetty", 8..21)
     //includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-2.7-netty", 8..maxJavaVersion) TODO Depends on com.epam.drill.agent.instrument.TestPayloadProcessor
-    includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-2.7-tomcat", 8..maxJavaVersion)
-    includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-2.7-undertow", 8..maxJavaVersion)
-    includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-3.1-jetty", 17..maxJavaVersion)
-    //includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-3.1-netty", 17..maxJavaVersion) TODO Depends on com.epam.drill.agent.instrument.TestPayloadProcessor
-    includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-3.1-tomcat", 17..maxJavaVersion)
-    includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-3.1-undertow", 17..maxJavaVersion)
+    includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-2.7-tomcat", 8..21)
+    includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-2.7-undertow", 8..21)
+    includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-3.1-jetty", 17..21)
+//    includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-3.1-netty", 17..21) TODO Depends on com.epam.drill.agent.instrument.TestPayloadProcessor
+    includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-3.1-tomcat", 17..21)
+    includeIfSupport("tests:websocket-messages-frameworks:spring-webflux-3.1-undertow", 17..21)
 }
