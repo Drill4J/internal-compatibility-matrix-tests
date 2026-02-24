@@ -80,7 +80,7 @@ jobs:
             tests/**/build/test-results/test/TEST-*.xml
 
       - name: Test Report (Windows)
-        uses: EnricoMi/publish-unit-test-result-action/windows@v2
+        uses: EnricoMi/publish-unit-test-result-action/windows/bash@v2
         if: startsWith(matrix.os, 'windows-') && (success() || failure())
         with:
           check_name: Test Report (${{ matrix.os}},${{ matrix.java-version}})
