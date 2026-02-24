@@ -18,6 +18,7 @@ val junitVersion: String = "5.10.0"
 val testcontainersVersion: String = "1.19.8"
 val mockserverVersion: String = "5.15.0"
 val seleniumVersion: String = "4.24.0"
+val webDriverManagerVersion: String = "5.9.2"
 
 dependencies {
     testImplementation(project(":common-test"))
@@ -31,6 +32,7 @@ dependencies {
     testImplementation("org.testcontainers:mockserver:$testcontainersVersion")
 
     testImplementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
+    testImplementation("io.github.bonigarcia:webdrivermanager:$webDriverManagerVersion")
 }
 
 tasks {

@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.epam.drill.compatibility.matrix
+package com.epam.drill.compatibility.testframeworks
 
+import io.github.bonigarcia.wdm.WebDriverManager
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.mockserver.client.MockServerClient
 import org.mockserver.integration.ClientAndServer.startClientAndServer
@@ -37,6 +38,14 @@ class Selenium4Test {
     private val debuggerPort = 9233
     private lateinit var driver: WebDriver
     private lateinit var mockServerClient: MockServerClient
+
+    companion object {
+        @JvmStatic
+        @BeforeAll
+        fun setupClass() {
+            WebDriverManager.chromedriver().setup()
+        }
+    }
 
     @Container
     private val devtoolsProxy: GenericContainer<Nothing> = GenericContainer<Nothing>("drill4j/devtools-proxy:0.1.0")
