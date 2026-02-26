@@ -14,6 +14,18 @@ on:
       skipTests:
         description: 'Skip tests (websockets, test-frameworks, ...)'
         required: false
+      agentMode:
+        description: 'Agent mode (NATIVE, JAVA)'
+        required: false
+        default: 'NATIVE'
+      appAgentVersion:
+        description: 'Drill AppAgent version (0.9.17)'
+        required: false
+        default: '0.9.17'
+      testAgentVersion:
+        description: 'Drill TestAgent version (0.23.10)'
+        required: false
+        default: '0.23.10'
 jobs:
   tests:
     runs-on: ${{ github.event.inputs.os }}

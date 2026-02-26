@@ -56,7 +56,7 @@ subprojects {
             environment("DRILL_INSTRUMENTATION_JAVA_HTTP_CLIENT_ENABLED" to true)
             environment("DRILL_SCAN_CLASS_DELAY" to "1000")
             environment("DRILL_INSTANCE_ID" to projectName)
-            environment("DRILL_SESSION_ID" to projectName)
+            environment("DRILL_TEST_SESSION_ID" to projectName)
 
             ignoreFailures = true
             testLogging {
@@ -66,30 +66,29 @@ subprojects {
         }
     }
 
-    if (parent?.name in appAgentTestModules) {
-        apply(plugin = "com.epam.drill.integration.cicd")
-        val drillAppAgentVersion: String by extra
-        val drillAppAgentMode: String by extra
-        drill {
-            groupId = "drill-compatibility-tests"
-            appId = project.name.replace(".", "_")
-            buildVersion = project.version.toString()
-            packagePrefixes = arrayOf("com/epam/drill/compatibility/apps")
-            enableAppAgent {
-                version = drillAppAgentVersion
-                agentMode = drillAppAgentMode
-                logLevel = "DEBUG;com.epam.drill.agent.shadow=INFO;com.epam.drill.agent.test2code.classloading=INFO"
+    apply(plugin = "com.epam.drill.integration.cicd")
+    val drillAgentVersion: String by extra
+    val drillAgentMode: String by extra
+    drill {
+        groupId = "drill-compatibility-tests"
+        appId = project.name.replace(".", "_")
+        buildVersion = project.version.toString()
+        packagePrefixes = arrayOf("com/epam/drill/compatibility/apps")
+        agent {
+            version = drillAgentVersion
+            agentMode = drillAgentMode
+            logLevel = "INFO;com.epam.drill.agent.instrument=DEBUG"
+        }
+        if (parent?.name in appAgentTestModules) {
+            coverage()
+            classScanning {
+                beforeTestTask = false
+                runtime = true
             }
         }
-    }
-    if (parent?.name in testAgentTestModules) {
-        apply(plugin = "com.epam.drill.integration.cicd")
-        val drillTestAgentVersion: String by extra
-        drill {
-            groupId = "drill-compatibility-tests"
-            enableTestAgent {
-                version = drillTestAgentVersion
-            }
+        if (parent?.name in testAgentTestModules) {
+            testTracing()
         }
     }
+
 }

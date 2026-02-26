@@ -19,7 +19,7 @@ import com.epam.drill.compatibility.stubs.StubAdminClient
 import com.epam.drill.compatibility.stubs.TestData
 import com.epam.drill.compatibility.stubs.TestResult
 
-class ExpectedTests(private val sessionId: String = System.getenv("DRILL_SESSION_ID")) {
+class ExpectedTests(private val sessionId: String = System.getenv("DRILL_TEST_SESSION_ID")) {
     private val expectedTests = mutableMapOf<TestData, Int>()
 
     fun initializeTestData() {
