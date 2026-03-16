@@ -48,9 +48,9 @@ subprojects {
             environment("host" to host)
             environment("port" to port)
             environment("DRILL_API_URL" to "http://$host:$port/api")
-            environment("DRILL_INSTRUMENTATION_COMPATIBILITY_TESTS_ENABLED" to true)
             environment("DRILL_USE_PROTOBUF_SERIALIZER" to false)
             environment("DRILL_USE_GZIP_COMPRESSION" to false)
+            environment("DRILL_INSTRUMENTATION_COMPATIBILITY_TESTS_ENABLED" to true)
             environment("DRILL_INSTRUMENTATION_WS_ENABLED" to true)
             environment("DRILL_INSTRUMENTATION_TTL_ENABLED" to true)
             environment("DRILL_INSTRUMENTATION_JAVA_HTTP_CLIENT_ENABLED" to true)
@@ -77,12 +77,12 @@ subprojects {
         agent {
             version = drillAgentVersion
             agentMode = drillAgentMode
-            logLevel = "INFO;com.epam.drill.agent.instrument=DEBUG"
+            logLevel = "INFO;com.epam.drill.agent.instrument=DEBUG;com.epam.drill.agent.configuration=DEBUG"
         }
         if (parent?.name in appAgentTestModules) {
             coverage()
             classScanning {
-                beforeTestTask = false
+                beforeRun = false
                 runtime = true
             }
         }
