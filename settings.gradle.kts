@@ -105,6 +105,7 @@ if ("web-frameworks" !in skipTests) {
     includeIfSupport("tests:web-frameworks:spring-webflux-3.1-netty", 17..21)
     includeIfSupport("tests:web-frameworks:spring-webflux-3.1-tomcat", 17..21)
     includeIfSupport("tests:web-frameworks:spring-webflux-3.1-undertow", 17..21)
+    includeIfSupport("tests:web-frameworks:spring-webflux-3.4-netty", 17..21)
     includeIfSupport("tests:web-frameworks:spring-webflux-4.0", 17..maxJavaVersion)
     //Apache CXF
     includeIfSupport("tests:web-frameworks:cxf-3.4-jetty", 8..maxJavaVersion)
