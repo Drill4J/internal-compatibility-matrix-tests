@@ -41,17 +41,20 @@ tasks {
     }
 }
 
-val drillTestAgentVersion: String by extra
+val drillAgentVersion: String by extra
+val drillAgentMode: String by extra
 drill {
     groupId = "drill-compatibility-tests"
-    enableTestAgent {
-        version = drillTestAgentVersion
-        additionalParams = mapOf(
-            "devToolsProxyAddress" to "http://localhost:8093",
-            "withJsCoverage" to "false",
-            "devtoolsAddressReplaceLocalhost" to "host.testcontainers.internal"
-        )
+    agent {
+        version = drillAgentVersion
+        agentMode = drillAgentMode
     }
+    testTracing()
+    additionalParams = mapOf(
+        "devToolsProxyAddress" to "http://localhost:8093",
+        "withJsCoverage" to "false",
+        "devtoolsAddressReplaceLocalhost" to "host.testcontainers.internal"
+    )
 }
 
 license {
