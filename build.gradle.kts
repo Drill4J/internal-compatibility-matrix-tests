@@ -82,7 +82,6 @@ subprojects {
         if (parent?.name in appAgentTestModules) {
             coverage()
             classScanning {
-                beforeRun = false
                 runtime = true
             }
         }
