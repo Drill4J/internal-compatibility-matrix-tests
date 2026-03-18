@@ -15,8 +15,10 @@
  */
 package com.epam.drill.compatibility.matrix
 
+import com.epam.drill.compatibility.apps.SimpleAppClass
 import java.net.InetSocketAddress
 import io.netty.bootstrap.ServerBootstrap
+import io.netty.buffer.ByteBuf
 import io.netty.channel.Channel
 import io.netty.channel.ChannelFutureListener
 import io.netty.channel.ChannelHandlerContext
@@ -32,8 +34,10 @@ import io.netty.handler.codec.http.HttpVersion
 import io.netty.handler.codec.http.LastHttpContent
 import mu.KotlinLogging
 
-class Netty4Test : CleanServerMatrixTest() {
+class Netty4Test : WebServerMatrixTest() {
     override val logger = KotlinLogging.logger {}
+
+    override fun getClassUnderTest() = SimpleAppClass::class.java
 
     override fun withHttpServer(block: (String) -> Unit) {
         val bossGroup = NioEventLoopGroup()
@@ -65,7 +69,10 @@ class Netty4Test : CleanServerMatrixTest() {
 
     private class TestRequestChannelHandler : SimpleChannelInboundHandler<LastHttpContent>() {
         override fun channelRead0(ctx: ChannelHandlerContext, msg: LastHttpContent) {
-            val response = DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, msg.retain().content())
+            val requestText = msg.retain().content().toString(io.netty.util.CharsetUtil.UTF_8)
+            val responseText = SimpleAppClass().echo(requestText)
+            val responseContent: ByteBuf = ctx.alloc().buffer().writeBytes(responseText.toByteArray())
+            val response = DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, responseContent)
             ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE)
         }
     }

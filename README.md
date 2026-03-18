@@ -5,6 +5,29 @@
 This project tests the Drill4J Java Agent for compatibility with different versions of JDK, web servers and frameworks.
 Based on the testing results, we fill out the compatibility matrix.
 
+## Running Tests with Different Java Versions
+
+This project uses [Gradle Java Toolchain](https://docs.gradle.org/current/userguide/toolchains.html) to compile and run tests with specific Java versions.
+
+### Specify Java Version
+
+Use the `-PjavaVersion` property to set the target Java version:
+
+```bash
+# Run all tests with Java 17
+./gradlew test -PjavaVersion=17
+
+# Run all tests with Java 21
+./gradlew test -PjavaVersion=21
+
+# Run all tests with Java 8
+./gradlew test -PjavaVersion=8
+```
+
+If `-PjavaVersion` is not specified, the default version is **17**.
+
+Gradle will automatically download the required JDK if it's not available locally (configured via `org.gradle.java.installations.auto-download=true` in `gradle.properties`).
+
 ## Running a separate test
 To run a separate test against a specific JDK, follow these steps.
 
