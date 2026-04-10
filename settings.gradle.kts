@@ -161,6 +161,12 @@ if ("test-frameworks" !in skipTests) {
     includeIfSupport("tests:test-frameworks:cucumber-5", 8..maxJavaVersion)
 }
 
+if ("messaging" !in skipTests) {
+    //Messaging
+    //Kafka
+    includeIfSupport("tests:messaging:spring-kafka-3.1", 17..maxJavaVersion, true)
+}
+
 if ("web-sockets" !in skipTests) {
     //Web-Sockets
     //Web-Socket Servers
