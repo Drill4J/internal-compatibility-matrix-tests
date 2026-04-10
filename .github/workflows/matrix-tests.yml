@@ -38,17 +38,17 @@ jobs:
           if-no-files-found: error
   tests:
     needs: download-agents
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.mode == 'java-mode' && 'ubuntu-latest' || matrix.mode }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-14]
+        mode: [ubuntu-latest, windows-latest, macos-14, java-mode]
         java-version: [8, 11, 17, 21, 25]
     steps:
       - name: Download .drill folder
         uses: actions/download-artifact@v4
         with:
-          name: drill-agents-${{ matrix.os }}
+          name: drill-agents-${{ matrix.mode }}
           path: ~/.drill/agents
 
       - name: Set up Java
@@ -69,29 +69,29 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Run tests using Gradle Wrapper
-        run: ./gradlew test -PjavaVersion=${{ matrix.java-version }} --info  --no-daemon --refresh-dependencies
+        run: ./gradlew test -PjavaVersion=${{ matrix.java-version }} ${{ matrix.mode == 'java-mode' && '-PdrillAgentMode=JAVA' || '' }} --info --no-daemon --refresh-dependencies
 
       - name: Test Report (Linux)
         uses: EnricoMi/publish-unit-test-result-action@v2
-        if: startsWith(matrix.os, 'ubuntu-') && (success() || failure())
+        if: (matrix.mode == 'ubuntu-latest' || matrix.mode == 'java-mode') && (success() || failure())
         with:
-          check_name: Test Report (${{ matrix.os}},${{ matrix.java-version}})
+          check_name: Test Report (${{ matrix.mode }}, java-${{ matrix.java-version }})
           files: |
             tests/**/build/test-results/test/TEST-*.xml
 
       - name: Test Report (Windows)
         uses: EnricoMi/publish-unit-test-result-action/windows/bash@v2
-        if: startsWith(matrix.os, 'windows-') && (success() || failure())
+        if: matrix.mode == 'windows-latest' && (success() || failure())
         with:
-          check_name: Test Report (${{ matrix.os}},${{ matrix.java-version}})
+          check_name: Test Report (${{ matrix.mode }}, java-${{ matrix.java-version }})
           files: |
             tests\**\build\test-results\test\TEST-*.xml                      
 
       - name: Test Report (MacOS)
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
-        if: startsWith(matrix.os, 'macos-') && (success() || failure())
+        if: matrix.mode == 'macos-14' && (success() || failure())
         with:
-          check_name: Test Report (${{ matrix.os}},${{ matrix.java-version}})
+          check_name: Test Report (${{ matrix.mode }}, java-${{ matrix.java-version }})
           files: |
             tests/**/build/test-results/test/TEST-*.xml
 
@@ -99,5 +99,5 @@ jobs:
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: native-errors-${{ matrix.os }}-java${{ matrix.java-version }}
+          name: native-errors-${{ matrix.mode }}-java${{ matrix.java-version }}
           path: tests/**/hs_err_*.log
