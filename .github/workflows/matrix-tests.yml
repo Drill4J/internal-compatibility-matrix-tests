@@ -71,29 +71,13 @@ jobs:
       - name: Run tests using Gradle Wrapper
         run: ./gradlew test -PjavaVersion=${{ matrix.java-version }} ${{ matrix.mode == 'java-mode' && '-PdrillAgentMode=JAVA' || '' }} --info --no-daemon --refresh-dependencies
 
-      - name: Test Report (Linux)
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: (matrix.mode == 'ubuntu-latest' || matrix.mode == 'java-mode') && (success() || failure())
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
-          check_name: Test Report (${{ matrix.mode }}, java-${{ matrix.java-version }})
-          files: |
-            tests/**/build/test-results/test/TEST-*.xml
-
-      - name: Test Report (Windows)
-        uses: EnricoMi/publish-unit-test-result-action/windows/bash@v2
-        if: matrix.mode == 'windows-latest' && (success() || failure())
-        with:
-          check_name: Test Report (${{ matrix.mode }}, java-${{ matrix.java-version }})
-          files: |
-            tests\**\build\test-results\test\TEST-*.xml                      
-
-      - name: Test Report (MacOS)
-        uses: EnricoMi/publish-unit-test-result-action/macos@v2
-        if: matrix.mode == 'macos-14' && (success() || failure())
-        with:
-          check_name: Test Report (${{ matrix.mode }}, java-${{ matrix.java-version }})
-          files: |
-            tests/**/build/test-results/test/TEST-*.xml
+          name: test-results-${{ matrix.mode }}-java-${{ matrix.java-version }}
+          path: tests/**/build/test-results/test/TEST-*.xml
+          if-no-files-found: ignore
 
       - name: Upload native errors
         uses: actions/upload-artifact@v4
@@ -101,3 +85,29 @@ jobs:
         with:
           name: native-errors-${{ matrix.mode }}-java${{ matrix.java-version }}
           path: tests/**/hs_err_*.log
+
+  generate-report:
+    needs: tests
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download all test results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: test-results-*
+          path: all-test-results
+
+      - name: Generate compatibility matrix report
+        run: |
+          chmod +x .github/scripts/generate-report.sh
+          .github/scripts/generate-report.sh all-test-results | tee compatibility-matrix.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compatibility-matrix-report
+          path: compatibility-matrix.md
+
