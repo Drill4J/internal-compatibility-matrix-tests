@@ -8,7 +8,9 @@
 # The script expects the following directory layout produced by actions/download-artifact:
 #   <artifacts-root-dir>/
 #     test-results-<mode>-java-<version>/
-#       tests/<category>/<module>/build/test-results/test/TEST-*.xml
+#       <category>/<module>/build/test-results/test/TEST-*.xml
+#
+# Note: upload-artifact strips the "tests/" prefix because it is the glob search root.
 #
 # Output: Markdown written to stdout (pipe to $GITHUB_STEP_SUMMARY or a file).
 
@@ -81,7 +83,7 @@ parse_xml_result() {
 # May have multiple XML files per module - any failure => fail.
 get_result() {
   local mode="$1" java_ver="$2" category="$3" module="$4"
-  local artifact_dir="${ARTIFACTS_DIR}/test-results-${mode}-java-${java_ver}/tests/${category}/${module}/build/test-results/test"
+  local artifact_dir="${ARTIFACTS_DIR}/test-results-${mode}-java-${java_ver}/${category}/${module}/build/test-results/test"
 
   if [[ ! -d "$artifact_dir" ]]; then
     echo "n/a"
@@ -122,8 +124,7 @@ result_icon() {
 declare -A SEEN_MODULES
 
 for artifact in "${ARTIFACTS_DIR}"/test-results-*/; do
-  [[ -d "$artifact/tests" ]] || continue
-  for cat_dir in "$artifact"/tests/*/; do
+  for cat_dir in "$artifact"/*/; do
     [[ -d "$cat_dir" ]] || continue
     local_category=$(basename "$cat_dir")
     for mod_dir in "$cat_dir"/*/; do

@@ -102,6 +102,9 @@ jobs:
 
       - name: Generate compatibility matrix report
         run: |
+          echo "::group::Artifact directory structure"
+          find all-test-results -maxdepth 4 -type d | sort | head -60
+          echo "::endgroup::"
           chmod +x .github/scripts/generate-report.sh
           .github/scripts/generate-report.sh all-test-results | tee compatibility-matrix.md >> $GITHUB_STEP_SUMMARY
 
