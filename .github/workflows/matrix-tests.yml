@@ -48,7 +48,7 @@ jobs:
       - name: Download .drill folder
         uses: actions/download-artifact@v4
         with:
-          name: drill-agents-${{ matrix.mode }}
+          name: drill-agents-${{ matrix.mode == 'java-mode' && 'ubuntu-latest' || matrix.mode }}
           path: ~/.drill/agents
 
       - name: Set up Java
