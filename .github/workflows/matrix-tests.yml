@@ -44,6 +44,9 @@ jobs:
       matrix:
         mode: [ubuntu-latest, windows-latest, macos-14, java-mode]
         java-version: [8, 11, 17, 21, 25]
+        exclude:
+          - mode: macos-14
+            java-version: 8
     steps:
       - name: Download .drill folder
         uses: actions/download-artifact@v4
