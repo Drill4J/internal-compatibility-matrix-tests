@@ -116,3 +116,4 @@ abstract class SpringKafkaMatrixTest {
         }
     }
 }
+

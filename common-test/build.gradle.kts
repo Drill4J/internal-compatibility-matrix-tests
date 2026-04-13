@@ -41,8 +41,6 @@ dependencies {
     compileOnly("org.glassfish.tyrus:tyrus-server:1.20")
     compileOnly("org.glassfish.tyrus:tyrus-container-grizzly-client:1.20")
     compileOnly("org.glassfish.tyrus:tyrus-container-grizzly-server:1.20")
-    compileOnly("org.apache.kafka:kafka-clients:3.7.2")
-    compileOnly("org.springframework.kafka:spring-kafka:3.1.4")
 
     compileOnly(kotlin("test-junit"))
 

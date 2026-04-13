@@ -19,7 +19,7 @@ rootProject.extra["testsAdminStubServerPort"] = stubServerPort
 
 
 subprojects {
-    val excludedModules = listOf("common-test", "stub-server")
+    val excludedModules = listOf("common-test", "common-test-jvm17", "stub-server")
     val appAgentTestModules = listOf("web-servers", "web-frameworks", "http-clients", "async",
         "websocket-clients", "websocket-clients-frameworks",
         "websocket-servers", "websocket-servers-frameworks",

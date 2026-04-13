@@ -59,6 +59,7 @@ val linux = "Linux"
 val macos = "Mac OS"
 
 include("common-test")
+include("common-test-jvm17")
 include("stub-server")
 
 
