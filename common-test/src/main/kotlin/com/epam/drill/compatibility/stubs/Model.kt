@@ -109,7 +109,7 @@ data class MethodCoverage(
     val signature: String,
     val testId: String?,
     val testSessionId: String?,
-    val probes: BooleanArray,
+    val stringProbes: String,
 )
 
 @Serializable
