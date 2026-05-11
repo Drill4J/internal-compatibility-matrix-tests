@@ -19,11 +19,12 @@ rootProject.extra["testsAdminStubServerPort"] = stubServerPort
 
 
 subprojects {
-    val excludedModules = listOf("common-test", "stub-server")
+    val excludedModules = listOf("common-test", "common-test-jvm17", "stub-server")
     val appAgentTestModules = listOf("web-servers", "web-frameworks", "http-clients", "async",
         "websocket-clients", "websocket-clients-frameworks",
         "websocket-servers", "websocket-servers-frameworks",
-        "websocket-messages", "websocket-messages-frameworks")
+        "websocket-messages", "websocket-messages-frameworks",
+        "messaging")
     val testAgentTestModules = listOf("test-frameworks")
 
     val projectName = name
@@ -54,6 +55,7 @@ subprojects {
             environment("DRILL_INSTRUMENTATION_WS_ENABLED" to true)
             environment("DRILL_INSTRUMENTATION_TTL_ENABLED" to true)
             environment("DRILL_INSTRUMENTATION_JAVA_HTTP_CLIENT_ENABLED" to true)
+            environment("DRILL_INSTRUMENTATION_KAFKA_ENABLED" to true)
             environment("DRILL_SCAN_CLASS_DELAY" to "1000")
             environment("DRILL_INSTANCE_ID" to projectName)
             environment("DRILL_TEST_SESSION_ID" to projectName)

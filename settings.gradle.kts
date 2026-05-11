@@ -59,6 +59,7 @@ val linux = "Linux"
 val macos = "Mac OS"
 
 include("common-test")
+include("common-test-jvm17")
 include("stub-server")
 
 
@@ -159,6 +160,12 @@ if ("test-frameworks" !in skipTests) {
     includeIfSupport("tests:test-frameworks:rest-assured-5.3", 8..maxJavaVersion)
     //Cucumber
     includeIfSupport("tests:test-frameworks:cucumber-5", 8..maxJavaVersion)
+}
+
+if ("messaging" !in skipTests) {
+    //Messaging
+    //Kafka
+    includeIfSupport("tests:messaging:spring-kafka-3.1", 17..maxJavaVersion, true)
 }
 
 if ("web-sockets" !in skipTests) {
