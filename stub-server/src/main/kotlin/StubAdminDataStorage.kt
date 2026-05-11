@@ -39,9 +39,10 @@ class StubAdminDataStorage {
         val instanceData = data.coverage.computeIfAbsent(coveragePayload.instanceId) { ConcurrentHashMap() }
         coveragePayload.coverage.forEach { coverage ->
             val testData = coverage.testId?.let { instanceData.computeIfAbsent(it) { ConcurrentHashMap() } } ?: ConcurrentHashMap()
-            val methodProbes = testData.computeIfAbsent(coverage.signature) { BooleanArray(coverage.probes.size) }
+            val coverageProbes = coverage.stringProbes.toBooleanArray()
+            val methodProbes = testData.computeIfAbsent(coverage.signature) { coverageProbes }
             methodProbes.forEachIndexed { index, probe ->
-                methodProbes[index] = probe || coverage.probes[index]
+                methodProbes[index] = probe || coverageProbes[index]
             }
         }
     }
@@ -50,5 +51,9 @@ class StubAdminDataStorage {
 
     fun clearSession(sessionId: String) {
         data.tests.remove(sessionId)
+    }
+
+    private fun String.toBooleanArray(): BooleanArray {
+        return this.map { it == '1' }.toBooleanArray()
     }
 }
